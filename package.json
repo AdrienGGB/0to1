@@ -1,5 +1,22 @@
 {
+  "name": "0to1",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "prompts"
+  ],
+  "scripts": {
+    "dev": "yarn workspace frontend dev",
+    "dev:backend": "yarn workspace backend dev",
+    "build": "yarn workspace frontend build",
+    "start": "yarn workspace frontend start",
+    "lint": "yarn workspace frontend lint"
+  },
   "dependencies": {
-    "@supabase/supabase-js": "^2.54.0"
+    "@supabase/supabase-js": "^2.54.0",
+    "next": "^15.4.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   }
 }
