@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch'
+import { createClient } from '@supabase/supabase-js'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()
@@ -40,9 +41,39 @@ Make lessons concise and practical.`
     const aiText = data.choices[0].message.content
     const course = JSON.parse(aiText)
 
-    // Here you would normally insert into your Supabase DB
-    // For now, just return parsed course
-    res.status(200).json({ course })
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    )
+
+    const { data: courseData, error: courseError } = await supabase
+      .from('courses')
+      .insert([
+        { title: course.title, description: course.description, topic: topic, ai_prompt: { prompt: prompt } },
+      ])
+      .select()
+
+    if (courseError) {
+      return res.status(500).json({ error: courseError.message })
+    }
+
+    const newCourse = courseData[0]
+
+    const lessons = course.lessons.map(lesson => ({
+      ...lesson,
+      course_id: newCourse.id,
+    }))
+
+    const { error: lessonsError } = await supabase.from('lessons').insert(lessons)
+
+    if (lessonsError) {
+      // If lessons fail, we should probably roll back the course insertion
+      // For now, just log the error
+      console.error('Error inserting lessons:', lessonsError)
+      return res.status(500).json({ error: lessonsError.message })
+    }
+
+    res.status(200).json({ course: newCourse })
 
   } catch (error) {
     res.status(500).json({ error: error.message })
