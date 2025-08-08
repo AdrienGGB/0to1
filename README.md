@@ -1,2 +1,1 @@
-# 0to1
-ai-learning-assistant
+# 0to1 Project
