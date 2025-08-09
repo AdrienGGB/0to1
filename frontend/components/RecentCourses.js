@@ -35,8 +35,8 @@ const RecentCourses = () => {
         <ul>
           {courses.map(course => (
             <li key={course.id} style={{ marginBottom: '10px' }}>
-              <Link href={`/course/${course.id}`}>
-                <a style={{ textDecoration: 'none', color: '#0070f3' }}>{course.title}</a>
+              <Link href={`/course/${course.id}`} style={{ textDecoration: 'none', color: '#0070f3' }}>
+                {course.title}
               </Link>
             </li>
           ))}
