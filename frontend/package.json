@@ -15,7 +15,13 @@
   "description": "",
   "dependencies": {
     "next": "^15.4.6",
+    "node-fetch": "^3.3.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "@types/react": "^19.0.2",
+    "typescript": "^5.5.4"
   }
 }
