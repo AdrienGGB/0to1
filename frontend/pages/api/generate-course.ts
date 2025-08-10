@@ -1,4 +1,3 @@
-
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch'
 import { createClient } from '@supabase/supabase-js'
@@ -90,4 +89,3 @@ Make lessons concise and practical.`
     res.status(500).json({ error: error.message })
   }
 }
-
