@@ -1,16 +1,6 @@
-
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch'
 import { createClient } from '@supabase/supabase-js'
-
-const extractJson = (text: string) => {
-  const jsonRegex = /```json([\s\S]*?)```/;
-  const match = text.match(jsonRegex);
-  if (match && match[1]) {
-    return match[1].trim();
-  }
-  return text; // Return original text if no match
-};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()
@@ -49,8 +39,7 @@ Make lessons concise and practical.`
 
     const data = await response.json()
     const aiText = data.choices[0].message.content
-    const jsonString = extractJson(aiText);
-    const course = JSON.parse(jsonString)
+    const course = JSON.parse(aiText)
 
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -90,4 +79,3 @@ Make lessons concise and practical.`
     res.status(500).json({ error: error.message })
   }
 }
-

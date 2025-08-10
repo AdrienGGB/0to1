@@ -1,11 +1,9 @@
 
-import dynamic from 'next/dynamic';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import TopicInput from '../components/TopicInput';
 import GenerateButton from '../components/GenerateButton';
-
-const RecentCourses = dynamic(() => import('../components/RecentCourses'), { ssr: false });
+import RecentCourses from '../components/RecentCourses';
 
 const LogViewer = ({ logs }) => (
   <div style={{ marginTop: '40px', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '4px', fontFamily: 'monospace', whiteSpace: 'pre-wrap', border: '1px solid #eee' }}>
@@ -20,12 +18,7 @@ export default function HomePage() {
   const [topic, setTopic] = useState('');
   const [loading, setLoading] = useState(false);
   const [logs, setLogs] = useState([]);
-  const [lastCourseId, setLastCourseId] = useState(null);
   const router = useRouter();
-
-  useEffect(() => {
-    setLastCourseId(localStorage.getItem('lastCourseId'));
-  }, []);
 
   const addLog = (message, type = 'info') => {
     setLogs(prevLogs => [...prevLogs, { message, type }]);
@@ -63,35 +56,12 @@ export default function HomePage() {
     }
   };
 
-  const handleContinueLastCourse = () => {
-    if (lastCourseId) {
-      router.push(`/course/${lastCourseId}`);
-    }
-  };
-
   return (
     <div style={{ maxWidth: '600px', margin: 'auto', padding: '40px 20px', fontFamily: 'sans-serif' }}>
       <h1 style={{ textAlign: 'center', marginBottom: '40px', fontSize: '32px' }}>0to1: AI Learning Assistant</h1>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <TopicInput value={topic} onChange={(e) => setTopic(e.target.value)} />
         <GenerateButton onClick={handleGenerate} loading={loading} />
-        {lastCourseId && (
-          <button
-            onClick={handleContinueLastCourse}
-            style={{
-              marginTop: '10px',
-              padding: '10px 15px',
-              backgroundColor: '#4CAF50',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontSize: '16px',
-            }}
-          >
-            Continue Last Course
-          </button>
-        )}
       </div>
       <RecentCourses />
       <LogViewer logs={logs} />

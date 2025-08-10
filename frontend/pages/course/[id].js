@@ -15,15 +15,13 @@ export default function CoursePage() {
     if (!id) return;
 
     const fetchCourse = async () => {
-      setLoading(true);
       try {
-        const response = await await fetch(`/api/courses/${id}`);
+        const response = await fetch(`/api/courses/${id}`);
         if (!response.ok) {
-          throw new Error('Failed to fetch course data');
+          throw new Error('Failed to fetch course');
         }
         const data = await response.json();
         setCourse(data);
-        localStorage.setItem('lastCourseId', id); // Save last viewed course ID
       } catch (err) {
         setError(err.message);
       } finally {
@@ -41,7 +39,7 @@ export default function CoursePage() {
   return (
     <div style={{ maxWidth: '800px', margin: 'auto', padding: '40px 20px', fontFamily: 'sans-serif' }}>
       <CourseHeader title={course.title} description={course.description} />
-      <LessonList lessons={course.lessons} courseId={id} />
+      <LessonList lessons={course.lessons} />
     </div>
   );
 }
