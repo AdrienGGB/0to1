@@ -1,16 +1,6 @@
-
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch'
 import { createClient } from '@supabase/supabase-js'
-
-const extractJson = (text: string) => {
-  const jsonRegex = /```json([\s\S]*?)```/;
-  const match = text.match(jsonRegex);
-  if (match && match[1]) {
-    return match[1].trim();
-  }
-  return text; // Return original text if no match
-};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()
@@ -49,45 +39,28 @@ Make lessons concise and practical.`
 
     const data = await response.json()
     const aiText = data.choices[0].message.content
-    const jsonString = extractJson(aiText);
-    const course = JSON.parse(jsonString)
+    const course = JSON.parse(aiText)
 
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
     )
 
-    const { data: courseData, error: courseError } = await supabase
-      .from('courses')
-      .insert([
-        { title: course.title, description: course.description, topic: topic, ai_prompt: { prompt: prompt } },
-      ])
-      .select()
+    const { data, error } = await supabase.rpc('create_course_with_lessons', {
+      course_title: course.title,
+      course_description: course.description,
+      course_topic: topic,
+      course_ai_prompt: { prompt },
+      lessons_data: course.lessons,
+    });
 
-    if (courseError) {
-      return res.status(500).json({ error: courseError.message })
+    if (error) {
+      return res.status(500).json({ error: error.message });
     }
 
-    const newCourse = courseData[0]
-
-    const lessons = course.lessons.map(lesson => ({
-      ...lesson,
-      course_id: newCourse.id,
-    }))
-
-    const { error: lessonsError } = await supabase.from('lessons').insert(lessons)
-
-    if (lessonsError) {
-      // If lessons fail, we should probably roll back the course insertion
-      // For now, just log the error
-      console.error('Error inserting lessons:', lessonsError)
-      return res.status(500).json({ error: lessonsError.message })
-    }
-
-    res.status(200).json({ course: newCourse })
+    res.status(200).json({ course: { id: data } });
 
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 }
-

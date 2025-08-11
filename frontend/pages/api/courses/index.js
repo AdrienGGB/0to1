@@ -1,4 +1,3 @@
-
 import { createClient } from '@supabase/supabase-js';
 
 export default async function handler(req, res) {
@@ -11,19 +10,15 @@ export default async function handler(req, res) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   );
 
-  try {
-    const { data, error } = await supabase
-      .from('courses')
-      .select('id, title, description, created_at')
-      .order('created_at', { ascending: false })
-      .limit(10);
+  const { data: courses, error } = await supabase
+    .from('courses')
+    .select('id,title,description,created_at')
+    .order('created_at', { ascending: false })
+    .limit(10);
 
-    if (error) {
-      throw error;
-    }
-
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  if (error) {
+    return res.status(500).json({ error: error.message });
   }
+
+  res.status(200).json(courses);
 }

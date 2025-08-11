@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import CourseHeader from '../../components/CourseHeader';
 import LessonList from '../../components/LessonList';
 
-export default function CoursePage() {
+const CoursePage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [course, setCourse] = useState(null);
@@ -32,14 +32,17 @@ export default function CoursePage() {
     fetchCourse();
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading course...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!course) return <p>Course not found.</p>;
 
   return (
-    <div style={{ maxWidth: '800px', margin: 'auto', padding: '40px 20px', fontFamily: 'sans-serif' }}>
+    <div>
       <CourseHeader title={course.title} description={course.description} />
       <LessonList lessons={course.lessons} />
     </div>
   );
-}
+};
+
+export default CoursePage;
+
