@@ -44,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // merge completedLessonIds (union)
     const existingSet = new Set(existingProgress.completedLessonIds || []);
     (progress.completedLessonIds || []).forEach((id: string) => existingSet.add(id));
-    const mergedCompletedLessonIds = Array.from(existingSet);
+    const mergedCompletedLessonIds: string[] = Array.from(existingSet) as string[];
 
     // merge lessonTimes: take max per lesson
     const mergedLessonTimes: Record<string, number> = { ...(existingProgress.lessonTimes || {}) };
