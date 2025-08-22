@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS "public"."courses" (
     "generated_by" "text",
     "ai_prompt" "jsonb",
     "created_at" timestamp with time zone DEFAULT "now"(),
-    "updated_at" timestamp with time zone DEFAULT "now"
+    "updated_at" timestamp with time zone DEFAULT "now"()
 );
 
 -- Create lessons table
