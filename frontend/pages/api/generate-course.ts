@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'node-fetch'
 import { createClient } from '@supabase/supabase-js'
+import * as fs from 'fs'
+import * as path from 'path'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()
@@ -8,16 +10,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { topic } = req.body
   if (!topic) return res.status(400).json({ error: 'Missing topic' })
 
-  const prompt = `You are an expert teacher. Given topic: "${topic}", produce a beginner course that takes someone from 0 to 1.
-Return ONLY JSON in this shape:
-{
-  "title": "string",
-  "description": "string",
-  "lessons": [
-    { "order": 1, "title": "string", "summary": "string", "content": "string", "duration_minutes": 10 }
-  ]
-}
-Make lessons concise and practical.`
+  const promptTemplate = fs.readFileSync(path.join(process.cwd(), '..', 'prompts', 'course-generation.prompt.md'), 'utf-8');
+  const prompt = promptTemplate.replace('{topic}', topic);
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -38,27 +32,36 @@ Make lessons concise and practical.`
     }
 
     const data = await response.json()
-    const aiText = data.choices[0].message.content
+    let aiText = data.choices[0].message.content
+    // Extract JSON from markdown code block if present
+    const jsonMatch = aiText.match(/```json\n([\s\S]*?)\n```/);
+    if (jsonMatch && jsonMatch[1]) {
+      aiText = jsonMatch[1];
+    }
     const course = JSON.parse(aiText)
+    const lessonsWithContent = course.lessons.map(lesson => ({
+      ...lesson,
+      content: ''
+    }));
 
     const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      process.env.SUPABASE_URL,
+      process.env.SUPABASE_ANON_KEY
     )
 
-    const { data, error } = await supabase.rpc('create_course_with_lessons', {
+    const { data: newCourseData, error } = await supabase.rpc('create_course_with_lessons', {
       course_title: course.title,
       course_description: course.description,
       course_topic: topic,
       course_ai_prompt: { prompt },
-      lessons_data: course.lessons,
+      lessons_data: lessonsWithContent,
     });
 
     if (error) {
       return res.status(500).json({ error: error.message });
     }
 
-    res.status(200).json({ course: { id: data } });
+    res.status(200).json({ course: { id: newCourseData } });
 
   } catch (error) {
     res.status(500).json({ error: error.message })

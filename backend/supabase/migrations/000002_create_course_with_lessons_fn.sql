@@ -5,7 +5,7 @@ CREATE OR REPLACE FUNCTION create_course_with_lessons(
   course_topic text,
   course_ai_prompt jsonb,
   lessons_data jsonb
-) RETURNS uuid AS $$
+) RETURNS uuid AS $
 DECLARE
   new_course_id uuid;
   lesson jsonb;
@@ -32,4 +32,4 @@ BEGIN
   -- Return the new course ID
   RETURN new_course_id;
 END;
-$$ LANGUAGE plpgsql;
+$ LANGUAGE plpgsql;

@@ -27,6 +27,24 @@ export default function HomePage() {
 
       const data = await response.json();
       const { course } = data;
+
+      // Trigger lesson enhancement for each lesson in the generated course
+      if (course && course.lessons) {
+        course.lessons.forEach(async (lesson) => {
+          try {
+            await fetch('/api/enhance-lesson', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ lessonId: lesson.id, courseId: course.id }),
+            });
+            // No need to wait for each enhancement to complete before redirecting
+          } catch (enhanceError) {
+            console.error(`Failed to enhance lesson ${lesson.id}:`, enhanceError);
+            // Handle error, maybe log it or update UI to show partial failure
+          }
+        });
+      }
+
       router.push(`/course/${course.id}`);
     } catch (error) {
       // For the user, we can show a notification
