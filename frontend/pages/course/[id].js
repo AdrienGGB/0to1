@@ -121,7 +121,7 @@ const CoursePage = () => {
       });
 
       if (selectedLessonId === lessonId) {
-        setLessonContent(enhancedLesson.content);
+        setSelectedLessonContent(enhancedLesson.content);
       }
 
     } catch (err) {
