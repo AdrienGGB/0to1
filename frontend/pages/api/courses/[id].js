@@ -8,8 +8,8 @@ export default async function handler(req, res) {
   const { id } = req.query;
 
   const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_ANON_KEY
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!
   );
 
   const { data: course, error } = await supabase

@@ -46,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const supabase = createClient(
       process.env.SUPABASE_URL!,
-      process.env.SUPABASE_ANON_KEY!
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
     const { data: newCourseData, error } = await supabase.rpc('create_course_with_lessons', {
