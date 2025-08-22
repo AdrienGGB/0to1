@@ -156,10 +156,6 @@ const CoursePage = () => {
 
     fetchAllData();
 
-    // Poll for updated course data every 5 seconds
-    const intervalId = setInterval(fetchCourseData, 5000);
-
-    return () => clearInterval(intervalId);
   }, [id, userId, fetchProgress]);
 
   // Effect to fetch detailed lesson content when selectedLessonId changes
