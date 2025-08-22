@@ -54,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(response.status).json({ error: errorData })
     }
 
-    const completion: { choices: { message: { content: string } }[] } = await response.json()
+    const completion = await response.json() as { choices: { message: { content: string } }[] }
     const enhancedContent = completion.choices[0].message.content
 
     // 4. Update the lesson in the database with the new content
