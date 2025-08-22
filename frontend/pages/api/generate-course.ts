@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       aiText = jsonMatch[1];
     }
     const course = JSON.parse(aiText)
-    const lessonsWithContent = course.lessons.map(lesson => ({
+    const lessonsWithContent = course.lessons.map((lesson: { title: string; summary: string; content: string; }) => ({
       ...lesson,
       content: ''
     }));
