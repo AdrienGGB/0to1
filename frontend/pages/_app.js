@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import Layout from '../components/Layout';
+import MainLayout from '../components/MainLayout';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
@@ -15,9 +15,9 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <Layout>
+    <MainLayout>
       <Component {...pageProps} />
-    </Layout>
+    </MainLayout>
   );
 }
 
