@@ -31,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(response.status).json({ error: errorData })
     }
 
-    const data = await response.json()
+    const data = await response.json() as { choices: { message: { content: string } }[] }
     let aiText = data.choices[0].message.content
     // Extract JSON from markdown code block if present
     const jsonMatch = aiText.match(/```json\n([\s\S]*?)\n```/);
