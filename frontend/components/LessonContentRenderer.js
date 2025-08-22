@@ -25,42 +25,20 @@ const LessonContentRenderer = ({ rawContent }) => {
   // Define custom components for ReactMarkdown
   const components = {
     // Basic handling for custom blocks as paragraphs
-    const parseLessonContent = (rawContent) => {
-  // Remove AI-specific comments before parsing frontmatter
-  const cleanedContent = rawContent.replace(/\/\/\/\/\/\s*Only write code below this line\s*\/\/\/\/\/\//g, '');
-  try {
-    const { data, content } = matter(cleanedContent);
-    return { frontmatter: data, markdownBody: content };
-  } catch (e) {
-    console.error("Error parsing frontmatter:", e);
-    return { frontmatter: {}, markdownBody: cleanedContent }; // Fallback
-  }
-};
-
-const LessonContentRenderer = ({ rawContent }) => {
-  if (!rawContent) return <p>No lesson content to display.</p>;
-
-  const { frontmatter, markdownBody } = parseLessonContent(rawContent);
-
-  // Define custom components for ReactMarkdown
-  const components = {
-    // Basic handling for custom blocks as paragraphs
     p: ({ node, ...props }) => {
       if (props.children && typeof props.children[0] === 'string') {
         const text = props.children[0];
-        // Handle TIP: and WARNING: callouts
-        if (text.startsWith('TIP:')) {
-          return <p style={{ borderLeft: '4px solid blue', paddingLeft: '10px', backgroundColor: '#e0e0ff' }}><strong>TIP:</strong> {text.substring(4).trim()}</p>;
+        if (text.startsWith(':::tip')) {
+          return <p style={{ borderLeft: '4px solid blue', paddingLeft: '10px', backgroundColor: '#e0e0ff' }}>TIP: {text.substring(6).trim()}</p>;
         }
-        if (text.startsWith('WARNING:')) {
-          return <p style={{ borderLeft: '4px solid orange', paddingLeft: '10px', backgroundColor: '#fffbe0' }}><strong>WARNING:</strong> {text.substring(8).trim()}</p>;
+        if (text.startsWith(':::warning')) {
+          return <p style={{ borderLeft: '4px solid orange', paddingLeft: '10px', backgroundColor: '#fffbe0' }}>WARNING: {text.substring(10).trim()}</p>;
         }
-        // Handle Mini Practice and Knowledge Check
-        if (text.includes('Mini Practice')) {
-          return <p style={{ borderLeft: '4px solid green', paddingLeft: '10px', backgroundColor: '#e6ffe6' }}><strong>Mini Practice:</strong> {text.replace('Mini Practice', '').trim()}</p>;
+        if (text.startsWith(':::hidden-answer')) {
+          return <p style={{ borderLeft: '4px solid gray', paddingLeft: '10px', backgroundColor: '#f0f0f0' }}>HIDDEN ANSWER (not interactive): {text.substring(16).trim()}</p>;
         }
-        if (text.includes('Knowledge Check')) {
-          return <p style={{ borderLeft: '4px solid purple', paddingLeft: '10px', backgroundColor: '#f5e0ff' }}><strong>Knowledge Check:</strong> {text.replace('Knowledge Check', '').trim()}</p>;
+        if (text.startsWith(':::quiz')) {
+          return <p style={{ borderLeft: '4px solid purple', paddingLeft: '10px', backgroundColor: '#f5e0ff' }}>QUIZ (not interactive): {text.substring(7).trim()}</p>;
         }
       }
       return <p {...props} />;
