@@ -74,7 +74,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     };
 
     // upsert (insert or update)
-    const payloadRow = {
+    const payloadRow: { user_id: string; course_id: string; progress: ProgressPayload } = {
       user_id: userId,
       course_id: courseId,
       progress: mergedProgress,
@@ -82,7 +82,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { error: upsertError } = await supabase
       .from('user_progress')
-      .upsert(payloadRow, { onConflict: ['user_id', 'course_id'] });
+      .upsert([payloadRow], { onConflict: 'user_id,course_id' });
 
     if (upsertError) throw upsertError;
 
