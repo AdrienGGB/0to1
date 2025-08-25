@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from './Sidebar';
 
-const Layout = ({ children }) => (
+const MainLayout = ({ children }) => (
   <div style={{ display: 'flex' }}>
     <Sidebar />
     <main style={{ flexGrow: 1, padding: '40px' }}>
@@ -10,4 +10,4 @@ const Layout = ({ children }) => (
   </div>
 );
 
-export default Layout;
+export default MainLayout;

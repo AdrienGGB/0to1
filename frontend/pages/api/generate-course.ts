@@ -31,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(response.status).json({ error: errorData })
     }
 
-    const data = await response.json()
+    const data = await response.json() as { choices: { message: { content: string } }[] }
     let aiText = data.choices[0].message.content
     // Extract JSON from markdown code block if present
     const jsonMatch = aiText.match(/```json\n([\s\S]*?)\n```/);
@@ -39,14 +39,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       aiText = jsonMatch[1];
     }
     const course = JSON.parse(aiText)
-    const lessonsWithContent = course.lessons.map(lesson => ({
+    const lessonsWithContent = course.lessons.map((lesson: { title: string; summary: string; content: string; }) => ({
       ...lesson,
       content: ''
     }));
 
     const supabase = createClient(
-      process.env.SUPABASE_URL,
-      process.env.SUPABASE_ANON_KEY
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
     const { data: newCourseData, error } = await supabase.rpc('create_course_with_lessons', {
@@ -63,7 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.status(200).json({ course: { id: newCourseData } });
 
-  } catch (error) {
-    res.status(500).json({ error: error.message })
+  } catch (err: any) {
+    res.status(500).json({ error: err.message })
   }
 }

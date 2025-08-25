@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const supabase = createClient(
       process.env.SUPABASE_URL!,
-      process.env.SUPABASE_ANON_KEY!
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
     // 1. Fetch lesson details from the database
@@ -54,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(response.status).json({ error: errorData })
     }
 
-    const completion = await response.json()
+    const completion = await response.json() as { choices: { message: { content: string } }[] }
     const enhancedContent = completion.choices[0].message.content
 
     // 4. Update the lesson in the database with the new content
@@ -69,7 +69,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     res.status(200).json({ id: lessonId, content: enhancedContent })
 
-  } catch (error) {
-    res.status(500).json({ error: error.message })
+  } catch (err: any) {
+    console.error(err);
+    res.status(500).json({ error: err.message || String(err) });
   }
 }
