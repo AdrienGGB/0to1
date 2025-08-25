@@ -3,21 +3,29 @@ import fetch from 'node-fetch'
 import { createClient } from '@supabase/supabase-js'
 import * as fs from 'fs'
 import * as path from 'path'
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()
+
+  const supabase = createMiddlewareClient({ req, res })
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (!session) {
+    return res.status(401).json({ error: 'Not authenticated' })
+  }
 
   const { lessonId, courseId } = req.body
   if (!lessonId || !courseId) return res.status(400).json({ error: 'Missing lessonId or courseId' })
 
   try {
-    const supabase = createClient(
+    const supabaseAdmin = createClient(
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
     // 1. Fetch lesson details from the database
-    const { data: lessonData, error: fetchError } = await supabase
+    const { data: lessonData, error: fetchError } = await supabaseAdmin
       .from('lessons')
       .select('title, summary')
       .eq('id', lessonId)
@@ -58,7 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const enhancedContent = completion.choices[0].message.content
 
     // 4. Update the lesson in the database with the new content
-    const { error: updateError } = await supabase
+    const { error: updateError } = await supabaseAdmin
       .from('lessons')
       .update({ content: enhancedContent })
       .eq('id', lessonId)

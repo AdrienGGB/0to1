@@ -3,9 +3,17 @@ import fetch from 'node-fetch'
 import { createClient } from '@supabase/supabase-js'
 import * as fs from 'fs'
 import * as path from 'path'
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()
+
+  const supabase = createMiddlewareClient({ req, res })
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (!session) {
+    return res.status(401).json({ error: 'Not authenticated' })
+  }
 
   const { topic } = req.body
   if (!topic) return res.status(400).json({ error: 'Missing topic' })
@@ -44,12 +52,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       content: ''
     }));
 
-    const supabase = createClient(
+    const supabaseAdmin = createClient(
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
-    const { data: newCourseData, error } = await supabase.rpc('create_course_with_lessons', {
+    const { data: newCourseData, error } = await supabaseAdmin.rpc('create_course_with_lessons', {
       course_title: course.title,
       course_description: course.description,
       course_topic: topic,

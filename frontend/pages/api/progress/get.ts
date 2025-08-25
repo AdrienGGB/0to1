@@ -1,17 +1,24 @@
-// FILE: frontend/pages/api/progress/get.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { userId, courseId } = req.query as { userId?: string; courseId?: string };
-  if (!userId || !courseId) return res.status(400).json({ error: 'Missing query params' });
+  const supabase = createMiddlewareClient({ req, res })
+  const { data: { session } } = await supabase.auth.getSession()
 
-  const { data, error } = await supabase
+  if (!session) {
+    return res.status(401).json({ error: 'Not authenticated' })
+  }
+
+  const { courseId } = req.query as { courseId?: string };
+  if (!courseId) return res.status(400).json({ error: 'Missing courseId' });
+
+  const supabaseAdmin = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+
+  const { data, error } = await supabaseAdmin
     .from('user_progress')
     .select('progress')
-    .eq('user_id', userId)
+    .eq('user_id', session.user.id)
     .eq('course_id', courseId)
     .single();
 

@@ -1,14 +1,21 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import TopicInput from '../components/TopicInput';
 import GenerateButton from '../components/GenerateButton';
 import RecentCourses from '../components/RecentCourses';
+import { useUser } from '@supabase/auth-helpers-react';
 
 export default function HomePage() {
   const [topic, setTopic] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const user = useUser();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/auth');
+    }
+  }, [user, router]);
 
   const handleGenerate = async () => {
     if (!topic) return;
@@ -53,6 +60,10 @@ export default function HomePage() {
       setLoading(false);
     }
   };
+
+  if (!user) {
+    return <p>Redirecting to authentication...</p>;
+  }
 
   return (
     <div style={{ maxWidth: '600px', margin: 'auto', padding: '40px 20px', fontFamily: 'sans-serif' }}>

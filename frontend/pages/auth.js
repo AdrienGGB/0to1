@@ -1,0 +1,111 @@
+import { useState } from 'react';
+import { supabase } from '@/utils/supabase/client';
+
+const Auth = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [requestMagicLink, setRequestMagicLink] = useState(false); // New state for magic link
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleAuth = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setMessage('');
+
+    try {
+      let authResponse;
+      if (requestMagicLink) {
+        authResponse = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin } });
+      } else if (isSignUp) {
+        authResponse = await supabase.auth.signUp({ email, password });
+      } else {
+        authResponse = await supabase.auth.signInWithPassword({ email, password });
+      }
+
+      const { data, error } = authResponse;
+
+      if (error) throw error;
+
+      if (requestMagicLink) {
+        setMessage('Magic link sent! Check your email.');
+      } else if (data.user) {
+        setMessage(`Success! Check your email for ${isSignUp ? 'verification' : 'a magic link'}.`);
+      } else {
+        setMessage('Authentication successful!');
+      }
+    } catch (error) {
+      setMessage(`Error: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    setLoading(true);
+    setMessage('');
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      setMessage('Signed out successfully!');
+    } catch (error) {
+      setMessage(`Error: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>
+        {isSignUp ? 'Sign Up' : (requestMagicLink ? 'Request Magic Link' : 'Sign In')}
+      </h2>
+      <form onSubmit={handleAuth} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+        />
+        {!requestMagicLink && (
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+          />
+        )}
+        <button type="submit" disabled={loading} style={{ padding: '10px 15px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+          {loading ? 'Loading...' : (requestMagicLink ? 'Send Magic Link' : (isSignUp ? 'Sign Up' : 'Sign In'))}
+        </button>
+      </form>
+      <p style={{ textAlign: 'center', marginTop: '15px' }}>
+        <a href="#" onClick={() => {
+          setIsSignUp(!isSignUp);
+          setRequestMagicLink(false); // Reset magic link request when switching sign up/in
+        }} style={{ color: '#007bff', textDecoration: 'none' }}>
+          {isSignUp ? 'Already have an account? Sign In' : 'Need an account? Sign Up'}
+        </a>
+      </p>
+      {!isSignUp && (
+        <p style={{ textAlign: 'center', marginTop: '10px' }}>
+          <a href="#" onClick={() => setRequestMagicLink(!requestMagicLink)} style={{ color: '#007bff', textDecoration: 'none' }}>
+            {requestMagicLink ? 'Sign In with Password' : 'Sign In with Magic Link'}
+          </a>
+        </p>
+      )}
+      {message && <p style={{ textAlign: 'center', marginTop: '15px', color: message.startsWith('Error') ? 'red' : 'green' }}>{message}</p>}
+
+      <button onClick={handleSignOut} disabled={loading} style={{ padding: '10px 15px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginTop: '20px' }}>
+        Sign Out
+      </button>
+    </div>
+  );
+};
+
+export default Auth;

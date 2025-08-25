@@ -1,23 +1,20 @@
-
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainLayout from '../components/MainLayout';
 import '../styles/globals.css';
+import { SessionContextProvider } from '@supabase/auth-helpers-react';
+import { supabase } from '../utils/supabase/client';
 
 function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      let userId = localStorage.getItem('userId');
-      if (!userId) {
-        userId = crypto.randomUUID();
-        localStorage.setItem('userId', userId);
-      }
-    }
-  }, []);
 
   return (
-    <MainLayout>
-      <Component {...pageProps} />
-    </MainLayout>
+    <SessionContextProvider
+      supabaseClient={supabase}
+      initialSession={pageProps.initialSession}
+    >
+      <MainLayout>
+        <Component {...pageProps} />
+      </MainLayout>
+    </SessionContextProvider>
   );
 }
 

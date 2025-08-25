@@ -1,12 +1,9 @@
-// FILE: frontend/pages/api/progress/save.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 
 const SUPABASE_URL = process.env.SUPABASE_URL!;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
-  auth: { persistSession: false },
-});
 
 type ProgressPayload = {
   version: number;
@@ -19,20 +16,30 @@ type ProgressPayload = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end();
 
-  const { userId, courseId, progress, clientUpdatedAt } = req.body as {
-    userId: string;
+  const supabase = createMiddlewareClient({ req, res })
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (!session) {
+    return res.status(401).json({ error: 'Not authenticated' })
+  }
+
+  const { courseId, progress, clientUpdatedAt } = req.body as {
     courseId: string;
     progress: ProgressPayload;
     clientUpdatedAt?: string;
   };
 
-  if (!userId || !courseId || !progress) return res.status(400).json({ error: 'Missing fields' });
+  if (!courseId || !progress) return res.status(400).json({ error: 'Missing fields' });
+
+  const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+    auth: { persistSession: false },
+  });
 
   try {
-    const { data: existingRows } = await supabase
+    const { data: existingRows } = await supabaseAdmin
       .from('user_progress')
       .select('*')
-      .eq('user_id', userId)
+      .eq('user_id', session.user.id)
       .eq('course_id', courseId)
       .limit(1);
 
@@ -75,12 +82,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // upsert (insert or update)
     const payloadRow: { user_id: string; course_id: string; progress: ProgressPayload } = {
-      user_id: userId,
+      user_id: session.user.id,
       course_id: courseId,
       progress: mergedProgress,
     };
 
-    const { error: upsertError } = await supabase
+    const { error: upsertError } = await supabaseAdmin
       .from('user_progress')
       .upsert([payloadRow], { onConflict: 'user_id,course_id' });
 

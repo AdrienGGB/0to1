@@ -1,8 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).end(); // Method Not Allowed
+  }
+
+  const supabase = createMiddlewareClient({ req, res })
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (!session) {
+    return res.status(401).json({ error: 'Not authenticated' })
   }
 
   const { id: lessonId, courseId } = req.query;
@@ -12,12 +20,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const supabase = createClient(
-      process.env.SUPABASE_URL,
-      process.env.SUPABASE_ANON_KEY
+    const supabaseAdmin = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from('lessons')
       .select('*') // Select all columns, including content
       .eq('id', lessonId)
