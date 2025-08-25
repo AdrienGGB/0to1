@@ -529,7 +529,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prop-types@npm:^15.0.0":
+"@types/prop-types@npm:*, @types/prop-types@npm:^15.0.0":
   version: 15.7.15
   resolution: "@types/prop-types@npm:15.7.15"
   checksum: 10c0/b59aad1ad19bf1733cf524fd4e618196c6c7690f48ee70a327eb450a42aab8e8a063fbe59ca0a5701aebe2d92d582292c0fb845ea57474f6a15f6994b0e260b2
@@ -554,12 +554,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^19.0.2":
-  version: 19.1.9
-  resolution: "@types/react@npm:19.1.9"
+"@types/react@npm:^18.3.1":
+  version: 18.3.24
+  resolution: "@types/react@npm:18.3.24"
   dependencies:
+    "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10c0/b418da4aaf18fbc6df4f1b7096dda7ee152d697cac00d729ffd855b2b44a3a9cfb2ecb017ed20979ea3a7d98a5ce5fcf01ac1a3614d4a3e4d7069a0c45e49b0f
+  checksum: 10c0/9e188fa8e50f172cf647fc48fea2e04d88602afff47190b697de281a8ac88df9ee059864757a2a438ff599eaf9276d9a9e0e60585e88f7d57f01a2e4877d37ec
   languageName: node
   linkType: hard
 
@@ -832,7 +833,7 @@ __metadata:
   resolution: "frontend@workspace:frontend"
   dependencies:
     "@types/node": "npm:^20.14.2"
-    "@types/react": "npm:^19.0.2"
+    "@types/react": "npm:^18.3.1"
     "@types/react-syntax-highlighter": "npm:^15"
     gray-matter: "npm:^4.0.3"
     next: "npm:^14.2.5"
