@@ -21,7 +21,6 @@ Generate a complete lesson in enhanced Markdown format with the following requir
 # 3. OUTPUT RULES
 - Do NOT add commentary outside of the Markdown file.
 - Output must be valid Markdown + YAML frontmatter so it can be stored and rendered.
-- Use admonitions (e.g., `:::tip`, `:::warning`, `:::info`) to highlight key information.
 
 # 4. INPUT VARIABLES
 Use these inputs in the lesson:
@@ -46,9 +45,7 @@ objectives:
 ## Key Revenue Streams
 ...
 
-:::tip
-A useful analogy for understanding football club revenues is to think of them as a three-legged stool: matchday revenue, broadcasting rights, and commercial deals.
-:::
+> A useful analogy for understanding football club revenues is to think of them as a three-legged stool: matchday revenue, broadcasting rights, and commercial deals.
 
 ## Broadcasting Rights: The Game Changer
 ...
