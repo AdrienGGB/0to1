@@ -121,7 +121,7 @@ const CoursePage = () => {
       });
 
       if (selectedLessonId === lessonId) {
-        setLessonContent(enhancedLesson.content);
+        setSelectedLessonContent(enhancedLesson.content);
       }
 
     } catch (err) {
@@ -134,7 +134,8 @@ const CoursePage = () => {
   useEffect(() => {
     if (!id || !userId) return;
 
-    const fetchCourseData = async () => {
+    const fetchAllData = async () => {
+      setLoading(true);
       try {
         const courseResponse = await fetch(`/api/courses/${id}`);
         if (!courseResponse.ok) {
@@ -142,24 +143,16 @@ const CoursePage = () => {
         }
         const courseData = await courseResponse.json();
         setCourse(courseData);
+
+        await fetchProgress(userId, id);
       } catch (err) {
         setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
-    const fetchAllData = async () => {
-      setLoading(true);
-      await fetchCourseData();
-      await fetchProgress(userId, id);
-      setLoading(false);
-    };
-
     fetchAllData();
-
-    // Poll for updated course data every 5 seconds
-    const intervalId = setInterval(fetchCourseData, 5000);
-
-    return () => clearInterval(intervalId);
   }, [id, userId, fetchProgress]);
 
   // Effect to fetch detailed lesson content when selectedLessonId changes

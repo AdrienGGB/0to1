@@ -67,7 +67,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(500).json({ error: updateError.message })
     }
 
-    res.status(200).json({ success: true, lessonId, enhancedContent })
+    res.status(200).json({ id: lessonId, content: enhancedContent })
 
   } catch (error) {
     res.status(500).json({ error: error.message })

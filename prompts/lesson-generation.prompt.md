@@ -1,41 +1,29 @@
 You are an expert course creator.
-Generate a complete programming lesson in enhanced Markdown format with the following requirements:
+Generate a complete lesson in enhanced Markdown format with the following requirements:
 
 # 1. FORMAT
 - Use the **lesson format** described below exactly.
 - Start with YAML frontmatter:
   id: unique lesson id in kebab-case
-  courseId: provided course id
+  courseId: provided courseId
   title: lesson title
-  duration: estimated reading + practice time (e.g., "15 min")
+  duration: estimated reading time (e.g., "15 min")
   objectives: 3–5 learning objectives (list)
-- Follow this structure:
-  ## 1️⃣ Introduction → brief context, why it's important
-  ## 2️⃣ Example → fenced code block with syntax highlighting
-  ## 3️⃣ Mini Practice → short exercise + :::hidden-answer block with solution
-  ## 4️⃣ Knowledge Check → :::quiz block with 1–2 multiple-choice questions and feedback for each option
-  ## 5️⃣ Common Pitfalls → :::warning blocks for mistakes to avoid
-  ## 6️⃣ Summary → concise bullet recap
+- Follow a clear structure with headings (e.g., `## Introduction`, `## Key Concepts`, etc.).
 
-# 2. CUSTOM BLOCKS
-- :::tip — for pro tips
-- :::warning — for pitfalls
-- :::hidden-answer — contains correct answer to mini practice, revealed by toggling
-- :::quiz — contains multiple-choice questions with `[ ]` or `[x]` marking correct answer, plus "Feedback" lines
-- Only use ::: blocks as shown in the format example
+# 2. CONTENT STYLE
+- Use clear, accessible, and engaging language.
+- Focus on maximizing knowledge and understanding of the topic.
+- Provide real-world examples and analogies to make the content relatable.
+- Avoid jargon where possible, or explain it clearly when necessary.
+- The tone should be encouraging and inspiring.
 
-# 3. CONTENT STYLE
-- Use clear, beginner-friendly explanations
-- Give relevant, executable code examples
-- Avoid unnecessary jargon
-- Assume the learner is new to the topic but motivated
+# 3. OUTPUT RULES
+- Do NOT add commentary outside of the Markdown file.
+- Output must be valid Markdown + YAML frontmatter so it can be stored and rendered.
+- Use admonitions (e.g., `:::tip`, `:::warning`, `:::info`) to highlight key information.
 
-# 4. OUTPUT RULES
-- Do NOT add commentary outside of the Markdown file
-- Output must be valid Markdown + YAML frontmatter so it can be stored and rendered
-- Code examples should be tested mentally for correctness
-
-# 5. INPUT VARIABLES
+# 4. INPUT VARIABLES
 Use these inputs in the lesson:
 - Topic: {{TOPIC}}
 - courseId: {{COURSE_ID}}
@@ -44,44 +32,33 @@ Use these inputs in the lesson:
 ---
 id: lesson-101
 courseId: course-001
-title: "Variables in JavaScript"
-duration: "15 min"
+title: "Introduction to the Economy of Football"
+duration: "20 min"
 objectives:
-  - Understand what variables are
-  - Learn `let`, `const`, and `var`
-  - Avoid common pitfalls
+  - Understand the main revenue streams of football clubs.
+  - Learn about the role of broadcasting rights in football's economy.
+  - Get an overview of player transfers and their financial impact.
 ---
 
-## 1️⃣ Introduction
+## Introduction
 ...
 
-## 2️⃣ Example
-```js
-// code example
-```
-
-## 3️⃣ Mini Practice
+## Key Revenue Streams
 ...
-:::hidden-answer
-```js
-// answer code
-```
+
+:::tip
+A useful analogy for understanding football club revenues is to think of them as a three-legged stool: matchday revenue, broadcasting rights, and commercial deals.
 :::
 
-## 4️⃣ Knowledge Check
-:::quiz
-**Q:**  
-- [ ] Option  
-- [x] Option  
-Feedback for each option...
-:::
-
-## 5️⃣ Common Pitfalls
-:::warning Pitfall
+## Broadcasting Rights: The Game Changer
 ...
-:::
 
-## 6️⃣ Summary
-- point
-- point
+## Player Transfers: A Billion-Dollar Market
+...
+
+## Summary
+...
+
 ---
+
+Now, generate the lesson for the topic: {{TOPIC}}
