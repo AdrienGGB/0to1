@@ -45,6 +45,8 @@ const Auth = () => {
       }
 
       const { data, error } = authResponse;
+      console.log('Auth Response Data:', data);
+      console.log('Auth Response Error:', error);
 
       if (error) throw error;
 
@@ -56,7 +58,11 @@ const Auth = () => {
         setMessage('Authentication successful!');
       }
     } catch (error) {
-      setMessage(`Error: ${error.message}`);
+      if (error.message.includes('User already registered') || error.message.includes('User already exists')) {
+        setMessage('This email is already registered. Please sign in or use a different email.');
+      } else {
+        setMessage(`Error: ${error.message}`);
+      }
     } finally {
       setLoading(false);
     }
