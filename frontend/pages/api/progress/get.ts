@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
-import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const supabase = createMiddlewareClient({ req, res })
+  const supabase = createPagesServerClient({ req, res })
   const { data: { session } } = await supabase.auth.getSession()
 
   if (!session) {

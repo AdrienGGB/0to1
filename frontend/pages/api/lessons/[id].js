@@ -1,12 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
-import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).end(); // Method Not Allowed
   }
 
-  const supabase = createMiddlewareClient({ req, res })
+  const supabase = createPagesServerClient({ req, res })
   const { data: { session } } = await supabase.auth.getSession()
 
   if (!session) {
