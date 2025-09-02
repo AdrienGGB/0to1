@@ -22,6 +22,17 @@ const Auth = () => {
       }
     };
     getSession();
+
+    // Listen for auth state changes
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        router.push('/');
+      }
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
   }, [router, supabase]);
 
   const handleAuth = async (event) => {
@@ -52,9 +63,9 @@ const Auth = () => {
 
       if (requestMagicLink) {
         setMessage('Magic link sent! Check your email.');
-      } else if (data.user) {
-        setMessage(`Success! Check your email for ${isSignUp ? 'verification' : 'a magic link'}.`);
-      } else {
+      } else if (isSignUp) {
+        setMessage('Sign up successful! Please check your email for verification.');
+      } else { // This is for sign-in with password
         setMessage('Authentication successful!');
       }
     } catch (error) {
