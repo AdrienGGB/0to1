@@ -5,7 +5,7 @@ import GenerateButton from '../components/GenerateButton';
 import RecentCourses from '../components/RecentCourses';
 import { createClient } from '@/utils/supabase/client';
 
-export default function HomePage() {
+function HomePage() {
   const [topic, setTopic] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -96,4 +96,4 @@ export default function HomePage() {
   );
 }
 
-export default dynamic(() => Promise.resolve(HomePage), { ssr: false });
+export default HomePage;
