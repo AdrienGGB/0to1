@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
+import { createPagesServerClient } from '@/utils/supabase/pages-router-server'
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {

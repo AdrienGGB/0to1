@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 import { createClient } from '@supabase/supabase-js'
 import * as fs from 'fs'
 import * as path from 'path'
-import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
+import { createPagesServerClient } from '@/utils/supabase/pages-router-server'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
-import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
+import { createPagesServerClient } from '@/utils/supabase/pages-router-server'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const supabase = createPagesServerClient({ req, res })

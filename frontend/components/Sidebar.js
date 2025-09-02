@@ -1,11 +1,12 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { supabase } from '@/utils/supabase/client';
+import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/router';
 
 const Sidebar = () => {
   const router = useRouter();
+  const supabase = createClient();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();

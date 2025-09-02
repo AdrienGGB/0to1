@@ -3,20 +3,38 @@ import { useRouter } from 'next/router';
 import TopicInput from '../components/TopicInput';
 import GenerateButton from '../components/GenerateButton';
 import RecentCourses from '../components/RecentCourses';
-import { useUser } from '@supabase/auth-helpers-react';
-import dynamic from 'next/dynamic';
+import { createClient } from '@/utils/supabase/client';
 
-const HomePage = () => {
+export default function HomePage() {
   const [topic, setTopic] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const user = useUser();
+  const [user, setUser] = useState(null); // New state for user
+  const [sessionLoaded, setSessionLoaded] = useState(false); // New state to track session loading
+  const supabase = createClient(); // Create client-side Supabase instance
 
   useEffect(() => {
-    if (!user) {
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user || null);
+      setSessionLoaded(true);
+    };
+    getSession();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, [supabase]);
+
+  useEffect(() => {
+    if (sessionLoaded && !user) {
       router.push('/auth');
     }
-  }, [user, router]);
+  }, [sessionLoaded, user, router]);
 
   const handleGenerate = async () => {
     if (!topic) return;
@@ -62,7 +80,7 @@ const HomePage = () => {
     }
   };
 
-  if (!user) {
+  if (!sessionLoaded || !user) { // Check sessionLoaded before rendering
     return <p>Redirecting to authentication...</p>;
   }
 

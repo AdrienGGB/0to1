@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/utils/supabase/client';
-import { useUser } from '@supabase/auth-helpers-react';
+import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/router';
 
 const Auth = () => {
@@ -12,14 +11,18 @@ const Auth = () => {
   const [requestMagicLink, setRequestMagicLink] = useState(false); // New state for magic link
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
-  const user = useUser();
   const router = useRouter();
+  const supabase = createClient(); // Create client-side Supabase instance
 
   useEffect(() => {
-    if (user) {
-      router.push('/');
-    }
-  }, [user, router]);
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        router.push('/');
+      }
+    };
+    getSession();
+  }, [router, supabase]);
 
   const handleAuth = async (event) => {
     event.preventDefault();
