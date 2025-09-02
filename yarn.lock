@@ -9,6 +9,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "0to1@workspace:."
   dependencies:
+    "@supabase/auth-helpers-react": "npm:^0.5.0"
     "@supabase/supabase-js": "npm:^2.54.0"
     next: "npm:^15.4.6"
     react: "npm:^19.1.1"

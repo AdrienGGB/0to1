@@ -4,8 +4,9 @@ import TopicInput from '../components/TopicInput';
 import GenerateButton from '../components/GenerateButton';
 import RecentCourses from '../components/RecentCourses';
 import { useUser } from '@supabase/auth-helpers-react';
+import dynamic from 'next/dynamic';
 
-export default function HomePage() {
+const HomePage = () => {
   const [topic, setTopic] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -76,3 +77,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+export default dynamic(() => Promise.resolve(HomePage), { ssr: false });

@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '@/utils/supabase/client';
+import { useUser } from '@supabase/auth-helpers-react';
+import { useRouter } from 'next/router';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [requestMagicLink, setRequestMagicLink] = useState(false); // New state for magic link
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const user = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push('/');
+    }
+  }, [user, router]);
 
   const handleAuth = async (event) => {
     event.preventDefault();
@@ -17,8 +29,13 @@ const Auth = () => {
     try {
       let authResponse;
       if (requestMagicLink) {
-        authResponse = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin } });
+        authResponse = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin + window.location.pathname } });
       } else if (isSignUp) {
+        if (password !== confirmPassword) {
+          setMessage('Passwords do not match');
+          setLoading(false);
+          return;
+        }
         authResponse = await supabase.auth.signUp({ email, password });
       } else {
         authResponse = await supabase.auth.signInWithPassword({ email, password });
@@ -42,19 +59,7 @@ const Auth = () => {
     }
   };
 
-  const handleSignOut = async () => {
-    setLoading(true);
-    setMessage('');
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      setMessage('Signed out successfully!');
-    } catch (error) {
-      setMessage(`Error: ${error.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
+  
 
   return (
     <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
@@ -71,14 +76,30 @@ const Auth = () => {
           style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
         />
         {!requestMagicLink && (
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
-          />
+          <>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+            />
+            {isSignUp && (
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+              />
+            )}
+            <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <input type="checkbox" checked={showPassword} onChange={() => setShowPassword(!showPassword)} />
+              Show Password
+            </label>
+          </>
         )}
         <button type="submit" disabled={loading} style={{ padding: '10px 15px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
           {loading ? 'Loading...' : (requestMagicLink ? 'Send Magic Link' : (isSignUp ? 'Sign Up' : 'Sign In'))}
@@ -101,9 +122,7 @@ const Auth = () => {
       )}
       {message && <p style={{ textAlign: 'center', marginTop: '15px', color: message.startsWith('Error') ? 'red' : 'green' }}>{message}</p>}
 
-      <button onClick={handleSignOut} disabled={loading} style={{ padding: '10px 15px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginTop: '20px' }}>
-        Sign Out
-      </button>
+      
     </div>
   );
 };

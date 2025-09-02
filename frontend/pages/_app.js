@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import MainLayout from '../components/MainLayout';
 import '../styles/globals.css';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
