@@ -44,11 +44,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { title: lessonTitle, summary: lessonSummary } = lessonData
 
+    // 1.1 Fetch the full course structure
+    const { data: courseLessons, error: courseLessonsError } = await supabaseAdmin
+      .from('lessons')
+      .select('title, order')
+      .eq('course_id', courseId)
+      .order('order', { ascending: true });
+
+    if (courseLessonsError) {
+      // We don't want to block the lesson generation if this fails, so we'll just log the error
+      console.error('Failed to fetch course structure:', courseLessonsError);
+    }
+
+    const courseStructure = courseLessons
+      ? courseLessons.map(lesson => `${lesson.order}. ${lesson.title}`).join('\n')
+      : 'Course structure not available.';
+
     // 2. Construct a detailed prompt based on phase2-5.md
     const promptTemplate = fs.readFileSync(path.join(process.cwd(), '..', 'prompts', 'lesson-generation.prompt.md'), 'utf-8');
     const prompt = promptTemplate
       .replace('{{TOPIC}}', lessonTitle)
-      .replace('{{COURSE_ID}}', courseId);
+      .replace('{{COURSE_ID}}', courseId)
+      .replace('{{COURSE_STRUCTURE}}', courseStructure);
 
     // 3. Call the AI service to generate the enhanced lesson content
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {

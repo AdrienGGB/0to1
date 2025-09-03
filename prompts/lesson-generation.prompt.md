@@ -16,6 +16,7 @@ Generate a complete lesson in enhanced Markdown format with the following requir
 - Focus on maximizing knowledge and understanding of the topic.
 - Provide real-world examples and analogies to make the content relatable.
 - Avoid jargon where possible, or explain it clearly when necessary.
+- **For non-technical topics, do not include code snippets or programming-related examples.**
 - The tone should be encouraging and inspiring.
 
 # 3. OUTPUT RULES
@@ -26,6 +27,12 @@ Generate a complete lesson in enhanced Markdown format with the following requir
 Use these inputs in the lesson:
 - Topic: {{TOPIC}}
 - courseId: {{COURSE_ID}}
+
+# 5. CONTEXT
+This lesson is part of a larger course. Here is the full course structure:
+{{COURSE_STRUCTURE}}
+
+Use this context to ensure the lesson is well-aligned with the other lessons in the course. The content should build upon previous lessons and set the stage for upcoming lessons.
 
 # LESSON FORMAT REFERENCE
 ---
