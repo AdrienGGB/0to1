@@ -18,6 +18,7 @@ const Auth = () => {
     const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
+        localStorage.setItem('userId', session.user.id);
         router.push('/');
       }
     };
@@ -26,6 +27,7 @@ const Auth = () => {
     // Listen for auth state changes
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' && session) {
+        localStorage.setItem('userId', session.user.id);
         router.push('/');
       }
     });
