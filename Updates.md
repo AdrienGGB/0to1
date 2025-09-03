@@ -21,3 +21,7 @@ Here is a recap of the changes made today:
 
 - **Fixed New Course Creation:**
     - Fixed authentication in the `generate-course` API route.
+
+- **Database Schema Update Required for User-Specific Courses:**
+    - A database migration is required to add a `user_id` column to the `courses` table, update the `create_course_with_lessons` function, and enable Row Level Security (RLS) policies. This ensures each user only sees their own courses.
+    - **Action Required:** After deploying the code changes, run `supabase db push` to apply these database changes to your production Supabase project.
