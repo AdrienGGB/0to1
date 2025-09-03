@@ -8,7 +8,13 @@ import { createPagesServerClient } from '@/utils/supabase/pages-router-server'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()
 
-  const supabase = createPagesServerClient({ req, res })
+  if (!process.env.OPENROUTER_API_KEY) {
+    console.error('OPENROUTER_API_KEY is not set');
+    return res.status(500).json({ error: 'OPENROUTER_API_KEY is not set' });
+  }
+
+
+  const supabase = createPagesServerClient(req, res)
   const { data: { session } } = await supabase.auth.getSession()
 
   if (!session) {
@@ -20,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const supabaseAdmin = createClient(
-      process.env.SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     )
 
@@ -59,6 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (!response.ok) {
       const errorData = await response.json()
+      console.error('OpenRouter error:', errorData);
       return res.status(response.status).json({ error: errorData })
     }
 

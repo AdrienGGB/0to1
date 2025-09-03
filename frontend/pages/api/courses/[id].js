@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { createPagesServerClient } from '@/utils/supabase/pages-router-server';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -7,10 +7,7 @@ export default async function handler(req, res) {
 
   const { id } = req.query;
 
-  const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_ANON_KEY
-  );
+  const supabase = createPagesServerClient(req, res);
 
   const { data: course, error } = await supabase
     .from('courses')

@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     return res.status(405).end(); // Method Not Allowed
   }
 
-  const supabase = createPagesServerClient({ req, res })
+  const supabase = createPagesServerClient(req, res)
   const { data: { session } } = await supabase.auth.getSession()
 
   if (!session) {
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
   try {
     const supabaseAdmin = createClient(
-      process.env.SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
 

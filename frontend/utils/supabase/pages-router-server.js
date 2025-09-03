@@ -1,5 +1,5 @@
 import { createServerClient } from '@supabase/ssr'
-import { serialize } from 'cookie'
+import { serialize, parse } from 'cookie'
 
 export function createPagesServerClient(req, res) {
   return createServerClient(
@@ -8,7 +8,8 @@ export function createPagesServerClient(req, res) {
     {
       cookies: {
         get(name) {
-          return req.cookies[name]
+          const cookies = parse(req.headers?.cookie || '')
+          return cookies[name]
         },
         set(name, value, options) {
           res.setHeader('Set-Cookie', serialize(name, value, options))
@@ -16,6 +17,9 @@ export function createPagesServerClient(req, res) {
         remove(name, options) {
           res.setHeader('Set-Cookie', serialize(name, '', options))
         },
+      },
+      auth: {
+        jwtSecret: process.env.SUPABASE_JWT_SECRET,
       },
     }
   )
