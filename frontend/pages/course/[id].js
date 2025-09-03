@@ -132,6 +132,7 @@ const CoursePage = () => {
   };
 
   useEffect(() => {
+    console.log('Fetching data for id:', id, 'and userId:', userId);
     if (!id || !userId) return;
 
     const fetchAllData = async () => {
