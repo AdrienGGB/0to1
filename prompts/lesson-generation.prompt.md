@@ -17,6 +17,7 @@ Generate a complete lesson in enhanced Markdown format with the following requir
 - Provide real-world examples and analogies to make the content relatable.
 - Avoid jargon where possible, or explain it clearly when necessary.
 - **For non-technical topics, do not include code snippets or programming-related examples.**
+- **Use emojis to make the content more engaging and visually appealing.** Use them appropriately to illustrate concepts and break up the text.
 - The tone should be encouraging and inspiring.
 
 # 3. OUTPUT RULES
