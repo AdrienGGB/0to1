@@ -7,6 +7,7 @@ import { createClient } from '@/utils/supabase/client';
 
 function HomePage() {
   const [topic, setTopic] = useState('');
+  const [level, setLevel] = useState('beginner');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [user, setUser] = useState(null); // New state for user
@@ -43,7 +44,7 @@ function HomePage() {
       const response = await fetch('/api/generate-course', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ topic }),
+        body: JSON.stringify({ topic, level }),
       });
 
       if (!response.ok) {
@@ -89,6 +90,20 @@ function HomePage() {
       <h1 style={{ textAlign: 'center', marginBottom: '40px', fontSize: '32px' }}>0to1: AI Learning Assistant</h1>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <TopicInput value={topic} onChange={(e) => setTopic(e.target.value)} />
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '10px' }}>
+          <label>
+            <input type="radio" value="beginner" checked={level === 'beginner'} onChange={() => setLevel('beginner')} />
+            Beginner
+          </label>
+          <label>
+            <input type="radio" value="intermediate" checked={level === 'intermediate'} onChange={() => setLevel('intermediate')} />
+            Intermediate
+          </label>
+          <label>
+            <input type="radio" value="expert" checked={level === 'expert'} onChange={() => setLevel('expert')} />
+            Expert
+          </label>
+        </div>
         <GenerateButton onClick={handleGenerate} loading={loading} />
       </div>
       <RecentCourses />

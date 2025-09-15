@@ -15,11 +15,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(401).json({ error: 'Not authenticated' })
   }
 
-  const { topic } = req.body
+  const { topic, level } = req.body
   if (!topic) return res.status(400).json({ error: 'Missing topic' })
+  if (!level) return res.status(400).json({ error: 'Missing level' })
 
   const promptTemplate = fs.readFileSync(path.join(process.cwd(), '..', 'prompts', 'course-generation.prompt.md'), 'utf-8');
-  const prompt = promptTemplate.replace('{topic}', topic);
+  const promptWithTopic = promptTemplate.replace('{topic}', topic);
+  const prompt = promptWithTopic.replace('{level}', level);
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -61,6 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       course_title: course.title,
       course_description: course.description,
       course_topic: topic,
+      course_level: level,
       course_ai_prompt: { prompt },
       lessons_data: lessonsWithContent,
     });

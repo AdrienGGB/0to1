@@ -201,7 +201,7 @@ const CoursePage = () => {
 
   return (
     <div>
-      <CourseHeader title={course.title} description={course.description} />
+      <CourseHeader title={course.title} description={course.description} level={course.level} />
       {selectedLessonContent ? (
         <div>
           <button onClick={() => setSelectedLessonId(null)} style={{ marginBottom: '20px', padding: '10px 20px', cursor: 'pointer' }}>
