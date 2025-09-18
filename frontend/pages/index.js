@@ -5,6 +5,8 @@ import { createClient } from '@/utils/supabase/client';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
 
 function HomePage() {
   const [topic, setTopic] = useState('');
@@ -83,31 +85,40 @@ function HomePage() {
   }
 
   return (
-    <div className="container mx-auto max-w-2xl py-12 px-6">
-      <section className="py-12 px-6 bg-brand-gradient text-white rounded-xl text-center mb-12">
+    <div className="container mx-auto max-w-lg py-12 px-6">
+      <section className="py-12 px-6 bg-brand-gradient text-white rounded-xl text-center mb-16">
         <h1 className="text-4xl font-bold">Instant AI Courses</h1>
         <p className="mt-2 text-lg">Create structured beginner courses in seconds.</p>
       </section>
 
-      <div className="flex flex-col gap-4">
-        <Input
-          type="text"
-          placeholder="Enter a topic..."
-          value={topic}
-          onChange={(e) => setTopic(e.target.value)}
-          className="p-4 text-lg"
-        />
-        <Tabs value={level} onValueChange={setLevel} className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="beginner">Beginner</TabsTrigger>
-            <TabsTrigger value="intermediate">Intermediate</TabsTrigger>
-            <TabsTrigger value="expert">Expert</TabsTrigger>
-          </TabsList>
-        </Tabs>
-        <Button onClick={handleGenerate} disabled={loading} className="bg-brand-indigoPurple hover:bg-brand-blue text-white font-bold py-4 text-lg">
-          {loading ? 'Generating...' : 'Generate Course'}
-        </Button>
-      </div>
+      <Card className="p-6 mb-16"> {/* Added Card component */}
+        <div className="grid gap-4"> {/* Changed to grid for better spacing with labels */}
+          <div>
+            <Label htmlFor="topic">Course Topic</Label> {/* Added Label */}
+            <Input
+              id="topic" // Added id for label association
+              type="text"
+              placeholder="Enter a topic..."
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
+              className="p-4 text-lg h-14"
+            />
+          </div>
+          <div>
+            <Label>Course Level</Label> {/* Added Label */}
+            <Tabs value={level} onValueChange={setLevel} className="w-full">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="beginner">Beginner</TabsTrigger>
+                <TabsTrigger value="intermediate">Intermediate</TabsTrigger>
+                <TabsTrigger value="expert">Expert</TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+          <Button onClick={handleGenerate} disabled={loading} className="bg-brand-indigoPurple hover:bg-brand-blue text-white font-bold py-4 text-lg">
+            {loading ? 'Generating...' : 'Generate Course'}
+          </Button>
+        </div>
+      </Card>
 
       <RecentCourses />
     </div>

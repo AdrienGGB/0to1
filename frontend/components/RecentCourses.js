@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 const RecentCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -27,19 +28,24 @@ const RecentCourses = () => {
   }, []);
 
   return (
-    <div style={{ marginTop: '60px' }}>
-      <h2 style={{ fontSize: '24px', marginBottom: '20px', borderBottom: '1px solid #eee', paddingBottom: '10px' }}>
+    <div className="mt-12">
+      <h2 className="text-2xl font-bold mb-6 border-b pb-2">
         Recent Courses
       </h2>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '20px' }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {courses.map(course => (
-          <Link key={course.id} href={`/course/${course.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div style={{ border: '1px solid #eee', borderRadius: '8px', padding: '20px', transition: 'box-shadow 0.3s ease', cursor: 'pointer' }}>
-              <h3 style={{ fontSize: '20px', marginBottom: '10px' }}>{course.title}</h3>
-              <p style={{ fontSize: '14px', color: '#666' }}>{course.description}</p>
-            </div>
+          <Link key={course.id} href={`/course/${course.id}`} className="no-underline text-inherit">
+            <Card className="h-full flex flex-col">
+              <CardHeader>
+                <CardTitle>{course.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-sm text-muted-foreground mb-2">{course.description}</p>
+                <p className="text-xs text-primary-foreground font-semibold">Level: {course.level}</p>
+              </CardContent>
+            </Card>
           </Link>
         ))}
       </div>
