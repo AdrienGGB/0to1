@@ -1,3 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* optional CSS variables used by components */
+:root{
+  --brand-indigo: #8B5CF6;
+  --brand-blue: #2563EB;
+  --bg: #F9FAFB;
+  --surface: #FFFFFF;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+}
+
+/* subtle gradient overlay helper */
+.bg-brand-hero {
+  background-image: linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(37,99,235,0.08) 100%);
+}
+
 /* Global CSS styles */
 * {
   box-sizing: border-box;

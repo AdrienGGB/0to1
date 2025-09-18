@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import TopicInput from '../components/TopicInput';
-import GenerateButton from '../components/GenerateButton';
 import RecentCourses from '../components/RecentCourses';
 import { createClient } from '@/utils/supabase/client';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 function HomePage() {
   const [topic, setTopic] = useState('');
   const [level, setLevel] = useState('beginner');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const [user, setUser] = useState(null); // New state for user
-  const [sessionLoaded, setSessionLoaded] = useState(false); // New state to track session loading
-  const supabase = createClient(); // Create client-side Supabase instance
+  const [user, setUser] = useState(null);
+  const [sessionLoaded, setSessionLoaded] = useState(false);
+  const supabase = createClient();
 
   useEffect(() => {
     const getSession = async () => {
@@ -55,7 +56,6 @@ function HomePage() {
       const data = await response.json();
       const { course } = data;
 
-      // Trigger lesson enhancement for each lesson in the generated course
       if (course && course.lessons) {
         course.lessons.forEach(async (lesson) => {
           try {
@@ -64,48 +64,51 @@ function HomePage() {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ lessonId: lesson.id, courseId: course.id }),
             });
-            // No need to wait for each enhancement to complete before redirecting
           } catch (enhanceError) {
             console.error(`Failed to enhance lesson ${lesson.id}:`, enhanceError);
-            // Handle error, maybe log it or update UI to show partial failure
           }
         });
       }
 
       router.push(`/course/${course.id}`);
     } catch (error) {
-      // For the user, we can show a notification
       alert(error.message);
     } finally {
       setLoading(false);
     }
   };
 
-  if (!sessionLoaded || !user) { // Check sessionLoaded before rendering
+  if (!sessionLoaded || !user) {
     return <p>Redirecting to authentication...</p>;
   }
 
   return (
-    <div style={{ maxWidth: '600px', margin: 'auto', padding: '40px 20px', fontFamily: 'sans-serif' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '40px', fontSize: '32px' }}>0to1: AI Learning Assistant</h1>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <TopicInput value={topic} onChange={(e) => setTopic(e.target.value)} />
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '10px' }}>
-          <label>
-            <input type="radio" value="beginner" checked={level === 'beginner'} onChange={() => setLevel('beginner')} />
-            Beginner
-          </label>
-          <label>
-            <input type="radio" value="intermediate" checked={level === 'intermediate'} onChange={() => setLevel('intermediate')} />
-            Intermediate
-          </label>
-          <label>
-            <input type="radio" value="expert" checked={level === 'expert'} onChange={() => setLevel('expert')} />
-            Expert
-          </label>
-        </div>
-        <GenerateButton onClick={handleGenerate} loading={loading} />
+    <div className="container mx-auto max-w-2xl py-12 px-6">
+      <section className="py-12 px-6 bg-brand-gradient text-white rounded-xl text-center mb-12">
+        <h1 className="text-4xl font-bold">Instant AI Courses</h1>
+        <p className="mt-2 text-lg">Create structured beginner courses in seconds.</p>
+      </section>
+
+      <div className="flex flex-col gap-4">
+        <Input
+          type="text"
+          placeholder="Enter a topic..."
+          value={topic}
+          onChange={(e) => setTopic(e.target.value)}
+          className="p-4 text-lg"
+        />
+        <Tabs value={level} onValueChange={setLevel} className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="beginner">Beginner</TabsTrigger>
+            <TabsTrigger value="intermediate">Intermediate</TabsTrigger>
+            <TabsTrigger value="expert">Expert</TabsTrigger>
+          </TabsList>
+        </Tabs>
+        <Button onClick={handleGenerate} disabled={loading} className="bg-brand-indigoPurple hover:bg-brand-blue text-white font-bold py-4 text-lg">
+          {loading ? 'Generating...' : 'Generate Course'}
+        </Button>
       </div>
+
       <RecentCourses />
     </div>
   );

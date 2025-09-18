@@ -1,10 +1,14 @@
 import React from 'react';
 import Sidebar from './Sidebar';
+import { DarkModeToggle } from './DarkModeToggle';
 
 const MainLayout = ({ children }) => (
-  <div style={{ display: 'flex' }}>
+  <div className="flex">
     <Sidebar />
-    <main style={{ flexGrow: 1, padding: '40px' }}>
+    <main className="flex-grow p-10 relative">
+      <div className="absolute top-4 right-4">
+        <DarkModeToggle />
+      </div>
       {children}
     </main>
   </div>
