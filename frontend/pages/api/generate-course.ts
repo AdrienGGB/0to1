@@ -9,7 +9,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method !== 'POST') return res.status(405).end()
 
   const supabase = createPagesServerClient(req, res)
-  const { data: { session } } = await supabase.auth.getSession()
+  const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+
+  if (sessionError) {
+    return res.status(401).json({ error: `Session error: ${sessionError.message}` })
+  }
 
   if (!session) {
     return res.status(401).json({ error: 'Not authenticated' })

@@ -44,7 +44,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { title: lessonTitle, summary: lessonSummary } = lessonData
 
-    // 1.1 Fetch the full course structure
+    // 1.1 Fetch course level
+    const { data: courseData, error: courseError } = await supabaseAdmin
+        .from('courses')
+        .select('level')
+        .eq('id', courseId)
+        .single();
+
+    if (courseError || !courseData) {
+        return res.status(404).json({ error: 'Course not found' });
+    }
+    const { level } = courseData;
+
+    // 1.2 Fetch the full course structure
     const { data: courseLessons, error: courseLessonsError } = await supabaseAdmin
       .from('lessons')
       .select('title, order')
@@ -65,7 +77,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const prompt = promptTemplate
       .replace('{{TOPIC}}', lessonTitle)
       .replace('{{COURSE_ID}}', courseId)
-      .replace('{{COURSE_STRUCTURE}}', courseStructure);
+      .replace('{{COURSE_STRUCTURE}}', courseStructure)
+      .replace('{{LEVEL}}', level);
 
     // 3. Call the AI service to generate the enhanced lesson content
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {

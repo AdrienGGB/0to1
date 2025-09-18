@@ -51,6 +51,9 @@ export async function updateSession(request) {
           })
         },
       },
+      auth: {
+        jwtSecret: process.env.SUPABASE_JWT_SECRET,
+      },
     }
   )
 

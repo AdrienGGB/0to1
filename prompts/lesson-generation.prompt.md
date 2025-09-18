@@ -28,12 +28,19 @@ Generate a complete lesson in enhanced Markdown format with the following requir
 Use these inputs in the lesson:
 - Topic: {{TOPIC}}
 - courseId: {{COURSE_ID}}
+- Level: {{LEVEL}}
 
 # 5. CONTEXT
 This lesson is part of a larger course. Here is the full course structure:
 {{COURSE_STRUCTURE}}
 
 Use this context to ensure the lesson is well-aligned with the other lessons in the course. The content should build upon previous lessons and set the stage for upcoming lessons.
+
+# 6. LEVEL-SPECIFIC REQUIREMENTS
+Adjust the lesson content based on the provided level:
+- **Beginner**: Keep the content short and introductory. Use simple language and basic examples. Avoid technical jargon.
+- **Intermediate**: Provide more detailed explanations, introduce best practices, and include some light theory. Assume some basic knowledge.
+- **Expert**: Dive deep into the topic with in-depth analysis. Cover edge cases, complex examples, and advanced concepts. Assume the learner is experienced.
 
 # LESSON FORMAT REFERENCE
 ---
