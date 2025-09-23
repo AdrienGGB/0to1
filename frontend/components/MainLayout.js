@@ -2,9 +2,9 @@ import React from 'react';
 import Sidebar from './Sidebar';
 
 const MainLayout = ({ children }) => (
-  <div style={{ display: 'flex' }}>
+  <div className="flex min-h-screen bg-gray-50">
     <Sidebar />
-    <main style={{ flexGrow: 1, padding: '40px' }}>
+    <main className="flex-1">
       {children}
     </main>
   </div>

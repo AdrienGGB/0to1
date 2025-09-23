@@ -37,10 +37,9 @@ function HomePage() {
   }, [supabase]);
 
   useEffect(() => {
-    // Temporarily bypass authentication for testing
-    // if (sessionLoaded && !user) {
-    //   router.push('/auth');
-    // }
+    if (sessionLoaded && !user) {
+      router.push('/auth');
+    }
   }, [sessionLoaded, user, router]);
 
   const handleGenerate = async () => {
@@ -87,10 +86,9 @@ function HomePage() {
     }
   };
 
-  // Temporarily bypass authentication for testing
-  // if (!sessionLoaded || !user) { // Check sessionLoaded before rendering
-  //   return <p>Redirecting to authentication...</p>;
-  // }
+  if (!sessionLoaded || !user) { // Check sessionLoaded before rendering
+    return <p>Redirecting to authentication...</p>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">

@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/router';
+import { Button } from '@/components/ui/button';
 
 const Sidebar = () => {
   const router = useRouter();
@@ -14,33 +15,35 @@ const Sidebar = () => {
   };
 
   return (
-    <div
-      style={{
-        width: '280px',
-        backgroundColor: '#fff',
-        padding: '30px',
-        height: '100vh',
-        borderRight: '1px solid #eee',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <div style={{ marginBottom: '40px' }}>
-        <Link href="/" style={{ textDecoration: 'none', color: '#000', fontSize: '28px', fontWeight: 'bold' }}>
+    <div className="w-64 bg-white border-r border-gray-200 flex flex-col h-screen">
+      <div className="p-6 border-b border-gray-200">
+        <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
           0to1
         </Link>
       </div>
-      <ul style={{ listStyle: 'none', padding: 0, flexGrow: 1 }}>
-        <li style={{ marginBottom: '15px' }}>
-          <Link href="/" style={{ textDecoration: 'none', color: '#333', fontSize: '18px', display: 'block', padding: '10px 15px', borderRadius: '5px', transition: 'background-color 0.2s ease' }}>
-            Home
-          </Link>
-        </li>
-        {/* Add more links here in the future */}
-      </ul>
-      <button onClick={handleSignOut} style={{ padding: '10px 15px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-        Sign Out
-      </button>
+      
+      <nav className="flex-1 p-4">
+        <ul className="space-y-2">
+          <li>
+            <Link 
+              href="/" 
+              className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900 transition-colors"
+            >
+              Home
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      
+      <div className="p-4 border-t border-gray-200">
+        <Button 
+          onClick={handleSignOut} 
+          variant="destructive" 
+          className="w-full"
+        >
+          Sign Out
+        </Button>
+      </div>
     </div>
   );
 };
