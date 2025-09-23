@@ -88,7 +88,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: process.env.OPENROUTER_MODEL || 'deepseek/deepseek-r1-0528:free',
+        model: process.env.OPENROUTER_MODEL || 'x-ai/grok-4-fast:free',
         messages: [{ role: 'user', content: prompt }]
       })
     })
