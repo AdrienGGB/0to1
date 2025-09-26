@@ -1,8 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/router';
-import CourseHeader from '../../components/CourseHeader';
-import LessonList from '../../components/LessonList';
-import LessonContentRenderer from '../../components/LessonContentRenderer'; // Import the new component
+import { Button } from '@/components/ui/button';
 
 const CoursePage = () => {
   const router = useRouter();
@@ -200,27 +196,21 @@ const CoursePage = () => {
   if (!course) return <p>Course not found.</p>;
 
   return (
-    <div>
+    <div className="min-h-screen bg-[linear-gradient(135deg,#2a3a4a_0%,#3f6075_35%,#5b7fa1_65%,#8b5fd6_100%)] animated-gradient p-8">
       <CourseHeader title={course.title} description={course.description} level={course.level} />
       {selectedLessonContent ? (
         <div>
-          <button onClick={() => setSelectedLessonId(null)} style={{ marginBottom: '20px', padding: '10px 20px', cursor: 'pointer' }}>
+          <Button onClick={() => setSelectedLessonId(null)} className="mb-4">
             Back to Lesson List
-          </button>
+          </Button>
           {loadingLessonContent ? (
-            <div style={{ textAlign: 'center', padding: '20px' }}>
-              <p>Loading lesson content...</p>
+            <div className="text-center p-5">
+              <p className="text-white">Loading lesson content...</p>
               {/* You can add a simple spinner here if you have one */}
-              <div style={{ border: '4px solid #f3f3f3', borderRadius: '50%', borderTop: '4px solid #3498db', width: '20px', height: '20px', animation: 'spin 1s linear infinite', margin: 'auto' }}></div>
-              <style jsx>{`
-                @keyframes spin {
-                  0% { transform: rotate(0deg); }
-                  100% { transform: rotate(360deg); }
-                }
-              `}</style>
+              <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
             </div>
           ) : lessonContentError ? (
-            <div style={{ color: 'red', padding: '20px', border: '1px solid red', borderRadius: '5px' }}>
+            <div className="text-red-500 p-5 border border-red-500 rounded-md">
               <p>Failed to load lesson content. Please try again.</p>
               <p>Details: {lessonContentError}</p>
             </div>

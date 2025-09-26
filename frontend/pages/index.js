@@ -98,31 +98,31 @@ function HomePage() {
           <p className="text-gray-300">Create structured courses in seconds</p>
         </div>
         
-        <Card className="shadow-lg border-0 bg-white/10 text-white backdrop-blur-sm">
+        <Card className="shadow-lg border-0 bg-white text-gray-800">
           <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-2xl font-semibold text-center text-white">Generate Your Course</CardTitle>
-            <p className="text-sm text-gray-300 text-center">Enter your topic below to create a course</p>
+            <CardTitle className="text-2xl font-semibold text-center">Generate Your Course</CardTitle>
+            <p className="text-sm text-gray-600 text-center">Enter your topic below to create a course</p>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="topic" className="text-sm font-medium text-white">Course Topic</Label>
+              <Label htmlFor="topic" className="text-sm font-medium">Course Topic</Label>
               <Input
                 id="topic"
                 type="text"
                 placeholder="Enter a topic to learn..."
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                className="h-10 bg-gray-800 text-white"
+                className="h-10 bg-gray-100 text-gray-800"
               />
             </div>
             
             <div className="space-y-2">
-              <Label className="text-sm font-medium text-white">Course Level</Label>
+              <Label className="text-sm font-medium">Course Level</Label>
               <Tabs value={level} onValueChange={setLevel} className="w-full">
-                <TabsList className="grid w-full grid-cols-3 bg-[linear-gradient(135deg,#2c5364_0%,#203a43_50%,#0f2027_100%)] text-white">
-                  <TabsTrigger value="beginner" className="data-[state=active]:bg-gray-500 data-[state=active]:border-gray-400">Beginner</TabsTrigger>
-                  <TabsTrigger value="intermediate" className="data-[state=active]:bg-gray-500 data-[state=active]:border-gray-400">Intermediate</TabsTrigger>
-                  <TabsTrigger value="expert" className="data-[state=active]:bg-gray-500 data-[state=active]:border-gray-400">Expert</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-3 bg-gray-200 text-gray-800">
+                  <TabsTrigger value="beginner" className="data-[state=active]:bg-gray-500 data-[state=active]:text-white">Beginner</TabsTrigger>
+                  <TabsTrigger value="intermediate" className="data-[state=active]:bg-gray-500 data-[state=active]:text-white">Intermediate</TabsTrigger>
+                  <TabsTrigger value="expert" className="data-[state=active]:bg-gray-500 data-[state=active]:text-white">Expert</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
@@ -130,7 +130,7 @@ function HomePage() {
             <Button 
               onClick={handleGenerate} 
               disabled={loading || !topic} 
-              className="w-full h-10 bg-gray-200 text-gray-800 hover:bg-gray-300"
+              className="w-full h-10 bg-gray-800 text-white hover:bg-gray-700"
             >
               {loading ? 'Generating...' : 'Generate Course'}
             </Button>

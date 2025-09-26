@@ -35,13 +35,13 @@ const RecentCourses = () => {
       </h2>
       {loading && <p className="text-white">Loading...</p>}
       {error && <p className="text-red-500">Error: {error}</p>}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
         {courses.map(course => (
-          <Link key={course.id} href={`/course/${course.id}`} className="text-white no-underline flex">
-            <div className="relative flex-1 flex flex-col border border-gray-700 rounded-lg p-4 transition-shadow duration-300 ease-in-out hover:shadow-lg cursor-pointer bg-gray-800 min-w-[300px]">
+          <Link key={course.id} href={`/course/${course.id}`} className="text-gray-800 no-underline flex">
+            <div className="relative flex-1 flex flex-col border border-gray-200 rounded-lg p-4 transition-shadow duration-300 ease-in-out hover:shadow-lg cursor-pointer bg-white min-w-[300px]">
               <Badge className="absolute top-2 right-2">{course.level}</Badge>
               <h3 className="text-lg font-bold mb-2 overflow-hidden text-ellipsis whitespace-nowrap">{course.title}</h3>
-              <p className="text-xs text-gray-400 overflow-hidden text-ellipsis h-16">{course.description}</p>
+              <p className="text-xs text-gray-600 overflow-hidden text-ellipsis h-16">{course.description}</p>
             </div>
           </Link>
         ))}

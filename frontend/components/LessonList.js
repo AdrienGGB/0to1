@@ -2,7 +2,7 @@ import React from 'react';
 import Lesson from './Lesson';
 
 const LessonList = ({ lessons, progress, onSaveProgress, onLessonTimeUpdate, onLessonSelect, selectedLessonId, onEnhanceLesson, enhancing }) => (
-  <div>
+  <div className="w-full max-w-4xl mx-auto">
     {lessons.sort((a, b) => a.order - b.order).map(lesson => (
       <Lesson
         key={lesson.id}

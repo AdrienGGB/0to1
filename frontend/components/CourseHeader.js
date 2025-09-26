@@ -1,26 +1,18 @@
 
 import React from 'react';
+import { Badge } from '@/components/ui/badge';
 
 const CourseHeader = ({ title, description, level }) => (
-  <div style={{ marginBottom: '40px', borderBottom: '1px solid #eee', paddingBottom: '20px' }}>
-    <h1 style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '10px' }}>
+  <div className="mb-8 pb-4 border-b border-gray-700">
+    <h1 className="text-4xl font-bold text-white mb-2">
       {title}
       {level && (
-        <span style={{
-          fontSize: '16px',
-          fontWeight: 'normal',
-          backgroundColor: '#eee',
-          color: '#333',
-          padding: '5px 10px',
-          borderRadius: '5px',
-          marginLeft: '15px',
-          verticalAlign: 'middle'
-        }}>
+        <Badge variant="secondary" className="ml-4 align-middle">
           {level.charAt(0).toUpperCase() + level.slice(1)}
-        </span>
+        </Badge>
       )}
     </h1>
-    <p style={{ fontSize: '20px', color: '#666' }}>{description}</p>
+    <p className="text-lg text-gray-300">{description}</p>
   </div>
 );
 
