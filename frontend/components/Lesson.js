@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 
 const Lesson = ({ lesson, isCompleted, onToggleComplete, onLessonSelect, isSelected, onEnhanceLesson, enhancing }) => {
   const isEnhanced = lesson.content && lesson.content.length > 0;
@@ -10,7 +9,6 @@ const Lesson = ({ lesson, isCompleted, onToggleComplete, onLessonSelect, isSelec
       className={`relative w-full border rounded-lg mb-4 overflow-hidden cursor-pointer ${isSelected ? 'bg-gray-200' : 'bg-white'}`}
       onClick={() => onLessonSelect(lesson.id)}
     >
-      <Badge variant="default" className="absolute top-2 right-2 py-1 px-2 pointer-events-none bg-gray-800 text-white">{lesson.level}</Badge>
       <div className="p-4 flex justify-between items-center">
         <h3 className="text-lg font-bold">{lesson.title}</h3>
         <div className="flex items-center">
