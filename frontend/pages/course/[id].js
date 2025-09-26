@@ -1,3 +1,8 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/router';
+import CourseHeader from '../../components/CourseHeader';
+import LessonList from '../../components/LessonList';
+import LessonContentRenderer from '../../components/LessonContentRenderer'; // Import the new component
 import { Button } from '@/components/ui/button';
 
 const CoursePage = () => {
