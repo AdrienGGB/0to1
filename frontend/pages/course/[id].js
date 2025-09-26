@@ -4,6 +4,7 @@ import CourseHeader from '../../components/CourseHeader';
 import LessonList from '../../components/LessonList';
 import LessonContentRenderer from '../../components/LessonContentRenderer'; // Import the new component
 import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 
 const CoursePage = () => {
   const router = useRouter();
@@ -201,16 +202,16 @@ const CoursePage = () => {
   if (!course) return <p>Course not found.</p>;
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#2a3a4a_0%,#3f6075_35%,#5b7fa1_65%,#8b5fd6_100%)] animated-gradient p-8">
+    <div className="min-h-screen bg-white p-8">
       <CourseHeader title={course.title} description={course.description} level={course.level} />
       {selectedLessonContent ? (
         <div>
-          <Button onClick={() => setSelectedLessonId(null)} className="mb-4">
-            Back to Lesson List
+          <Button onClick={() => setSelectedLessonId(null)} className="mb-4 bg-gray-500 text-white">
+            <ArrowLeft className="h-4 w-4" />
           </Button>
           {loadingLessonContent ? (
             <div className="text-center p-5">
-              <p className="text-white">Loading lesson content...</p>
+              <p className="text-gray-800">Loading lesson content...</p>
               {/* You can add a simple spinner here if you have one */}
               <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
             </div>

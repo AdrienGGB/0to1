@@ -28,7 +28,7 @@ const Lesson = ({ lesson, isCompleted, onToggleComplete, onLessonSelect, isSelec
               }}
               disabled={enhancing}
               size="sm"
-              className="ml-4"
+              className="ml-4 bg-gray-500 border border-gray-400 text-white hover:bg-gray-600"
             >
               {enhancing ? 'Enhancing...' : 'Enhance'}
             </Button>
