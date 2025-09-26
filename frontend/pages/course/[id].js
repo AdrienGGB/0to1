@@ -202,7 +202,7 @@ const CoursePage = () => {
   if (!course) return <p>Course not found.</p>;
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#2a3a4a_0%,#3f6075_35%,#5b7fa1_65%,#8b5fd6_100%)] animated-gradient p-8">
+    <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] p-8">
       <CourseHeader title={course.title} description={course.description} level={course.level} />
       {selectedLessonContent ? (
         <div className="bg-white p-6 rounded-lg shadow-lg text-gray-800">
@@ -211,7 +211,7 @@ const CoursePage = () => {
           </Button>
           {loadingLessonContent ? (
             <div className="text-center p-5">
-              <p className="text-gray-800">Loading lesson content...</p>
+              <p className="text-gray-800">Loading course content...</p>
               {/* You can add a simple spinner here if you have one */}
               <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
             </div>

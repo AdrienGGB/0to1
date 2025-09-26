@@ -91,11 +91,11 @@ function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#2a3a4a_0%,#3f6075_35%,#5b7fa1_65%,#8b5fd6_100%)] flex flex-col items-center py-12 px-4 animated-gradient">
+    <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] flex flex-col items-center py-12 px-4">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-white mb-2">0to1: AI Learning Assistant</h1>
-          <p className="text-gray-300">Create structured courses in seconds</p>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">0to1: AI Learning Assistant</h1>
+          <p className="text-gray-600">Create structured courses in seconds</p>
         </div>
         
         <Card className="shadow-lg border-0 bg-white text-gray-800">
@@ -120,9 +120,9 @@ function HomePage() {
               <Label className="text-sm font-medium">Course Level</Label>
               <Tabs value={level} onValueChange={setLevel} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 bg-gray-200 text-gray-800">
-                  <TabsTrigger value="beginner" className="data-[state=active]:bg-gray-500 data-[state=active]:text-white">Beginner</TabsTrigger>
-                  <TabsTrigger value="intermediate" className="data-[state=active]:bg-gray-500 data-[state=active]:text-white">Intermediate</TabsTrigger>
-                  <TabsTrigger value="expert" className="data-[state=active]:bg-gray-500 data-[state=active]:text-white">Expert</TabsTrigger>
+                  <TabsTrigger value="beginner" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">Beginner</TabsTrigger>
+                  <TabsTrigger value="intermediate" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">Intermediate</TabsTrigger>
+                  <TabsTrigger value="expert" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">Expert</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
@@ -130,7 +130,7 @@ function HomePage() {
             <Button 
               onClick={handleGenerate} 
               disabled={loading || !topic} 
-              className="w-full h-10 bg-gray-800 text-white hover:bg-gray-700"
+              className="w-full h-10 bg-gray-500 text-white hover:bg-gray-600"
             >
               {loading ? 'Generating...' : 'Generate Course'}
             </Button>
