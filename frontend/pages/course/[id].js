@@ -202,11 +202,11 @@ const CoursePage = () => {
   if (!course) return <p>Course not found.</p>;
 
   return (
-    <div className="min-h-screen bg-white p-8">
+    <div className="min-h-screen bg-[linear-gradient(135deg,#2a3a4a_0%,#3f6075_35%,#5b7fa1_65%,#8b5fd6_100%)] animated-gradient p-8">
       <CourseHeader title={course.title} description={course.description} level={course.level} />
       {selectedLessonContent ? (
-        <div>
-          <Button onClick={() => setSelectedLessonId(null)} className="mb-4 bg-gray-500 text-white">
+        <div className="bg-white p-6 rounded-lg shadow-lg text-gray-800">
+          <Button onClick={() => setSelectedLessonId(null)} className="mb-4 bg-gray-500 text-white hover:bg-gray-600">
             <ArrowLeft className="h-4 w-4" />
           </Button>
           {loadingLessonContent ? (
