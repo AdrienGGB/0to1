@@ -10,7 +10,7 @@ const Lesson = ({ lesson, isCompleted, onToggleComplete, onLessonSelect, isSelec
       className={`relative w-full border rounded-lg mb-4 overflow-hidden cursor-pointer ${isSelected ? 'bg-gray-200' : 'bg-white'}`}
       onClick={() => onLessonSelect(lesson.id)}
     >
-      <Badge className="absolute top-2 right-2 py-1 px-2 pointer-events-none">{lesson.level}</Badge>
+      <Badge variant="default" className="absolute top-2 right-2 py-1 px-2 pointer-events-none bg-gray-800 text-white">{lesson.level}</Badge>
       <div className="p-4 flex justify-between items-center">
         <h3 className="text-lg font-bold">{lesson.title}</h3>
         <div className="flex items-center">
@@ -30,7 +30,7 @@ const Lesson = ({ lesson, isCompleted, onToggleComplete, onLessonSelect, isSelec
               }}
               disabled={enhancing}
               size="sm"
-              className="ml-4 bg-gray-500 border border-gray-400 text-white hover:bg-gray-600"
+              className="ml-4 bg-gray-800 text-white hover:bg-gray-700"
             >
               {enhancing ? 'Enhancing...' : 'Enhance'}
             </Button>

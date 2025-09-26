@@ -206,7 +206,7 @@ const CoursePage = () => {
       <CourseHeader title={course.title} description={course.description} level={course.level} />
       {selectedLessonContent ? (
         <div className="bg-white p-6 rounded-lg shadow-lg text-gray-800">
-          <Button onClick={() => setSelectedLessonId(null)} className="mb-4 bg-gray-500 text-white hover:bg-gray-600">
+          <Button onClick={() => setSelectedLessonId(null)} className="mb-4 bg-gray-800 text-white hover:bg-gray-700">
             <ArrowLeft className="h-4 w-4" />
           </Button>
           {loadingLessonContent ? (
