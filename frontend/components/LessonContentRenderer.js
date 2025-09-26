@@ -56,7 +56,7 @@ const LessonContentRenderer = ({ rawContent }) => {
         <div className="mb-5 pb-3 border-b border-gray-200">
           <H3>Lesson Metadata:</H3>
           {Object.entries(frontmatter).map(([key, value]) => (
-            <P key={key}><strong>{key}:</strong> {Array.isArray(value) ? value.join(', ') : value}</P>
+            <P key={key}><strong className="text-gray-800">{key}:</strong> {Array.isArray(value) ? value.join(', ') : value}</P>
           ))}
         </div>
       )}
