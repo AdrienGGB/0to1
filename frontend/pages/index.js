@@ -91,38 +91,38 @@ function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-[linear-gradient(135deg,#0f2027_0%,#203a43_35%,#2c5364_65%,#6a11cb_100%)] flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">0to1: AI Learning Assistant</h1>
-          <p className="text-gray-600">Create structured courses in seconds</p>
+          <h1 className="text-3xl font-bold text-white mb-2">0to1: AI Learning Assistant</h1>
+          <p className="text-gray-300">Create structured courses in seconds</p>
         </div>
         
-        <Card className="shadow-lg border-0">
+        <Card className="shadow-lg border-0 bg-white/10 text-white backdrop-blur-sm">
           <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-2xl font-semibold text-center">Generate Your Course</CardTitle>
-            <p className="text-sm text-gray-600 text-center">Enter your topic below to create a course</p>
+            <CardTitle className="text-2xl font-semibold text-center text-white">Generate Your Course</CardTitle>
+            <p className="text-sm text-gray-300 text-center">Enter your topic below to create a course</p>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="topic" className="text-sm font-medium">Course Topic</Label>
+              <Label htmlFor="topic" className="text-sm font-medium text-white">Course Topic</Label>
               <Input
                 id="topic"
                 type="text"
                 placeholder="Enter a topic to learn..."
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                className="h-10"
+                className="h-10 bg-gray-800 text-white"
               />
             </div>
             
             <div className="space-y-2">
-              <Label className="text-sm font-medium">Course Level</Label>
+              <Label className="text-sm font-medium text-white">Course Level</Label>
               <Tabs value={level} onValueChange={setLevel} className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="beginner">Beginner</TabsTrigger>
-                  <TabsTrigger value="intermediate">Intermediate</TabsTrigger>
-                  <TabsTrigger value="expert">Expert</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-3 bg-[linear-gradient(135deg,#2c5364_0%,#203a43_50%,#0f2027_100%)] text-white">
+                  <TabsTrigger value="beginner" className="data-[state=active]:bg-gray-500 data-[state=active]:border-gray-400">Beginner</TabsTrigger>
+                  <TabsTrigger value="intermediate" className="data-[state=active]:bg-gray-500 data-[state=active]:border-gray-400">Intermediate</TabsTrigger>
+                  <TabsTrigger value="expert" className="data-[state=active]:bg-gray-500 data-[state=active]:border-gray-400">Expert</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
@@ -130,7 +130,7 @@ function HomePage() {
             <Button 
               onClick={handleGenerate} 
               disabled={loading || !topic} 
-              className="w-full h-10"
+              className="w-full h-10 bg-gray-200 text-gray-800 hover:bg-gray-300"
             >
               {loading ? 'Generating...' : 'Generate Course'}
             </Button>
