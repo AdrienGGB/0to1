@@ -91,7 +91,7 @@ function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#0f2027_0%,#203a43_35%,#2c5364_65%,#6a11cb_100%)] flex flex-col items-center justify-center py-12 px-4 animated-gradient">
+    <div className="min-h-screen bg-[linear-gradient(135deg,#2a3a4a_0%,#3f6075_35%,#5b7fa1_65%,#8b5fd6_100%)] flex flex-col items-center py-12 px-4 animated-gradient">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-white mb-2">0to1: AI Learning Assistant</h1>
@@ -136,10 +136,9 @@ function HomePage() {
             </Button>
           </CardContent>
         </Card>
-        
-        <div className="text-center">
-          <RecentCourses />
-        </div>
+      </div>
+      <div className="w-full mt-12">
+        <RecentCourses />
       </div>
     </div>
   );
