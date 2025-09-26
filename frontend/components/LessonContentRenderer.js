@@ -5,6 +5,9 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw'; // Import rehype-raw
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/cjs/styles/hljs'; // A simple style (changed to cjs)
+import {
+  H1, H2, H3, H4, P, Blockquote, List, InlineCode, Lead, Large, Small, Muted,
+} from '@/components/ui/typography';
 
 // Utility to parse YAML frontmatter
 const parseLessonContent = (rawContent) => {
@@ -18,17 +21,20 @@ const parseLessonContent = (rawContent) => {
 };
 
 const LessonContentRenderer = ({ rawContent }) => {
-  if (!rawContent) return <p>No lesson content to display.</p>;
+  if (!rawContent) return <P>No lesson content to display.</P>;
 
   const { frontmatter, markdownBody } = parseLessonContent(rawContent);
 
   // Define custom components for ReactMarkdown
   const components = {
-    // Basic handling for custom blocks as paragraphs
-    p: ({ node, ...props }) => {
-      return <p {...props} />;
-    },
-    // Render code blocks with syntax highlighting
+    h1: ({ node, ...props }) => <H1 {...props} />,
+    h2: ({ node, ...props }) => <H2 {...props} />,
+    h3: ({ node, ...props }) => <H3 {...props} />,
+    h4: ({ node, ...props }) => <H4 {...props} />,
+    p: ({ node, ...props }) => <P {...props} />,
+    blockquote: ({ node, ...props }) => <Blockquote {...props} />,
+    ul: ({ node, ...props }) => <List {...props} />,
+    ol: ({ node, ...props }) => <List {...props} />,
     code: ({ node, inline, className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '');
       return !inline && match ? (
@@ -36,23 +42,21 @@ const LessonContentRenderer = ({ rawContent }) => {
           {String(children).replace(/\n$/, '')}
         </SyntaxHighlighter>
       ) : (
-        <code className={className} {...props}>
+        <InlineCode className={className} {...props}>
           {children}
-        </code>
+        </InlineCode>
       );
     },
-    // If the AI generates <details> tags for hidden answers, rehype-raw might be needed.
-    // For this simplified version, we're assuming it's just text.
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', maxWidth: '800px', margin: '20px auto', padding: '20px', border: '1px solid #eee' }}>
+    <div className="font-sans max-w-full mx-auto">
       {/* Basic display of YAML Frontmatter */}
       {Object.keys(frontmatter).length > 0 && (
-        <div style={{ marginBottom: '20px', borderBottom: '1px solid #eee', paddingBottom: '10px' }}>
-          <h3>Lesson Metadata:</h3>
+        <div className="mb-5 pb-3 border-b border-gray-200">
+          <H3>Lesson Metadata:</H3>
           {Object.entries(frontmatter).map(([key, value]) => (
-            <p key={key}><strong>{key}:</strong> {Array.isArray(value) ? value.join(', ') : value}</p>
+            <P key={key}><strong>{key}:</strong> {Array.isArray(value) ? value.join(', ') : value}</P>
           ))}
         </div>
       )}
