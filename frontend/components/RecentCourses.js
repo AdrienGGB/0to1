@@ -27,18 +27,18 @@ const RecentCourses = () => {
   }, []);
 
   return (
-    <div className="mt-12 w-full">
-      <h2 className="text-2xl font-bold text-white mb-4 pb-2 border-b border-gray-700">
+    <div className="mt-12 w-full px-4">
+      <h2 className="text-xl font-bold text-white mb-4 pb-2 border-b border-gray-700">
         Recent Courses
       </h2>
       {loading && <p className="text-white">Loading...</p>}
       {error && <p className="text-red-500">Error: {error}</p>}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {courses.map(course => (
           <Link key={course.id} href={`/course/${course.id}`} className="text-white no-underline">
-            <div className="border border-gray-700 rounded-lg p-4 transition-shadow duration-300 ease-in-out hover:shadow-lg cursor-pointer bg-gray-800">
-              <h3 className="text-xl font-bold mb-2">{course.title}</h3>
-              <p className="text-sm text-gray-400">{course.description}</p>
+            <div className="border border-gray-700 rounded-lg p-4 transition-shadow duration-300 ease-in-out hover:shadow-lg cursor-pointer bg-gray-800 min-w-[300px]">
+              <h3 className="text-lg font-bold mb-2 overflow-hidden text-ellipsis whitespace-nowrap">{course.title}</h3>
+              <p className="text-xs text-gray-400 overflow-hidden text-ellipsis">{course.description}</p>
             </div>
           </Link>
         ))}

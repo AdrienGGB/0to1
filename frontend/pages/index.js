@@ -91,7 +91,7 @@ function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#0f2027_0%,#203a43_35%,#2c5364_65%,#6a11cb_100%)] flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-[linear-gradient(135deg,#0f2027_0%,#203a43_35%,#2c5364_65%,#6a11cb_100%)] flex flex-col items-center justify-center py-12 px-4 animated-gradient">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-white mb-2">0to1: AI Learning Assistant</h1>
