@@ -39,8 +39,8 @@ const RecentCourses = () => {
         {courses.map(course => (
           <Link key={course.id} href={`/course/${course.id}`} className="text-gray-800 no-underline flex">
             <div className="relative flex-1 flex flex-col border border-gray-200 rounded-lg p-4 transition-shadow duration-300 ease-in-out hover:shadow-lg cursor-pointer bg-white min-w-[300px]">
-              <Badge className="absolute top-2 right-2 bg-gray-800 text-white text-sm">{course.level ? course.level.charAt(0).toUpperCase() + course.level.slice(1) : 'N/A'}</Badge>
-              <h3 className="text-lg font-bold mb-2 overflow-hidden text-ellipsis whitespace-nowrap">{course.title}</h3>
+              <Badge className="absolute top-1 right-1 bg-gray-800 text-white text-sm py-0.5 px-1.5">{course.level ? course.level.charAt(0).toUpperCase() + course.level.slice(1) : 'N/A'}</Badge>
+              <h3 className="text-lg font-bold mb-2 overflow-hidden text-ellipsis whitespace-nowrap pr-12">{course.title}</h3>
               <p className="text-xs text-gray-600 overflow-hidden text-ellipsis h-16">{course.description}</p>
             </div>
           </Link>

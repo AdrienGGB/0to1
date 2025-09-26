@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
   const { data: courses, error } = await supabase
     .from('courses')
-    .select('id,title,description,created_at')
+    .select('id,title,description,level,created_at')
     .order('created_at', { ascending: false })
     .limit(10);
 
