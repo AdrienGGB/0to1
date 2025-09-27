@@ -198,7 +198,8 @@ const CoursePage = ({ user }) => {
   if (!course) return <p className="text-base leading-relaxed">Course not found.</p>;
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] p-8 max-w-4xl mx-auto px-4 text-base leading-relaxed">
+    <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)]">
+      <div className="p-8 max-w-4xl mx-auto px-4 text-base leading-relaxed">
       <CourseHeader title={course.title} description={course.description} level={course.level} />
       {selectedLessonContent ? (
         <div className="bg-white p-6 rounded-lg shadow-lg text-gray-800">
