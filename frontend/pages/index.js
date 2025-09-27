@@ -78,7 +78,7 @@ function HomePage() {
               <Button onClick={handleSignOut} variant="outline">Sign Out</Button>
             ) : (
               <Link href="/auth">
-                <Button variant="outline">Sign In</Button>
+                <Button className="bg-gray-800 text-white hover:bg-gray-900">Sign In</Button>
               </Link>
             )}
           </div>
@@ -111,9 +111,9 @@ function HomePage() {
               <Label className="text-sm font-medium">Course Level</Label>
               <Tabs value={level} onValueChange={setLevel} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 bg-gray-200 text-gray-800">
-                  <TabsTrigger value="beginner">Beginner</TabsTrigger>
-                  <TabsTrigger value="intermediate">Intermediate</TabsTrigger>
-                  <TabsTrigger value="expert">Expert</TabsTrigger>
+                  <TabsTrigger value="beginner" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">Beginner</TabsTrigger>
+                  <TabsTrigger value="intermediate" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">Intermediate</TabsTrigger>
+                  <TabsTrigger value="expert" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">Expert</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
@@ -121,7 +121,7 @@ function HomePage() {
             <Button 
               onClick={handleGenerate} 
               disabled={loading || !topic} 
-              className="w-full h-10 bg-gray-500 text-white hover:bg-gray-600"
+              className="w-full h-10 bg-gray-800 text-white hover:bg-gray-900"
             >
               {loading ? 'Generating...' : 'Generate Course'}
             </Button>
