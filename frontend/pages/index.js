@@ -80,7 +80,7 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] flex flex-col items-center py-12 px-4">
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-4xl px-4">
         <header className="flex justify-between items-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800">0to1</h1>
           <div>
