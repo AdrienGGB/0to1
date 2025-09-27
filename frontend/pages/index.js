@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import RecentCourses from '../components/RecentCourses';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
 
 function HomePage() {
   const [topic, setTopic] = useState('');
@@ -67,6 +68,14 @@ function HomePage() {
     await supabase.auth.signOut();
     setUser(null);
   };
+
+  const mockCourses = [
+    { title: "The Renaissance Period", description: "Explore the art, science, and culture of the Renaissance." },
+    { title: "Introduction to Quantum Computing", description: "Understand the basics of quantum mechanics and its application in computing." },
+    { title: "The Art of Storytelling", description: "Learn techniques to craft compelling narratives." },
+    { title: "Mastering Modern JavaScript", description: "Dive deep into ES6+ features and advanced JavaScript concepts." },
+    { title: "Sustainable Living: A Beginner's Guide", description: "Discover practical ways to reduce your environmental footprint." },
+  ];
 
   return (
     <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] flex flex-col items-center py-12 px-4">
@@ -131,15 +140,34 @@ function HomePage() {
         {user ? (
           <RecentCourses />
         ) : (
-          <div className="text-center p-8 bg-white/50 rounded-lg shadow-md">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Discover a new way to learn</h3>
-            <p className="text-gray-600 mb-2">Generate courses on any topic you can imagine.</p>
-            <p className="text-gray-600 font-semibold">Some ideas to get you started:</p>
-            <ul className="list-disc list-inside text-gray-600 mt-2">
-              <li>The Renaissance Period</li>
-              <li>Introduction to Quantum Computing</li>
-              <li>The Art of Storytelling</li>
-            </ul>
+          <div className="w-full max-w-2xl mx-auto mt-12">
+            <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Discover a new way to learn</h3>
+            <p className="text-gray-600 mb-8 text-center">Generate courses on any topic you can imagine. Here are some ideas:</p>
+            <Carousel
+              opts={{
+                align: "start",
+              }}
+              className="w-full max-w-xs mx-auto"
+            >
+              <CarouselContent>
+                {mockCourses.map((course, index) => (
+                  <CarouselItem key={index} className="basis-full">
+                    <div className="p-1">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-lg font-semibold text-center">{course.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex aspect-square items-center justify-center p-6">
+                          <span className="text-sm text-center">{course.description}</span>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
         )}
       </div>
