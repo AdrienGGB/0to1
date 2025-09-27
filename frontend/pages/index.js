@@ -154,11 +154,11 @@ function HomePage() {
                 {mockCourses.map((course, index) => (
                   <CarouselItem key={index} className="pl-4 sm:basis-1/2 lg:basis-1/3">
                     <div className="p-1">
-                      <div className="relative flex-1 flex flex-col border border-gray-200 rounded-lg p-4 transition-shadow duration-300 ease-in-out hover:shadow-lg cursor-pointer bg-white min-h-[200px]">
+                      <Link href="/auth" className="relative flex-1 flex flex-col border border-gray-200 rounded-lg p-4 transition-shadow duration-300 ease-in-out hover:shadow-lg cursor-pointer bg-white min-h-[200px]">
                         <Badge className="absolute top-1 right-1 bg-gray-800 text-white text-xs font-bold py-0 px-1">{course.level ? course.level.charAt(0).toUpperCase() + course.level.slice(1) : 'N/A'}</Badge>
                         <h3 className="text-base font-bold mb-2 pr-12">{course.title}</h3>
                         <p className="text-sm text-gray-600 line-clamp-3">{course.description}</p>
-                      </div>
+                      </Link>
                     </div>
                   </CarouselItem>
                 ))}
