@@ -7,8 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import RecentCourses from '../components/RecentCourses';
 
-function LandingPage() {
+function HomePage() {
   const [topic, setTopic] = useState('');
   const [level, setLevel] = useState('beginner');
   const [loading, setLoading] = useState(false);
@@ -62,15 +63,33 @@ function LandingPage() {
     }
   };
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+  };
+
   return (
     <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] flex flex-col items-center py-12 px-4">
-      <div className="w-full max-w-md space-y-6">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">0to1: AI Learning Assistant</h1>
-          <p className="text-gray-600">Create structured courses in seconds</p>
+      <div className="w-full max-w-4xl">
+        <header className="flex justify-between items-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-800">0to1</h1>
+          <div>
+            {user ? (
+              <Button onClick={handleSignOut} variant="outline">Sign Out</Button>
+            ) : (
+              <Link href="/auth">
+                <Button variant="outline">Sign In</Button>
+              </Link>
+            )}
+          </div>
+        </header>
+
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">AI Learning Assistant</h2>
+          <p className="text-lg text-gray-600">Create structured courses in seconds</p>
         </div>
-        
-        <Card className="shadow-lg border-0 bg-white text-gray-800">
+
+        <Card className="shadow-lg border-0 bg-white text-gray-800 mb-12">
           <CardHeader className="space-y-1 pb-4">
             <CardTitle className="text-2xl font-semibold text-center">Generate Your Course</CardTitle>
             <p className="text-sm text-gray-600 text-center">Enter your topic below to create a course</p>
@@ -81,7 +100,7 @@ function LandingPage() {
               <Input
                 id="topic"
                 type="text"
-                placeholder="Enter a topic to learn..."
+                placeholder="e.g., The History of the Internet"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
                 className="h-10 bg-gray-100 text-gray-800"
@@ -92,9 +111,9 @@ function LandingPage() {
               <Label className="text-sm font-medium">Course Level</Label>
               <Tabs value={level} onValueChange={setLevel} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 bg-gray-200 text-gray-800">
-                  <TabsTrigger value="beginner" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">Beginner</TabsTrigger>
-                  <TabsTrigger value="intermediate" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">Intermediate</TabsTrigger>
-                  <TabsTrigger value="expert" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">Expert</TabsTrigger>
+                  <TabsTrigger value="beginner">Beginner</TabsTrigger>
+                  <TabsTrigger value="intermediate">Intermediate</TabsTrigger>
+                  <TabsTrigger value="expert">Expert</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
@@ -108,14 +127,24 @@ function LandingPage() {
             </Button>
           </CardContent>
         </Card>
-        <div className="text-center">
-          <Link href="/home" className="text-gray-600 hover:text-gray-800">
-            View Recent Courses
-          </Link>
-        </div>
+
+        {user ? (
+          <RecentCourses />
+        ) : (
+          <div className="text-center p-8 bg-white/50 rounded-lg shadow-md">
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">Discover a new way to learn</h3>
+            <p className="text-gray-600 mb-2">Generate courses on any topic you can imagine.</p>
+            <p className="text-gray-600 font-semibold">Some ideas to get you started:</p>
+            <ul className="list-disc list-inside text-gray-600 mt-2">
+              <li>The Renaissance Period</li>
+              <li>Introduction to Quantum Computing</li>
+              <li>The Art of Storytelling</li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-export default LandingPage;
+export default HomePage;
