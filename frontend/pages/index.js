@@ -140,25 +140,24 @@ function HomePage() {
         {user ? (
           <RecentCourses />
         ) : (
-          <div className="w-full max-w-2xl mx-auto mt-12">
+          <div className="w-full max-w-4xl mx-auto mt-12">
             <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">Discover a new way to learn</h3>
-            <p className="text-gray-600 mb-8 text-center">Generate courses on any topic you can imagine. Here are some ideas:</p>
             <Carousel
               opts={{
                 align: "start",
               }}
-              className="w-full max-w-xs mx-auto"
+              className="w-full"
             >
-              <CarouselContent>
+              <CarouselContent className="-ml-4">
                 {mockCourses.map((course, index) => (
-                  <CarouselItem key={index} className="basis-full">
+                  <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
                     <div className="p-1">
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="text-lg font-semibold text-center">{course.title}</CardTitle>
+                      <Card className="h-full flex flex-col">
+                        <CardHeader className="flex-grow">
+                          <CardTitle className="text-lg font-semibold text-gray-800">{course.title}</CardTitle>
                         </CardHeader>
-                        <CardContent className="flex aspect-square items-center justify-center p-6">
-                          <span className="text-sm text-center">{course.description}</span>
+                        <CardContent className="flex-grow flex items-center justify-center p-6">
+                          <span className="text-sm text-gray-600 text-center">{course.description}</span>
                         </CardContent>
                       </Card>
                     </div>
