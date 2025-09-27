@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import RecentCourses from '../components/RecentCourses';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
+import { Badge } from '@/components/ui/badge';
 
 function HomePage() {
   const [topic, setTopic] = useState('');
@@ -70,11 +71,11 @@ function HomePage() {
   };
 
   const mockCourses = [
-    { title: "The Renaissance Period", description: "Explore the art, science, and culture of the Renaissance." },
-    { title: "Introduction to Quantum Computing", description: "Understand the basics of quantum mechanics and its application in computing." },
-    { title: "The Art of Storytelling", description: "Learn techniques to craft compelling narratives." },
-    { title: "Mastering Modern JavaScript", description: "Dive deep into ES6+ features and advanced JavaScript concepts." },
-    { title: "Sustainable Living: A Beginner's Guide", description: "Discover practical ways to reduce your environmental footprint." },
+    { title: "The Renaissance Period", description: "Explore the art, science, and culture of the Renaissance.", level: "beginner" },
+    { title: "Introduction to Quantum Computing", description: "Understand the basics of quantum mechanics and its application in computing.", level: "intermediate" },
+    { title: "The Art of Storytelling", description: "Learn techniques to craft compelling narratives.", level: "expert" },
+    { title: "Mastering Modern JavaScript", description: "Dive deep into ES6+ features and advanced JavaScript concepts.", level: "intermediate" },
+    { title: "Sustainable Living: A Beginner's Guide", description: "Discover practical ways to reduce your environmental footprint.", level: "beginner" },
   ];
 
   return (
@@ -151,16 +152,13 @@ function HomePage() {
             >
               <CarouselContent className="-ml-4">
                 {mockCourses.map((course, index) => (
-                  <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={index} className="pl-4 sm:basis-1/2 lg:basis-1/3">
                     <div className="p-1">
-                      <Card className="h-full flex flex-col justify-between">
-                        <CardHeader className="flex-grow">
-                          <CardTitle className="text-lg font-semibold text-gray-800">{course.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent className="flex-grow flex items-center justify-center p-6">
-                          <span className="text-sm text-gray-600 text-center">{course.description}</span>
-                        </CardContent>
-                      </Card>
+                      <div className="relative flex-1 flex flex-col border border-gray-200 rounded-lg p-4 transition-shadow duration-300 ease-in-out hover:shadow-lg cursor-pointer bg-white min-h-[200px]">
+                        <Badge className="absolute top-1 right-1 bg-gray-800 text-white text-xs font-bold py-0 px-1">{course.level ? course.level.charAt(0).toUpperCase() + course.level.slice(1) : 'N/A'}</Badge>
+                        <h3 className="text-lg font-bold mb-2 overflow-hidden text-ellipsis whitespace-nowrap pr-12">{course.title}</h3>
+                        <p className="text-xs text-gray-600 overflow-hidden text-ellipsis h-16">{course.description}</p>
+                      </div>
                     </div>
                   </CarouselItem>
                 ))}
