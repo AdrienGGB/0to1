@@ -1,11 +1,11 @@
-
 import React from 'react';
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/router';
 import { Button } from '@/components/ui/button';
+import { Home, LogOut, ChevronsLeft, ChevronsRight } from 'lucide-react';
 
-const Sidebar = () => {
+const Sidebar = ({ isCollapsed, onToggle }) => {
   const router = useRouter();
   const supabase = createClient();
 
@@ -15,33 +15,33 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 h-screen w-64 bg-white border-r border-gray-200 flex flex-col">
-      <div className="p-6 border-b border-gray-200">
-        <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
-          0to1
-        </Link>
+    <div className={`fixed top-0 left-0 h-screen bg-white border-r border-gray-200 flex flex-col transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
+      <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+        {!isCollapsed && (
+          <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
+            0to1
+          </Link>
+        )}
+        <Button variant="ghost" size="icon" onClick={onToggle}>
+          {isCollapsed ? <ChevronsRight /> : <ChevronsLeft />}
+        </Button>
       </div>
       
       <nav className="flex-1 p-4">
         <ul className="space-y-2">
           <li>
-            <Link 
-              href="/" 
-              className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900 transition-colors"
-            >
-              Home
+            <Link href="/" className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900 transition-colors">
+              <Home className="mr-3" />
+              {!isCollapsed && 'Home'}
             </Link>
           </li>
         </ul>
       </nav>
       
       <div className="p-4 border-t border-gray-200">
-        <Button 
-          onClick={handleSignOut} 
-          variant="destructive" 
-          className="w-full"
-        >
-          Sign Out
+        <Button onClick={handleSignOut} variant="destructive" className="w-full">
+          <LogOut className="mr-3" />
+          {!isCollapsed && 'Sign Out'}
         </Button>
       </div>
     </div>
