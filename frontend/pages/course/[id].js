@@ -6,7 +6,7 @@ import LessonContentRenderer from '../../components/LessonContentRenderer'; // I
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
-const CoursePage = () => {
+const CoursePage = ({ user }) => {
   const router = useRouter();
   const { id } = router.query;
   const [course, setCourse] = useState(null);
@@ -18,26 +18,11 @@ const CoursePage = () => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [userId, setUserId] = useState(null);
 
-  // New states for selected lesson content
-  const [selectedLessonId, setSelectedLessonId] = useState(null);
-  const [selectedLessonContent, setSelectedLessonContent] = useState(null);
-  const [loadingLessonContent, setLoadingLessonContent] = useState(false);
-  const [lessonContentError, setLessonContentError] = useState(null);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedUserId = localStorage.getItem('userId');
-      if (storedUserId) {
-        setUserId(storedUserId);
-      }
-    }
-  }, []);
-
-  const fetchProgress = useCallback(async (userId, courseId) => {
+  const fetchProgress = useCallback(async (user, courseId) => {
     try {
-      const response = await fetch(`/api/progress?userId=${userId}&courseId=${courseId}`);
+      const response = await fetch(`/api/progress?userId=${user.id}&courseId=${courseId}`);
       if (response.ok) {
         const data = await response.json();
         if (data.progress) {
@@ -50,7 +35,7 @@ const CoursePage = () => {
   }, []);
 
   const handleSaveProgress = useCallback(async (newProgress) => {
-    if (!userId || !id) return;
+    if (!user?.id || !id) return;
 
     const updatedProgress = { ...progress, ...newProgress };
 
@@ -65,7 +50,7 @@ const CoursePage = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userId,
+          userId: user.id,
           courseId: id,
           progress: updatedProgress,
           clientUpdatedAt: new Date().toISOString(),
@@ -134,8 +119,8 @@ const CoursePage = () => {
   };
 
   useEffect(() => {
-    console.log('Fetching data for id:', id, 'and userId:', userId);
-    if (!id || !userId) return;
+    console.log('Fetching data for id:', id, 'and userId:', user?.id);
+    if (!id || !user?.id) return;
 
     const fetchAllData = async () => {
       setLoading(true);
@@ -147,7 +132,7 @@ const CoursePage = () => {
         const courseData = await courseResponse.json();
         setCourse(courseData);
 
-        await fetchProgress(userId, id);
+        await fetchProgress(user, id);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -156,7 +141,7 @@ const CoursePage = () => {
     };
 
     fetchAllData();
-  }, [id, userId, fetchProgress]);
+  }, [id, user?.id, fetchProgress]);
 
   // Effect to fetch detailed lesson content when selectedLessonId changes
   useEffect(() => {

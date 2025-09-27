@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <MainLayout user={user}>
-      <Component {...pageProps} />
+      <Component {...pageProps} user={user} />
     </MainLayout>
   );
 }
