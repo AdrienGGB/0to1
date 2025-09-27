@@ -18,9 +18,20 @@ const CoursePage = ({ user }) => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userId, setUserId] = useState(null);
+
+  // New states for selected lesson content
+  const [selectedLessonId, setSelectedLessonId] = useState(null);
+  const [selectedLessonContent, setSelectedLessonContent] = useState(null);
+  const [loadingLessonContent, setLoadingLessonContent] = useState(false);
+  const [lessonContentError, setLessonContentError] = useState(null);
+
+  useEffect(() => {
+    setUserId(user?.id || null);
+  }, [user]);
 
 
-  const fetchProgress = useCallback(async (user, courseId) => {
+  const fetchProgress = useCallback(async (userId, courseId) => {
     try {
       const response = await fetch(`/api/progress?userId=${user.id}&courseId=${courseId}`);
       if (response.ok) {
@@ -132,7 +143,7 @@ const CoursePage = ({ user }) => {
         const courseData = await courseResponse.json();
         setCourse(courseData);
 
-        await fetchProgress(user, id);
+        await fetchProgress(userId, id);
       } catch (err) {
         setError(err.message);
       } finally {
