@@ -72,7 +72,7 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] flex flex-col items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] flex flex-col items-center justify-center py-12 px-4 text-base leading-relaxed">
       <Card className="w-full max-w-md shadow-lg border-0 bg-white text-gray-800">
         <Tabs defaultValue="signin" onValueChange={(value) => setIsSignUp(value === 'signup')}>
           <TabsList className="grid w-full grid-cols-2">
@@ -86,14 +86,14 @@ const AuthPage = () => {
             <CardContent>
               <form onSubmit={handleAuth} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="m@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <Label htmlFor="email" className="text-base leading-relaxed">Email</Label>
+                  <Input id="email" type="email" placeholder="m@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full py-3 px-4 text-base" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
-                  <Input id="password" type={showPassword ? 'text' : 'password'} required value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <Label htmlFor="password" className="text-base leading-relaxed">Password</Label>
+                  <Input id="password" type={showPassword ? 'text' : 'password'} required value={password} onChange={(e) => setPassword(e.target.value)} className="w-full py-3 px-4 text-base" />
                 </div>
-                <Button type="submit" className="w-full bg-gray-800 text-white hover:bg-gray-900" disabled={loading}>
+                <Button type="submit" className="w-full bg-gray-800 text-white hover:bg-gray-900 py-3 px-4 text-base" disabled={loading}>
                   {loading ? 'Loading...' : 'Sign In'}
                 </Button>
               </form>
@@ -106,18 +106,18 @@ const AuthPage = () => {
             <CardContent>
               <form onSubmit={handleAuth} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email-signup">Email</Label>
-                  <Input id="email-signup" type="email" placeholder="m@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <Label htmlFor="email-signup" className="text-base leading-relaxed">Email</Label>
+                  <Input id="email-signup" type="email" placeholder="m@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full py-3 px-4 text-base" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password-signup">Password</Label>
-                  <Input id="password-signup" type={showPassword ? 'text' : 'password'} required value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <Label htmlFor="password-signup" className="text-base leading-relaxed">Password</Label>
+                  <Input id="password-signup" type={showPassword ? 'text' : 'password'} required value={password} onChange={(e) => setPassword(e.target.value)} className="w-full py-3 px-4 text-base" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="confirm-password-signup">Confirm Password</Label>
-                  <Input id="confirm-password-signup" type={showPassword ? 'text' : 'password'} required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                  <Label htmlFor="confirm-password-signup" className="text-base leading-relaxed">Confirm Password</Label>
+                  <Input id="confirm-password-signup" type={showPassword ? 'text' : 'password'} required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full py-3 px-4 text-base" />
                 </div>
-                <Button type="submit" className="w-full bg-gray-800 text-white hover:bg-gray-900" disabled={loading}>
+                <Button type="submit" className="w-full bg-gray-800 text-white hover:bg-gray-900 py-3 px-4 text-base" disabled={loading}>
                   {loading ? 'Loading...' : 'Sign Up'}
                 </Button>
               </form>
@@ -125,11 +125,11 @@ const AuthPage = () => {
           </TabsContent>
         </Tabs>
         <div className="p-4 text-center">
-          <label className="flex items-center justify-center gap-2">
+          <label className="flex items-center justify-center gap-2 text-base leading-relaxed">
             <input type="checkbox" checked={showPassword} onChange={() => setShowPassword(!showPassword)} />
             Show Password
           </label>
-          {message && <p className={`mt-4 text-sm ${message.startsWith('Error') ? 'text-red-500' : 'text-green-500'}`}>{message}</p>}
+          {message && <p className={`mt-4 text-base leading-relaxed ${message.startsWith('Error') ? 'text-red-500' : 'text-green-500'}`}>{message}</p>}
         </div>
       </Card>
     </div>

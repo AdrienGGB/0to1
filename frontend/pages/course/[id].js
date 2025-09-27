@@ -197,28 +197,28 @@ const CoursePage = () => {
   }, [selectedLessonId, id, course]);
 
 
-  if (loading) return <p>Loading course...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (!course) return <p>Course not found.</p>;
+  if (loading) return <p className="text-base leading-relaxed">Loading course...</p>;
+  if (error) return <p className="text-base leading-relaxed">Error: {error}</p>;
+  if (!course) return <p className="text-base leading-relaxed">Course not found.</p>;
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] p-8">
+    <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] p-8 max-w-4xl mx-auto px-4 text-base leading-relaxed">
       <CourseHeader title={course.title} description={course.description} level={course.level} />
       {selectedLessonContent ? (
         <div className="bg-white p-6 rounded-lg shadow-lg text-gray-800">
-          <Button onClick={() => setSelectedLessonId(null)} className="mb-4 bg-gray-800 text-white hover:bg-gray-700">
+          <Button onClick={() => setSelectedLessonId(null)} className="mb-4 bg-gray-800 text-white hover:bg-gray-700 py-3 px-4 text-base">
             <ArrowLeft className="h-4 w-4" />
           </Button>
           {loadingLessonContent ? (
             <div className="text-center p-5">
-              <p className="text-gray-800">Loading course content...</p>
+              <p className="text-gray-800 text-base leading-relaxed">Loading course content...</p>
               {/* You can add a simple spinner here if you have one */}
               <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
             </div>
           ) : lessonContentError ? (
             <div className="text-red-500 p-5 border border-red-500 rounded-md">
-              <p>Failed to load lesson content. Please try again.</p>
-              <p>Details: {lessonContentError}</p>
+              <p className="text-base leading-relaxed">Failed to load lesson content. Please try again.</p>
+              <p className="text-base leading-relaxed">Details: {lessonContentError}</p>
             </div>
           ) : (
             <LessonContentRenderer rawContent={selectedLessonContent} />

@@ -1,24 +1,14 @@
-
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 const GenerateButton = ({ onClick, loading }) => (
-  <button
+  <Button
     onClick={onClick}
     disabled={loading}
-    style={{
-      width: '100%',
-      padding: '15px',
-      fontSize: '18px',
-      backgroundColor: loading ? '#ccc' : '#0070f3',
-      color: 'white',
-      border: 'none',
-      borderRadius: '5px',
-      cursor: loading ? 'not-allowed' : 'pointer',
-      transition: 'background-color 0.3s ease',
-    }}
+    className="w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-base"
   >
     {loading ? 'Generating...' : 'Generate Course'}
-  </button>
+  </Button>
 );
 
 export default GenerateButton;

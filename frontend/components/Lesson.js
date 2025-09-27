@@ -6,13 +6,13 @@ const Lesson = ({ lesson, isCompleted, onToggleComplete, onLessonSelect, isSelec
 
   return (
     <div
-      className={`relative w-full border rounded-lg mb-4 overflow-hidden cursor-pointer ${isSelected ? 'bg-gray-200' : 'bg-white'}`}
+      className={`relative w-full border rounded-lg mb-4 overflow-hidden cursor-pointer text-base leading-relaxed ${isSelected ? 'bg-gray-200' : 'bg-white'}`}
       onClick={() => onLessonSelect(lesson.id)}
     >
       <div className="p-4 flex justify-between items-center">
         <h3 className="text-lg font-bold">{lesson.title}</h3>
         <div className="flex items-center">
-          <span className="text-sm text-gray-500 mr-4">{lesson.duration_minutes} min</span>
+          <span className="text-base text-gray-500 mr-4 leading-relaxed">{lesson.duration_minutes} min</span>
           <input
             type="checkbox"
             checked={isCompleted}
@@ -27,8 +27,7 @@ const Lesson = ({ lesson, isCompleted, onToggleComplete, onLessonSelect, isSelec
                 onEnhanceLesson(lesson.id);
               }}
               disabled={enhancing}
-              size="sm"
-              className="ml-4 bg-gray-800 text-white hover:bg-gray-700"
+              className="ml-4 bg-gray-800 text-white hover:bg-gray-700 py-3 px-4 text-base"
             >
               {enhancing ? 'Enhancing...' : 'Enhance'}
             </Button>
@@ -36,7 +35,7 @@ const Lesson = ({ lesson, isCompleted, onToggleComplete, onLessonSelect, isSelec
         </div>
       </div>
       <div className="px-4 pb-4">
-        <p className="text-sm text-gray-600">{lesson.summary}</p>
+        <p className="text-base text-gray-600 leading-relaxed">{lesson.summary}</p>
       </div>
     </div>
   );

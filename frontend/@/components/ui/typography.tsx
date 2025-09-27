@@ -67,7 +67,7 @@ const P = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}
+    className={cn("text-base leading-relaxed [&:not(:first-child)]:mt-6", className)}
     {...props}
   />
 ))
@@ -89,7 +89,7 @@ const List = React.forwardRef<
   HTMLUListElement,
   React.HTMLAttributes<HTMLUListElement>
 >(({ className, ...props }, ref) => (
-  <ul ref={ref} className={cn("my-6 ml-6 list-disc [&>li]:mt-2", className)} {...props} />
+  <ul ref={ref} className={cn("my-6 ml-6 list-disc text-base leading-relaxed [&>li]:mt-2", className)} {...props} />
 ))
 List.displayName = "List"
 
@@ -100,7 +100,7 @@ const InlineCode = React.forwardRef<
   <code
     ref={ref}
     className={cn(
-      "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold",
+      "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-base font-semibold",
       className
     )}
     {...props}
@@ -132,7 +132,7 @@ const Small = React.forwardRef<
   HTMLElement,
   React.HTMLAttributes<HTMLElement>
 >(({ className, ...props }, ref) => (
-  <small ref={ref} className={cn("text-sm font-medium leading-none", className)} {...props} />
+  <small ref={ref} className={cn("text-base font-medium leading-none", className)} {...props} />
 ))
 Small.displayName = "Small"
 
@@ -140,7 +140,7 @@ const Muted = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+  <p ref={ref} className={cn("text-base text-muted-foreground", className)} {...props} />
 ))
 Muted.displayName = "Muted"
 

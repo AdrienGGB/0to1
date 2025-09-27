@@ -79,16 +79,16 @@ function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] flex flex-col items-center py-12 px-4">
+    <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] flex flex-col items-center py-12 px-4 text-base leading-relaxed">
       <div className="w-full max-w-4xl px-4">
         <header className="flex justify-between items-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800">0to1</h1>
           <div>
             {user ? (
-              <Button onClick={handleSignOut} variant="outline">Sign Out</Button>
+              <Button onClick={handleSignOut} className="w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-base">Sign Out</Button>
             ) : (
               <Link href="/auth">
-                <Button className="bg-gray-800 text-white hover:bg-gray-900">Sign In</Button>
+                <Button className="w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-base">Sign In</Button>
               </Link>
             )}
           </div>
@@ -96,17 +96,17 @@ function HomePage() {
 
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-800 mb-2">AI Learning Assistant</h2>
-          <p className="text-lg text-gray-600">Create structured courses in seconds</p>
+          <p className="text-base text-gray-600 leading-relaxed">Create structured courses in seconds</p>
         </div>
 
         <Card className="shadow-lg border-0 bg-white text-gray-800 mb-12">
           <CardHeader className="space-y-1 pb-4">
             <CardTitle className="text-2xl font-semibold text-center">Generate Your Course</CardTitle>
-            <p className="text-sm text-gray-600 text-center">Enter your topic below to create a course</p>
+            <p className="text-base text-gray-600 text-center leading-relaxed">Enter your topic below to create a course</p>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="topic" className="text-sm font-medium">Course Topic</Label>
+              <Label htmlFor="topic" className="text-base font-medium leading-relaxed">Course Topic</Label>
               <Input
                 id="topic"
                 type="text"
@@ -118,7 +118,7 @@ function HomePage() {
             </div>
             
             <div className="space-y-2">
-              <Label className="text-sm font-medium">Course Level</Label>
+              <Label className="text-base font-medium leading-relaxed">Course Level</Label>
               <Tabs value={level} onValueChange={setLevel} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 bg-gray-200 text-gray-800">
                   <TabsTrigger value="beginner" className="data-[state=active]:bg-gray-800 data-[state=active]:text-white">Beginner</TabsTrigger>
@@ -131,7 +131,7 @@ function HomePage() {
             <Button 
               onClick={handleGenerate} 
               disabled={loading || !topic} 
-              className="w-full h-10 bg-gray-800 text-white hover:bg-gray-900"
+              className="w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-base"
             >
               {loading ? 'Generating...' : 'Generate Course'}
             </Button>

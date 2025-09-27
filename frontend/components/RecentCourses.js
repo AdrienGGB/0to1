@@ -29,12 +29,12 @@ const RecentCourses = () => {
   }, []);
 
   return (
-    <div className="mt-12 w-full px-4">
+    <div className="mt-12 w-full px-4 text-base leading-relaxed">
       <h2 className="text-xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200 text-center">
         Recent Courses
       </h2>
-      {loading && <p className="text-gray-800">Loading...</p>}
-      {error && <p className="text-red-500">Error: {error}</p>}
+      {loading && <p className="text-gray-800 text-base leading-relaxed">Loading...</p>}
+      {error && <p className="text-red-500 text-base leading-relaxed">Error: {error}</p>}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
         {courses.map(course => (
           <Link key={course.id} href={`/course/${course.id}`} className="text-gray-800 no-underline flex">
@@ -46,7 +46,7 @@ const RecentCourses = () => {
           </Link>
         ))}
       </div>
-      {!loading && courses.length === 0 && <p className="text-gray-800 text-center">No recent courses yet.</p>}
+      {!loading && courses.length === 0 && <p className="text-gray-800 text-center text-base leading-relaxed">No recent courses yet.</p>}
     </div>
   );
 };

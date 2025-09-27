@@ -50,7 +50,7 @@ const LessonContentRenderer = ({ rawContent }) => {
   };
 
   return (
-    <div className="font-sans max-w-full mx-auto">
+    <div className="font-sans max-w-full mx-auto px-4">
       {/* Basic display of YAML Frontmatter */}
       {Object.keys(frontmatter).length > 0 && (
         <div className="mb-5 pb-3 border-b border-gray-200">

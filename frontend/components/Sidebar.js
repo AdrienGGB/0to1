@@ -39,7 +39,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
       </nav>
       
       <div className="p-4 border-t border-gray-200">
-        <Button onClick={handleSignOut} variant="destructive" className="w-full">
+        <Button onClick={handleSignOut} className="w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-base">
           <LogOut className="mr-3" />
           {!isCollapsed && 'Sign Out'}
         </Button>
