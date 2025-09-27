@@ -135,7 +135,7 @@ const CoursePage = () => {
 
   useEffect(() => {
     console.log('Fetching data for id:', id, 'and userId:', userId);
-    if (!id) return;
+    if (!id || !userId) return;
 
     const fetchAllData = async () => {
       setLoading(true);
@@ -147,9 +147,7 @@ const CoursePage = () => {
         const courseData = await courseResponse.json();
         setCourse(courseData);
 
-        if (userId) {
-          await fetchProgress(userId, id);
-        }
+        await fetchProgress(userId, id);
       } catch (err) {
         setError(err.message);
       } finally {

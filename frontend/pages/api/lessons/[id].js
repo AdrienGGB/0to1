@@ -6,6 +6,13 @@ export default async function handler(req, res) {
     return res.status(405).end(); // Method Not Allowed
   }
 
+  const supabase = createPagesServerClient(req, res)
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (!session) {
+    return res.status(401).json({ error: 'Not authenticated' })
+  }
+
   const { id: lessonId, courseId } = req.query;
 
   if (!lessonId || !courseId) {
