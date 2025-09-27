@@ -234,6 +234,7 @@ const CoursePage = ({ user }) => {
         />
       )}
     </div>
+    </div>
   );
 };
 
