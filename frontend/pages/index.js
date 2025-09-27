@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import TopicInput from '../components/TopicInput';
-import GenerateButton from '../components/GenerateButton';
-import RecentCourses from '../components/RecentCourses';
+import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-function HomePage() {
+function LandingPage() {
   const [topic, setTopic] = useState('');
   const [level, setLevel] = useState('beginner');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const [user, setUser] = useState(null); // New state for user
-  const [sessionLoaded, setSessionLoaded] = useState(false); // New state to track session loading
-  const supabase = createClient(); // Create client-side Supabase instance
+  const [user, setUser] = useState(null);
+  const supabase = createClient();
 
   useEffect(() => {
     const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       setUser(session?.user || null);
-      setSessionLoaded(true);
     };
     getSession();
 
@@ -36,13 +32,11 @@ function HomePage() {
     };
   }, [supabase]);
 
-  useEffect(() => {
-    if (sessionLoaded && !user) {
-      router.push('/auth');
-    }
-  }, [sessionLoaded, user, router]);
-
   const handleGenerate = async () => {
+    if (!user) {
+      router.push('/auth');
+      return;
+    }
     if (!topic) return;
     setLoading(true);
     try {
@@ -60,35 +54,13 @@ function HomePage() {
       const data = await response.json();
       const { course } = data;
 
-      // Trigger lesson enhancement for each lesson in the generated course
-      if (course && course.lessons) {
-        course.lessons.forEach(async (lesson) => {
-          try {
-            await fetch('/api/enhance-lesson', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ lessonId: lesson.id, courseId: course.id }),
-            });
-            // No need to wait for each enhancement to complete before redirecting
-          } catch (enhanceError) {
-            console.error(`Failed to enhance lesson ${lesson.id}:`, enhanceError);
-            // Handle error, maybe log it or update UI to show partial failure
-          }
-        });
-      }
-
       router.push(`/course/${course.id}`);
     } catch (error) {
-      // For the user, we can show a notification
       alert(error.message);
     } finally {
       setLoading(false);
     }
   };
-
-  if (!sessionLoaded || !user) { // Check sessionLoaded before rendering
-    return <p>Redirecting to authentication...</p>;
-  }
 
   return (
     <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)] flex flex-col items-center py-12 px-4">
@@ -136,12 +108,14 @@ function HomePage() {
             </Button>
           </CardContent>
         </Card>
-      </div>
-      <div className="w-full mt-12">
-        <RecentCourses />
+        <div className="text-center">
+          <Link href="/home" className="text-gray-600 hover:text-gray-800">
+            View Recent Courses
+          </Link>
+        </div>
       </div>
     </div>
   );
 }
 
-export default HomePage;
+export default LandingPage;
