@@ -145,6 +145,7 @@ function HomePage() {
             <Carousel
               opts={{
                 align: "start",
+                loop: true,
               }}
               className="w-full"
             >
@@ -152,7 +153,7 @@ function HomePage() {
                 {mockCourses.map((course, index) => (
                   <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
                     <div className="p-1">
-                      <Card className="h-full flex flex-col">
+                      <Card className="h-full flex flex-col justify-between">
                         <CardHeader className="flex-grow">
                           <CardTitle className="text-lg font-semibold text-gray-800">{course.title}</CardTitle>
                         </CardHeader>
