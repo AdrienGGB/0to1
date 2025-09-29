@@ -15,36 +15,45 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
   };
 
   return (
-    <div className={`fixed top-0 left-0 h-screen bg-white border-r border-gray-200 flex flex-col transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
-      <div className="p-6 border-b border-gray-200 flex items-center justify-between">
-        {!isCollapsed && (
-          <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
-            0to1
-          </Link>
-        )}
-        <Button variant="ghost" size="icon" onClick={onToggle}>
-          {isCollapsed ? <ChevronsRight /> : <ChevronsLeft />}
-        </Button>
-      </div>
-      
-      <nav className="flex-1 p-4">
-        <ul className="space-y-2">
-          <li>
-            <Link href="/" className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900 transition-colors">
-              <Home className="mr-3" />
-              {!isCollapsed && 'Home'}
+    <>
+      {/* Backdrop for mobile overlay */}
+      {!isCollapsed && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={onToggle}
+        ></div>
+      )}
+      <div className={`fixed top-0 h-screen bg-white border-r border-gray-200 flex flex-col transition-all duration-300 z-50 ${isCollapsed ? '-left-64' : 'left-0 w-64'}`}>
+        <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+          {!isCollapsed && (
+            <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
+              0to1
             </Link>
-          </li>
-        </ul>
-      </nav>
-      
-      <div className="p-4 border-t border-gray-200">
-        <Button onClick={handleSignOut} className="w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-base">
-          <LogOut className="mr-3" />
-          {!isCollapsed && 'Sign Out'}
-        </Button>
+          )}
+          <Button variant="ghost" size="icon" onClick={onToggle}>
+            {isCollapsed ? <ChevronsRight /> : <ChevronsLeft />}
+          </Button>
+        </div>
+        
+        <nav className="flex-1 p-4">
+          <ul className="space-y-2">
+            <li>
+              <Link href="/" className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900 transition-colors">
+                <Home className="mr-3" />
+                {!isCollapsed && 'Home'}
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        
+        <div className="p-4 border-t border-gray-200">
+          <Button onClick={handleSignOut} className="w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-base">
+            <LogOut className="mr-3" />
+            {!isCollapsed && 'Sign Out'}
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

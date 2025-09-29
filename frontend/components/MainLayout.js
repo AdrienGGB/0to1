@@ -15,7 +15,7 @@ const MainLayout = ({ children, user }) => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar isCollapsed={isSidebarCollapsed} onToggle={toggleSidebar} />
-      <main className={`flex-1 transition-all duration-300 ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
+      <main className={`flex-1 transition-all duration-300`}>
         {children}
       </main>
     </div>
