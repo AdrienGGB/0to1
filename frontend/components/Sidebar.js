@@ -30,7 +30,6 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
           </Link>
           {/* The toggle button is now in MainLayout */}
         </div>
-        </div>
         
         <nav className="flex-1 p-4">
           <ul className="space-y-2">
