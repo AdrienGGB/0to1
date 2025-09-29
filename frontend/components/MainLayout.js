@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
 
 const MainLayout = ({ children, user }) => {
-  const [isSidebarCollapsed, setSidebarCollapsed] = useState(true); // Start collapsed by default
+  const [isSidebarCollapsed, setSidebarCollapsed] = useState(false); // Start open by default
 
   const toggleSidebar = () => {
     setSidebarCollapsed(!isSidebarCollapsed);
@@ -22,7 +22,7 @@ const MainLayout = ({ children, user }) => {
           variant="ghost"
           size="icon"
           onClick={toggleSidebar}
-          className="fixed top-4 left-4 z-50 md:hidden"
+          className="fixed top-4 left-4 z-50 lg:hidden" // Show on small screens, hide on large
         >
           <Menu className="h-6 w-6" />
         </Button>

@@ -23,14 +23,13 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
           onClick={onToggle}
         ></div>
       )}
-      <div className={`fixed top-0 h-screen bg-white border-r border-gray-200 flex flex-col transition-all duration-300 z-50 ${isCollapsed ? '-left-64' : 'left-0 w-64'}`}>
+      <div className={`fixed top-0 h-screen bg-white border-r border-gray-200 flex flex-col transition-all duration-300 z-50 ${isCollapsed ? '-full' : 'left-0 w-64'}`}>
         <div className="p-6 border-b border-gray-200 flex items-center justify-between">
-          {!isCollapsed && (
-            <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
-              0to1
-            </Link>
-          )}
+          <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
+            0to1
+          </Link>
           {/* The toggle button is now in MainLayout */}
+        </div>
         </div>
         
         <nav className="flex-1 p-4">
