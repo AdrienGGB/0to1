@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/router';
 import { Button } from '@/components/ui/button';
-import { Home, LogOut } from 'lucide-react';
+import { Home, LogOut, ChevronsLeft, ChevronsRight } from 'lucide-react';
 
 const Sidebar = ({ isCollapsed, onToggle }) => {
   const router = useRouter();
@@ -19,16 +19,21 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
       {/* Backdrop for mobile overlay */}
       {!isCollapsed && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={onToggle}
         ></div>
       )}
-      <div className={`fixed top-0 h-screen bg-white border-r border-gray-200 flex flex-col transition-all duration-300 z-50 ${isCollapsed ? '-full' : 'left-0 w-64'}`}>
+      <div className={`fixed top-0 h-screen bg-white border-r border-gray-200 flex flex-col transition-all duration-300 z-50
+        ${isCollapsed ? '-left-full lg:w-20' : 'left-0 w-64'}
+        lg:left-0
+      `}>
         <div className="p-6 border-b border-gray-200 flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
-            0to1
+            {!isCollapsed && '0to1'}
           </Link>
-          {/* The toggle button is now in MainLayout */}
+          <Button variant="ghost" size="icon" onClick={onToggle} className="hidden lg:flex">
+            {isCollapsed ? <ChevronsRight /> : <ChevronsLeft />}
+          </Button>
         </div>
         
         <nav className="flex-1 p-4">
