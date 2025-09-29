@@ -19,10 +19,10 @@ const MainLayout = ({ children, user }) => {
       <Sidebar isCollapsed={isSidebarCollapsed} onToggle={toggleSidebar} />
       <main className={`flex-1 transition-all duration-300 lg:${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
         <Button
-          variant="ghost"
+          variant="default"
           size="icon"
           onClick={toggleSidebar}
-          className="fixed top-4 left-4 z-50 lg:hidden" // Show on small screens, hide on large
+          className="fixed top-4 left-4 z-50 lg:hidden bg-gray-800 text-white hover:bg-gray-900"
         >
           <Menu className="h-6 w-6" />
         </Button>
