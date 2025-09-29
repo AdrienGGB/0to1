@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/router';
 import { Button } from '@/components/ui/button';
-import { Home, LogOut, ChevronsLeft, ChevronsRight } from 'lucide-react';
+import { Home, LogOut } from 'lucide-react';
 
 const Sidebar = ({ isCollapsed, onToggle }) => {
   const router = useRouter();
@@ -30,9 +30,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
               0to1
             </Link>
           )}
-          <Button variant="ghost" size="icon" onClick={onToggle}>
-            {isCollapsed ? <ChevronsRight /> : <ChevronsLeft />}
-          </Button>
+          {/* The toggle button is now in MainLayout */}
         </div>
         
         <nav className="flex-1 p-4">
