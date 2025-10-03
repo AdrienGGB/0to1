@@ -19,11 +19,11 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
       {/* Backdrop for mobile overlay */}
       {!isCollapsed && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
           onClick={onToggle}
         ></div>
       )}
-      <div className={`fixed top-0 h-screen bg-white border-r border-gray-200 flex flex-col transition-all duration-300 z-50
+      <div className={`fixed top-0 h-screen bg-white border-r border-gray-200 flex flex-col transition-all duration-300 z-40
         ${isCollapsed ? '-left-full' : 'left-0 w-64'}
         lg:${isCollapsed ? 'w-20' : 'w-64'} lg:left-0
       `}>
