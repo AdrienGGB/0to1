@@ -19,6 +19,7 @@ const CoursePage = ({ user }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [isEnrolled, setIsEnrolled] = useState(false); // New state for enrollment status
 
   // New states for selected lesson content
   const [selectedLessonId, setSelectedLessonId] = useState(null);
@@ -89,7 +90,51 @@ const CoursePage = ({ user }) => {
     });
   }, [handleSaveProgress]);
 
-  const [enhancing, setEnhancing] = useState(null);
+  const handleEnroll = useCallback(async () => {
+    if (!user?.id || !id) return;
+
+    try {
+      const supabaseClient = createClient();
+      const { error: enrollError } = await supabaseClient.rpc('enroll_user_in_course', { p_user_id: user.id, p_course_id: id });
+
+      if (enrollError) {
+        throw new Error(enrollError.message);
+      }
+      setIsEnrolled(true);
+      alert('Successfully enrolled in the course!');
+    } catch (err) {
+      console.error('Error enrolling in course:', err);
+      alert(`Failed to enroll in course: ${err.message}`);
+    }
+  }, [user?.id, id]);
+
+  const handleToggleComplete = useCallback(async (lessonId, completed) => {
+    if (!user?.id || !id) return;
+
+    try {
+      const supabaseClient = createClient();
+      const { error: progressError } = await supabaseClient.rpc('update_lesson_progress', {
+        p_user_id: user.id,
+        p_course_id: id,
+        p_lesson_id: lessonId,
+        p_completed: completed,
+      });
+
+      if (progressError) {
+        throw new Error(progressError.message);
+      }
+
+      setProgress(prevProgress => {
+        const newCompletedLessonIds = completed
+          ? [...prevProgress.completedLessonIds, lessonId]
+          : prevProgress.completedLessonIds.filter(lId => lId !== lessonId);
+        return { ...prevProgress, completedLessonIds: newCompletedLessonIds };
+      });
+    } catch (err) {
+      console.error('Error updating lesson progress:', err);
+      alert(`Failed to update lesson progress: ${err.message}`);
+    }
+  }, [user?.id, id]);
 
   const handleEnhanceLesson = async (lessonId) => {
     setEnhancing(lessonId);
@@ -143,7 +188,21 @@ const CoursePage = ({ user }) => {
         const courseData = await courseResponse.json();
         setCourse(courseData);
 
-        await fetchProgress(userId, id);
+        if (userId) {
+          await fetchProgress(userId, id);
+          // Fetch enrollment status
+          const { data: enrollmentData, error: enrollmentError } = await supabase
+            .from('user_courses')
+            .select('id')
+            .eq('user_id', userId)
+            .eq('course_id', id)
+            .single();
+
+          if (enrollmentError && enrollmentError.code !== 'PGRST116') { // PGRST116 means no rows found
+            throw new Error(enrollmentError.message);
+          }
+          setIsEnrolled(!!enrollmentData);
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -201,6 +260,11 @@ const CoursePage = ({ user }) => {
     <div className="min-h-screen bg-[linear-gradient(135deg,#cfe8ff_0%,#a9d4ff_40%,#b9c6ff_70%,#d6b9ff_100%)]">
       <div className="p-8 max-w-4xl mx-auto px-4 text-base leading-relaxed">
       <CourseHeader title={course.title} description={course.description} level={course.level} />
+      {user && !isEnrolled && (
+        <Button onClick={handleEnroll} className="mt-4 w-full sm:w-auto px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-base">
+          Enroll in Course
+        </Button>
+      )}
       {selectedLessonContent ? (
         <div className="bg-white p-6 rounded-lg shadow-lg text-gray-800">
           <Button onClick={() => setSelectedLessonId(null)} className="mb-4 bg-gray-800 text-white hover:bg-gray-700 py-3 px-4 text-base">
@@ -231,6 +295,7 @@ const CoursePage = ({ user }) => {
           selectedLessonId={selectedLessonId} // Pass the currently selected ID
           onEnhanceLesson={handleEnhanceLesson} // Pass the new handler
           enhancing={enhancing}
+          onToggleComplete={handleToggleComplete} // Pass the new handler
         />
       )}
     </div>

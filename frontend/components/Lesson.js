@@ -16,7 +16,7 @@ const Lesson = ({ lesson, isCompleted, onToggleComplete, onLessonSelect, isSelec
           <input
             type="checkbox"
             checked={isCompleted}
-            onChange={onToggleComplete}
+            onChange={(e) => onToggleComplete(lesson.id, e.target.checked)}
             onClick={(e) => e.stopPropagation()} // Prevent click from propagating to parent div
             className="transform scale-150"
           />
