@@ -76,6 +76,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(500).json({ error: error.message });
     }
 
+    if (newCourseData) {
+      const { error: enrollError } = await supabaseAdmin.rpc('enroll_user_in_course', {
+        p_user_id: session.user.id,
+        p_course_id: newCourseData,
+      });
+
+      if (enrollError) {
+        console.error('Failed to enroll user in course:', enrollError.message);
+        // Decide if you want to return an error to the user or just log it
+        // For now, just log it and proceed
+      }
+    }
+
     res.status(200).json({ course: { id: newCourseData } });
 
   } catch (err: any) {
