@@ -20,6 +20,7 @@ const CoursePage = ({ user }) => {
   const [error, setError] = useState(null);
   const [userId, setUserId] = useState(null);
   const [isEnrolled, setIsEnrolled] = useState(false); // New state for enrollment status
+  const [enhancing, setEnhancing] = useState(null); // State to track lesson enhancement
 
   // New states for selected lesson content
   const [selectedLessonId, setSelectedLessonId] = useState(null);
