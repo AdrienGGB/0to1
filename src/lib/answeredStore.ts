@@ -4,7 +4,7 @@ import type { Card } from "@/lib/cards/schema";
  * Remembers on this device which card versions were already answered, so the same person
  * is not shown them again. Stays in the browser: never sent to the server.
  */
-const STORAGE_KEY = "0to1.answered.v1";
+const STORAGE_KEY = "requete.answered.v1";
 
 export function getCardKey(card: Pick<Card, "id" | "version">): string {
   return `${card.id}@${card.version}`;

@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "0to1 — Vos besoins, en quelques gestes",
-    short_name: "0to1",
+    name: "ReQuête — Vos besoins, en quelques gestes",
+    short_name: "ReQuête",
     description:
       "Un questionnaire neutre et anonyme pour faire remonter les besoins et les attentes de la population.",
     lang: "fr",
