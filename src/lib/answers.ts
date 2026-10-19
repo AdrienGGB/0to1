@@ -70,6 +70,13 @@ export function getSwipeDirection(
   return distance > 0 ? "down" : "up";
 }
 
+/**
+ * How the deck was built: themes interleaved at random, or one theme the person picked.
+ * Theme answers are self-selected, so analysis keeps the two apart.
+ */
+export const deckModeSchema = z.enum(["mixed", "theme"]);
+export type DeckMode = z.infer<typeof deckModeSchema>;
+
 export const answerRecordSchema = z.object({
   sessionId: z.uuid(),
   /** Issued by POST /api/session once the anti-bot challenge is solved. */
@@ -82,6 +89,8 @@ export const answerRecordSchema = z.object({
   deckSeed: z.number().int().nonnegative(),
   responseMs: z.number().int().nonnegative(),
   isFast: z.boolean(),
+  /** Defaults to "mixed" for pages loaded before theme choice existed. */
+  deckMode: deckModeSchema.default("mixed"),
 });
 
 export type AnswerRecord = z.infer<typeof answerRecordSchema>;

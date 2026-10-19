@@ -1,8 +1,14 @@
 import { expect, test, type Page } from "@playwright/test";
 
-async function startSurvey(page: Page) {
+async function openMenu(page: Page) {
   await page.goto("/");
   await page.getByRole("button", { name: /je commence/ }).click();
+  await expect(page.getByRole("heading", { name: "Sur quoi voulez-vous répondre ?" })).toBeVisible();
+}
+
+async function startSurvey(page: Page) {
+  await openMenu(page);
+  await page.getByRole("button", { name: "Tous les thèmes, mélangés" }).click();
   await expect(page.locator("article")).toBeVisible();
 }
 
@@ -105,4 +111,51 @@ test("keeps the four answer buttons on screen on a small phone", async ({ page }
   for (const name of ["Non", "Oui", "Je ne sais pas", "Je préfère ne pas répondre"]) {
     await expect(page.getByRole("button", { name, exact: true })).toBeInViewport();
   }
+});
+
+test("answers one picked theme and shows its progress", async ({ page }) => {
+  const modes: string[] = [];
+  page.on("request", (request) => {
+    if (request.url().endsWith("/api/answers")) {
+      modes.push((request.postDataJSON() as { deckMode: string }).deckMode);
+    }
+  });
+
+  await openMenu(page);
+  await expect(page.getByText(/^0 carte répondue sur \d+$/)).toBeVisible();
+  const theme = page.getByRole("button", { name: /^Logement/ });
+  await expect(theme).toContainText("0 sur 3");
+  await theme.click();
+
+  const deckSize = await getDeckSize(page);
+  expect(deckSize).toBe(3);
+  for (let index = 0; index < deckSize; index++) {
+    await expect(page.getByText(`Carte ${index + 1} sur ${deckSize}`)).toBeVisible();
+    await expect(page.locator("article").last()).toContainText("Logement");
+    await page.getByRole("button", { name: "Non", exact: true }).click();
+  }
+
+  await expect(page.getByText("Vous avez fait le tour du thème «\u00a0Logement\u00a0».")).toBeVisible();
+  await expect.poll(() => modes).toEqual(["theme", "theme", "theme"]);
+
+  await page.getByRole("button", { name: "Choisir un thème" }).click();
+  await expect(page.getByText(/^3 cartes répondues sur \d+$/)).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Logement/ })).toBeDisabled();
+  await expect(page.getByRole("button", { name: /^Logement/ })).toContainText("Terminé");
+});
+
+test("records mixed decks as mixed and leaves a deck for the theme list", async ({ page }) => {
+  const modes: string[] = [];
+  page.on("request", (request) => {
+    if (request.url().endsWith("/api/answers")) {
+      modes.push((request.postDataJSON() as { deckMode: string }).deckMode);
+    }
+  });
+
+  await startSurvey(page);
+  await page.getByRole("button", { name: "Oui", exact: true }).click();
+  await expect(page.getByText(/^Carte 2 sur/)).toBeVisible();
+  await page.getByRole("button", { name: "Thèmes" }).click();
+  await expect(page.getByText(/^1 carte répondue sur \d+$/)).toBeVisible();
+  await expect.poll(() => modes).toEqual(["mixed"]);
 });

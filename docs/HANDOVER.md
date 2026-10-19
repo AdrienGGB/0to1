@@ -13,6 +13,8 @@ Tout ce qui suit est mergé sur `main` (PR #3 à #6) et déployé sur Vercel.
   `DECISIONS.md`).
 - **Interface** : pile de cartes à 4 gestes (droite Oui, gauche Non, haut Je ne sais pas, bas Je
   préfère ne pas répondre), boutons et clavier équivalents, paquets de 12 cartes enchaînables.
+  Écran de choix : paquet mélangé ou un thème, avec progression globale et par thème ; chaque
+  réponse garde son `deck_mode` (voir `DECISIONS.md`).
 - **Contenu** : 110 cartes, 55 paires miroirs, 17 thèmes, 6 catégories. Deux passes du relecteur de
   neutralité, tous les bloquants corrigés, historique `reviews` sur chaque carte.
 - **Anti-abus** : niveau 1 (mémoire locale des cartes répondues) et niveau 2 (défi ALTCHA, session

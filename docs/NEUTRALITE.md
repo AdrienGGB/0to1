@@ -81,6 +81,11 @@ Le QCM se présente comme une pile de cartes, chacune portant une affirmation.
   le seul emploi.
 - **Paquets de 12 cartes**, thèmes entremêlés dans un ordre aléatoire ; « Continuer » enchaîne un
   autre paquet, sans jamais remontrer une carte (ni son miroir) déjà répondue sur l'appareil.
+- **Choix d'un thème** : on peut aussi répondre à un seul thème choisi dans une liste. La liste suit
+  l'ordre alphabétique, avec le même style pour chaque thème, et le paquet mélangé reste proposé en
+  premier. Une réponse obtenue ainsi est **auto-sélectionnée** (on choisit les sujets qui nous
+  préoccupent) : elle est marquée `deck_mode = 'theme'` et ne se compare pas directement aux
+  réponses des paquets mélangés (`'mixed'`), surtout pour les cartes de priorité.
 - Les cartes de vécu indiquent une **période de référence** (« Au cours des 12 derniers mois »)
   quand elle est utile, et précisent ce qui est compté (« loyer ou prêt, charges comprises »).
 - Une réponse donnée en moins d'une seconde est **marquée** (`isFast`), jamais rejetée.

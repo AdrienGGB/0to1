@@ -1,22 +1,25 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence } from "motion/react";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, LayoutList, Shuffle } from "lucide-react";
 
 import { SwipeCard } from "@/components/SwipeCard";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import {
   answerLabels,
   getAnswerForDirection,
   isFastAnswer,
   type AnswerRecord,
+  type DeckMode,
   type SwipeDirection,
 } from "@/lib/answers";
 import { markAnswered, readAnsweredKeys } from "@/lib/answeredStore";
 import { buildSessionDeck } from "@/lib/cards/buildSessionDeck";
-import type { DeckCard } from "@/lib/cards/schema";
+import type { DeckCard, Theme } from "@/lib/cards/schema";
+import { getThemeProgress, isThemeComplete } from "@/lib/cards/themeProgress";
 import { createSeed } from "@/lib/shuffle";
 import {
   openSession,
@@ -25,11 +28,14 @@ import {
   type SolvedChallenge,
 } from "@/lib/startSession";
 
-type Phase = "intro" | "starting" | "error" | "deck" | "done" | "nothing-left";
+type Phase = "intro" | "starting" | "error" | "menu" | "deck" | "done";
 
-interface DeckSession extends AnswerSession {
+interface Deck {
   seed: number;
   cards: DeckCard[];
+  mode: DeckMode;
+  /** The theme the person picked, for a theme deck. */
+  theme?: Theme;
 }
 
 const keyDirections: Record<string, SwipeDirection> = {
@@ -55,12 +61,18 @@ interface SurveyProps {
 
 export function Survey({ cards }: SurveyProps) {
   const [phase, setPhase] = useState<Phase>("intro");
-  const [session, setSession] = useState<DeckSession | null>(null);
+  const [session, setSession] = useState<AnswerSession | null>(null);
+  const [deck, setDeck] = useState<Deck | null>(null);
   const [index, setIndex] = useState(0);
   const [lastDirection, setLastDirection] = useState<SwipeDirection | null>(null);
   const [answeredCount, setAnsweredCount] = useState(0);
-  const [hasMoreCards, setHasMoreCards] = useState(false);
+  const [answeredKeys, setAnsweredKeys] = useState<Set<string>>(() => new Set());
   const shownAtRef = useRef(0);
+
+  const themeProgress = useMemo(() => getThemeProgress(cards, answeredKeys), [cards, answeredKeys]);
+  const answeredTotal = themeProgress.reduce((sum, { answered }) => sum + answered, 0);
+  const cardTotal = themeProgress.reduce((sum, { total }) => sum + total, 0);
+  const hasMoreCards = answeredTotal < cardTotal;
   const challengeRef = useRef<Promise<SolvedChallenge> | null>(null);
 
   // Solve the anti-bot challenge in the background while the intro is being read.
@@ -70,25 +82,25 @@ export function Survey({ cards }: SurveyProps) {
     challengeRef.current = pending;
   }, []);
 
-  function showDeck(answerSession: AnswerSession, deckCards: DeckCard[], seed: number) {
-    setSession({ ...answerSession, seed, cards: deckCards });
-    setIndex(0);
-    setPhase("deck");
-    shownAtRef.current = performance.now();
+  function showMenu() {
+    setAnsweredKeys(readAnsweredKeys());
+    setPhase("menu");
+    window.scrollTo(0, 0);
   }
 
   async function startSurvey() {
-    const seed = createSeed();
-    const deckCards = buildSessionDeck(cards, readAnsweredKeys(), seed);
-    if (deckCards.length === 0) {
-      setPhase("nothing-left");
+    const keys = readAnsweredKeys();
+    if (buildSessionDeck(cards, keys, 0).length === 0) {
+      // Nothing left to answer on this device: no session needed to say so.
+      showMenu();
       return;
     }
     setPhase("starting");
     try {
       const solved = await (challengeRef.current ?? prepareChallenge());
       // The server-issued id groups the answers of one sitting, nothing more.
-      showDeck(await openSession(solved), deckCards, seed);
+      setSession(await openSession(solved));
+      showMenu();
     } catch {
       // A challenge is single-use: retrying needs a fresh one.
       challengeRef.current = null;
@@ -96,20 +108,26 @@ export function Survey({ cards }: SurveyProps) {
     }
   }
 
-  /** Chains another short deck within the same session. */
-  function continueSurvey() {
-    if (!session) {
+  /** Starts a short deck within the same session: every theme mixed, or the one picked. */
+  function startDeck(theme?: Theme) {
+    const seed = createSeed();
+    const pool = theme ? cards.filter((card) => card.theme.id === theme.id) : cards;
+    const deckCards = buildSessionDeck(pool, readAnsweredKeys(), seed);
+    if (!session || deckCards.length === 0) {
       return;
     }
-    const seed = createSeed();
-    showDeck(session, buildSessionDeck(cards, readAnsweredKeys(), seed), seed);
+    setDeck({ seed, cards: deckCards, mode: theme ? "theme" : "mixed", theme });
+    setIndex(0);
+    setPhase("deck");
+    window.scrollTo(0, 0);
+    shownAtRef.current = performance.now();
   }
 
-  const currentCard = session?.cards[index];
+  const currentCard = deck?.cards[index];
 
   const handleSwipe = useCallback(
     (direction: SwipeDirection) => {
-      if (!session || !currentCard) {
+      if (!session || !deck || !currentCard) {
         return;
       }
       const responseMs = Math.round(performance.now() - shownAtRef.current);
@@ -120,22 +138,23 @@ export function Survey({ cards }: SurveyProps) {
         cardVersion: currentCard.version,
         answer: getAnswerForDirection(direction),
         position: index,
-        deckSeed: session.seed,
+        deckSeed: deck.seed,
         responseMs,
         isFast: isFastAnswer(responseMs),
+        deckMode: deck.mode,
       });
 
       markAnswered(currentCard);
       setAnsweredCount((count) => count + 1);
       setLastDirection(direction);
       shownAtRef.current = performance.now();
-      if (index + 1 >= session.cards.length) {
-        setHasMoreCards(buildSessionDeck(cards, readAnsweredKeys(), 0).length > 0);
+      if (index + 1 >= deck.cards.length) {
+        setAnsweredKeys(readAnsweredKeys());
         setPhase("done");
       }
       setIndex(index + 1);
     },
-    [cards, session, currentCard, index],
+    [session, deck, currentCard, index],
   );
 
   useEffect(() => {
@@ -201,19 +220,77 @@ export function Survey({ cards }: SurveyProps) {
     );
   }
 
-  if (phase === "nothing-left") {
+  if (phase === "menu") {
     return (
-      <section className="flex flex-col gap-4 text-center" aria-live="polite">
-        <h1 className="text-3xl font-semibold">Merci</h1>
-        <p className="text-muted-foreground">
-          Vous avez déjà répondu à toutes les cartes disponibles sur cet appareil. De nouvelles
-          cartes seront ajoutées prochainement.
-        </p>
+      <section className="flex flex-col gap-6">
+        <div className="flex flex-col gap-3">
+          <h1 className="text-2xl font-semibold text-balance">Sur quoi voulez-vous répondre ?</h1>
+          <p className="text-sm text-muted-foreground">
+            {answeredTotal} {answeredTotal > 1 ? "cartes répondues" : "carte répondue"} sur{" "}
+            {cardTotal}
+          </p>
+          <Progress
+            value={cardTotal > 0 ? (answeredTotal / cardTotal) * 100 : 0}
+            aria-label="Progression globale"
+          />
+        </div>
+
+        {hasMoreCards ? (
+          <Button size="lg" onClick={() => startDeck()}>
+            <Shuffle aria-hidden /> Tous les thèmes, mélangés
+          </Button>
+        ) : (
+          <p className="text-muted-foreground" aria-live="polite">
+            Vous avez déjà répondu à toutes les cartes disponibles sur cet appareil. De nouvelles
+            cartes seront ajoutées prochainement.
+          </p>
+        )}
+
+        <div className="flex flex-col gap-3">
+          <h2 className="text-sm font-semibold text-muted-foreground">Ou choisissez un thème</h2>
+          {/* Alphabetical order and one shared style: no theme is put forward. */}
+          <ul className="flex flex-col gap-2">
+            {themeProgress.map((progress) => {
+              const isComplete = isThemeComplete(progress);
+              return (
+                <li key={progress.theme.id}>
+                  <Button
+                    variant="outline"
+                    className="h-auto w-full flex-col items-stretch gap-2 py-3 whitespace-normal"
+                    disabled={isComplete}
+                    onClick={() => startDeck(progress.theme)}
+                  >
+                    <span className="flex items-center justify-between gap-3">
+                      <span className="text-left text-base">{progress.theme.label}</span>
+                      <span className="flex shrink-0 items-center gap-1 text-muted-foreground">
+                        {isComplete ? (
+                          <>
+                            <Check aria-hidden /> Terminé
+                          </>
+                        ) : (
+                          `${progress.answered} sur ${progress.total}`
+                        )}
+                      </span>
+                    </span>
+                    <Progress
+                      className="h-1.5"
+                      value={(progress.answered / progress.total) * 100}
+                      aria-hidden
+                    />
+                  </Button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </section>
     );
   }
 
-  if (phase === "done" || !session) {
+  if (phase === "done" || !deck) {
+    const themeDone = deck?.theme
+      ? themeProgress.find(({ theme }) => theme.id === deck.theme?.id)
+      : undefined;
     return (
       <section className="flex flex-col gap-4 text-center" aria-live="polite">
         <h1 className="text-3xl font-semibold">Merci</h1>
@@ -222,10 +299,18 @@ export function Survey({ cards }: SurveyProps) {
             ? `Vos ${answeredCount} réponses ont été prises en compte.`
             : "Votre réponse a été prise en compte."}
         </p>
+        {themeDone && isThemeComplete(themeDone) && (
+          <p className="text-muted-foreground">
+            Vous avez fait le tour du thème «&nbsp;{themeDone.theme.label}&nbsp;».
+          </p>
+        )}
         {hasMoreCards ? (
           <div className="flex flex-col gap-2">
-            <Button size="lg" onClick={continueSurvey}>
+            <Button size="lg" onClick={() => startDeck()}>
               Continuer avec d&apos;autres cartes
+            </Button>
+            <Button variant="outline" size="lg" onClick={showMenu}>
+              <LayoutList aria-hidden /> Choisir un thème
             </Button>
             <p className="text-sm text-muted-foreground">
               Vous pouvez aussi vous arrêter ici : chaque réponse compte déjà.
@@ -241,22 +326,19 @@ export function Survey({ cards }: SurveyProps) {
   return (
     <section className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-muted-foreground" aria-live="polite">
-          Carte {index + 1} sur {session.cards.length}
-        </p>
-        <div
-          className="h-1.5 w-full overflow-hidden rounded-full bg-muted"
-          role="progressbar"
-          aria-valuemin={0}
-          aria-valuemax={session.cards.length}
-          aria-valuenow={index}
-          aria-label="Progression"
-        >
-          <div
-            className="h-full bg-primary transition-[width]"
-            style={{ width: `${(index / session.cards.length) * 100}%` }}
-          />
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-sm text-muted-foreground" aria-live="polite">
+            Carte {index + 1} sur {deck.cards.length}
+          </p>
+          <Button variant="ghost" size="sm" onClick={showMenu}>
+            <LayoutList aria-hidden /> Thèmes
+          </Button>
         </div>
+        <Progress
+          className="h-1.5"
+          value={(index / deck.cards.length) * 100}
+          aria-label="Progression du paquet"
+        />
       </div>
 
       <div className="relative h-[clamp(18rem,52svh,24rem)]">
