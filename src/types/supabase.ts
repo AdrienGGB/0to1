@@ -33,6 +33,24 @@ export interface Database {
         Update: never;
         Relationships: [];
       };
+      priority_messages: {
+        Row: {
+          id: string;
+          session_id: string;
+          choice: "themes" | "dont_know" | "prefer_not";
+          theme_ids: string[];
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          session_id: string;
+          choice: "themes" | "dont_know" | "prefer_not";
+          theme_ids?: string[];
+          created_at?: string;
+        };
+        Update: never;
+        Relationships: [];
+      };
     };
     Views: Record<never, never>;
     Functions: {
@@ -43,6 +61,23 @@ export interface Database {
       consume_challenge: {
         Args: { p_nonce: string; p_expires_at: string };
         Returns: boolean;
+      };
+      card_answer_stats: {
+        Args: Record<string, never>;
+        Returns: {
+          card_id: string;
+          card_version: number;
+          total: number;
+          yes: number;
+          no: number;
+          dont_know: number;
+          prefer_not: number;
+          first_answer_at: string;
+        }[];
+      };
+      theme_message_stats: {
+        Args: Record<string, never>;
+        Returns: { theme_id: string; chosen: number; total: number; first_message_at: string }[];
       };
     };
     Enums: Record<never, never>;
