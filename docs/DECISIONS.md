@@ -7,6 +7,18 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ---
 
+## 2026-10-19 — Adresse et noms techniques : requete
+
+- **Contexte** : le site et le repo portaient encore le nom technique `0to1`. `requete.vercel.app`
+  est pris par un autre site, et `requete.fr`, `.app`, `.org` sont déjà enregistrés.
+- **Décision** : adresse **https://re-quete.vercel.app** (le tiret rappelle *re-quête*). Projet
+  Vercel renommé `0to1-hi4o` → `requete`, repo GitHub `AdrienGGB/0to1` → `AdrienGGB/requete`. Le
+  projet Supabase garde sa référence (`vpbxrneabgskbckjiwlk`, non modifiable) et s'affiche déjà
+  « ReQuete ».
+- **Conséquences** : `0to1-hi4o.vercel.app` redirige en 308 vers la nouvelle adresse, chemin
+  conservé ; GitHub redirige l'ancien nom du repo. Un vrai domaine reste possible plus tard.
+- **Remplace** la partie « noms techniques » de « Nom du produit : ReQuête ».
+
 ## 2026-10-19 — Choix des thèmes et progression
 
 - **Contexte** : Adrien veut que chacun voie les thèmes, choisisse le sien et suive son avancement.
