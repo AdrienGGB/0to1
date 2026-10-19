@@ -7,8 +7,9 @@
 **Contrainte non négociable** : le QCM est **apolitique et neutre**. Il mesure des besoins et des
 priorités ; il ne classe pas les gens, ne recommande rien, ne pousse aucune option.
 
-**Nom du produit** : ReQuête (le repo GitHub, Vercel et Supabase gardent le nom technique `0to1`).
-**Site** : https://0to1-hi4o.vercel.app (injoignable depuis les sessions cloud : réseau bloqué).
+**Nom du produit** : ReQuête (nom technique `requete` pour le repo GitHub et le projet Vercel ;
+le dossier local peut s'appeler encore `0to1`).
+**Site** : https://re-quete.vercel.app (injoignable depuis les sessions cloud : réseau bloqué).
 **Développeur** : Adrien (solo).
 **État** : collecte uniquement (aucun affichage de résultats, voir `docs/DECISIONS.md`). Écran de
 swipe, 110 cartes (17 thèmes, 6 catégories) en paquets de 12 mélangés ou par thème choisi, avec

@@ -24,7 +24,8 @@ Tout ce qui suit est mergé sur `main` (PR #3 à #6) et déployé sur Vercel.
   `supabase/migrations/`, workflow manuel `Supabase Migrations (prod)`.
 - **Qualité** : CI GitHub sur chaque PR (lint, typecheck, 44 tests unitaires, build, 10 tests e2e
   Playwright).
-- **Site** : https://0to1-hi4o.vercel.app (projet Vercel `0to1-hi4o`, le seul). Variables Vercel posées par
+- **Site** : https://re-quete.vercel.app (projet Vercel `requete`, le seul ; l'ancienne adresse
+  `0to1-hi4o.vercel.app` redirige en 308). Repo : `AdrienGGB/requete`. Variables Vercel posées par
   Adrien : `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `ANTI_ABUSE_SECRET`.
 - **Secrets GitHub** posés : `SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_REF_PROD`,
   `SUPABASE_DB_PASSWORD_PROD`.
@@ -41,7 +42,7 @@ Tout ce qui suit est mergé sur `main` (PR #3 à #6) et déployé sur Vercel.
    avec un faux jeton répond 401 (un corps invalide répond 400 avant le contrôle du jeton). Les
    12 lignes de test ont été supprimées : `answers` est vide.
 4. **Vercel nettoyé** : les projets `0to1` et `0to1-learningassistant` sont supprimés. Seul
-   `0to1-hi4o` reste.
+   `0to1-hi4o` reste (renommé `requete` depuis).
 
 Pour interroger la base sans le MCP Supabase : `POST
 https://api.supabase.com/v1/projects/vpbxrneabgskbckjiwlk/database/query` avec le jeton du CLI
