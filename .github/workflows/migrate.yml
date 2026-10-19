@@ -1,0 +1,56 @@
+name: Supabase Migrations (prod)
+
+# Applies supabase/migrations/ to the hosted PROD project with `supabase db push`.
+# Dev is local (supabase start, or PGlite for quick checks): no hosted dev project.
+#
+# Trigger: manual only (Actions -> Supabase Migrations (prod) -> Run workflow).
+# The manual run is the gate: nothing reaches prod on push or merge.
+#
+# Required GitHub secrets (until they are set, the job is a green no-op):
+#   SUPABASE_ACCESS_TOKEN      account-level personal access token (supabase.com/dashboard/account/tokens)
+#   SUPABASE_PROJECT_REF_PROD  project ref, e.g. vpbxrneabgskbckjiwlk
+#   SUPABASE_DB_PASSWORD_PROD  database password chosen when the project was created
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only list the migrations that would be applied"
+        type: boolean
+        default: true
+
+jobs:
+  migrate-prod:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Check config
+        id: cfg
+        env:
+          TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Supabase secrets not set, skipping PROD migration (no-op)."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.cfg.outputs.configured == 'true'
+      - uses: supabase/setup-cli@v1
+        if: steps.cfg.outputs.configured == 'true'
+        with:
+          version: latest
+      - name: Push migrations to PROD
+        if: steps.cfg.outputs.configured == 'true'
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD_PROD }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          supabase link --project-ref "${{ secrets.SUPABASE_PROJECT_REF_PROD }}"
+          if [ "$DRY_RUN" = "true" ]; then
+            supabase db push --dry-run
+          else
+            supabase db push
+          fi
