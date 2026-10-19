@@ -6,20 +6,20 @@
   },
   "cards": [
     {
-      "id": "defense-securite-exterieure-oui",
+      "id": "defense-risque-attaque-securite-oui",
       "version": 1,
-      "kind": "experience",
-      "statement": "Je me sens en sécurité face aux menaces venant de l'extérieur du pays.",
-      "rationale": "Mesure le sentiment de sécurité face aux menaces extérieures.",
-      "mirrorOf": "defense-securite-exterieure-non"
+      "kind": "perception",
+      "statement": "Je me sens en sécurité face aux risques d'attaque venant d'autres pays (guerre, terrorisme, cyberattaques).",
+      "rationale": "Mesure le sentiment de sécurité face aux risques d'attaque venant d'autres pays.",
+      "mirrorOf": "defense-risque-attaque-securite-non"
     },
     {
-      "id": "defense-securite-exterieure-non",
+      "id": "defense-risque-attaque-securite-non",
       "version": 1,
-      "kind": "experience",
-      "statement": "Je ne me sens pas en sécurité face aux menaces venant de l'extérieur du pays.",
-      "rationale": "Mesure le sentiment de sécurité face aux menaces extérieures. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "defense-securite-exterieure-oui"
+      "kind": "perception",
+      "statement": "Je ne me sens pas en sécurité face aux risques d'attaque venant d'autres pays (guerre, terrorisme, cyberattaques).",
+      "rationale": "Mesure le sentiment de sécurité face aux risques d'attaque venant d'autres pays. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "defense-risque-attaque-securite-oui"
     },
     {
       "id": "defense-crise-preparation-oui",

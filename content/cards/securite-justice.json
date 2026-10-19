@@ -8,7 +8,7 @@
     {
       "id": "securite-quartier-oui",
       "version": 1,
-      "kind": "experience",
+      "kind": "perception",
       "statement": "Je me sens en sécurité dans mon quartier ou ma commune.",
       "rationale": "Mesure le sentiment de sécurité au quotidien.",
       "mirrorOf": "securite-quartier-non"
@@ -16,26 +16,42 @@
     {
       "id": "securite-quartier-non",
       "version": 1,
-      "kind": "experience",
+      "kind": "perception",
       "statement": "Je ne me sens pas en sécurité dans mon quartier ou ma commune.",
       "rationale": "Mesure le sentiment de sécurité au quotidien. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "securite-quartier-oui"
     },
     {
-      "id": "justice-plainte-prise-en-compte",
+      "id": "justice-plainte-traitee",
       "version": 1,
-      "kind": "expectation",
-      "statement": "Si j'étais victime d'une infraction, je pense que ma plainte serait prise en compte.",
-      "rationale": "Mesure la confiance dans la prise en compte d'une plainte.",
-      "mirrorOf": "justice-plainte-ignoree"
+      "kind": "perception",
+      "statement": "Si j'étais victime d'une infraction et portais plainte, je pense que ma plainte serait traitée sérieusement.",
+      "rationale": "Mesure la confiance dans le traitement d'une plainte.",
+      "mirrorOf": "justice-plainte-non-traitee"
     },
     {
-      "id": "justice-plainte-ignoree",
+      "id": "justice-plainte-non-traitee",
       "version": 1,
-      "kind": "expectation",
-      "statement": "Si j'étais victime d'une infraction, je pense que ma plainte ne serait pas prise en compte.",
-      "rationale": "Mesure la confiance dans la prise en compte d'une plainte. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "justice-plainte-prise-en-compte"
+      "kind": "perception",
+      "statement": "Si j'étais victime d'une infraction et portais plainte, je pense que ma plainte ne serait pas traitée sérieusement.",
+      "rationale": "Mesure la confiance dans le traitement d'une plainte. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "justice-plainte-traitee"
+    },
+    {
+      "id": "securite-justice-priorite-haute",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de sécurité et de justice comptent beaucoup pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions de sécurité et de justice parmi les préoccupations.",
+      "mirrorOf": "securite-justice-priorite-basse"
+    },
+    {
+      "id": "securite-justice-priorite-basse",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de sécurité et de justice comptent peu pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions de sécurité et de justice parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "securite-justice-priorite-haute"
     }
   ]
 }

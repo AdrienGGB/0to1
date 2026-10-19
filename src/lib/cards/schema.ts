@@ -6,6 +6,7 @@ import { z } from "zod";
  */
 export const cardKindSchema = z.enum([
   "experience",
+  "perception",
   "priority",
   "expectation",
   "solution",

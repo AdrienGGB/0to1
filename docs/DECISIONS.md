@@ -12,13 +12,20 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 - **Contexte** : passer des 6 cartes d'exemple à un vrai premier questionnaire.
 - **Décision** :
   - 6 catégories (vie quotidienne, travail et éducation, environnement, vie collective, économie,
-    défense), 16 thèmes, 76 cartes en 38 paires miroirs.
+    défense), 17 thèmes, 108 cartes en 54 paires miroirs, dont une paire de priorité par thème.
+  - **Choix des thèmes** : les 6 catégories ont été choisies par Adrien. Les thèmes couvrent
+    d'abord les besoins du quotidien que les enquêtes de conditions de vie suivent habituellement
+    (budget, logement, santé, déplacements, alimentation, travail, école, services publics,
+    sécurité, lien social), plus les sujets collectifs demandés (environnement, démocratie,
+    numérique, économie, impôts, défense).
+  - **Thèmes absents de ce premier paquet**, à trancher par Adrien : culture, territoires,
+    agriculture, immigration, et tout autre sujet proposé. Leur absence est un choix, pas un oubli.
   - **Cartes pour tous**, sans option « Non concerné » : chaque carte doit admettre une réponse
     pertinente de n'importe qui (voir `NEUTRALITE.md`).
   - **Split-ballot** : une seule version de chaque paire par personne, tirée au hasard.
   - **Paquets de 12** cartes aux thèmes entremêlés, enchaînables avec « Continuer ».
-- **Conséquences** : un répondant voit au plus 38 cartes. Les deux cartes santé passent en
-  version 2 (formulation hypothétique, pour inclure ceux qui n'ont pas eu besoin de médecin).
+- **Conséquences** : un répondant voit au plus 54 cartes, en 5 paquets. Les cartes déjà présentes
+  dans la PR #3 et reformulées (santé, coût du logement, déplacements) passent en version 2.
 - **Remplace** la question « Non concerné » de la section « À décider ».
 
 ## 2026-10-19 — Projet Supabase et application des migrations

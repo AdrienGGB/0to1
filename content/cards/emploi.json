@@ -6,20 +6,36 @@
   },
   "cards": [
     {
-      "id": "emploi-recherche-confiance",
+      "id": "emploi-local-accessible",
       "version": 1,
-      "kind": "experience",
-      "statement": "Si je devais chercher un emploi, je pense que j'en trouverais un qui corresponde à mes compétences.",
-      "rationale": "Mesure la confiance dans l'accès à un emploi adapté, y compris pour qui n'en cherche pas.",
-      "mirrorOf": "emploi-recherche-inquietude"
+      "kind": "perception",
+      "statement": "Là où je vis, une personne qui cherche un emploi peut en trouver un qui corresponde à ses compétences.",
+      "rationale": "Mesure la perception du marché de l'emploi local, accessible à tous, en emploi ou non.",
+      "mirrorOf": "emploi-local-difficile"
     },
     {
-      "id": "emploi-recherche-inquietude",
+      "id": "emploi-local-difficile",
+      "version": 1,
+      "kind": "perception",
+      "statement": "Là où je vis, une personne qui cherche un emploi aurait du mal à en trouver un qui corresponde à ses compétences.",
+      "rationale": "Mesure la perception du marché de l'emploi local, accessible à tous, en emploi ou non. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "emploi-local-accessible"
+    },
+    {
+      "id": "emploi-activite-sens-oui",
       "version": 1,
       "kind": "experience",
-      "statement": "Si je devais chercher un emploi, je pense que j'aurais du mal à en trouver un qui corresponde à mes compétences.",
-      "rationale": "Mesure la confiance dans l'accès à un emploi adapté, y compris pour qui n'en cherche pas. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "emploi-recherche-confiance"
+      "statement": "Mon activité principale (travail, études ou autre) a du sens pour moi.",
+      "rationale": "Mesure le sens trouvé dans son activité principale.",
+      "mirrorOf": "emploi-activite-sens-non"
+    },
+    {
+      "id": "emploi-activite-sens-non",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Mon activité principale (travail, études ou autre) n'a pas de sens pour moi.",
+      "rationale": "Mesure le sens trouvé dans son activité principale. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "emploi-activite-sens-oui"
     },
     {
       "id": "emploi-activite-nuit-sante",

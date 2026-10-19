@@ -8,7 +8,7 @@
     {
       "id": "economie-perspectives-meilleures",
       "version": 1,
-      "kind": "expectation",
+      "kind": "perception",
       "statement": "Je pense que ma situation financière sera meilleure dans cinq ans qu'aujourd'hui.",
       "rationale": "Mesure les perspectives financières personnelles.",
       "mirrorOf": "economie-perspectives-moins-bonnes"
@@ -16,31 +16,15 @@
     {
       "id": "economie-perspectives-moins-bonnes",
       "version": 1,
-      "kind": "expectation",
+      "kind": "perception",
       "statement": "Je pense que ma situation financière sera moins bonne dans cinq ans qu'aujourd'hui.",
       "rationale": "Mesure les perspectives financières personnelles. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "economie-perspectives-meilleures"
     },
     {
-      "id": "economie-impots-compris",
-      "version": 1,
-      "kind": "experience",
-      "statement": "Je comprends comment est utilisé l'argent de mes impôts et cotisations.",
-      "rationale": "Mesure la compréhension de l'usage des impôts et cotisations.",
-      "mirrorOf": "economie-impots-incompris"
-    },
-    {
-      "id": "economie-impots-incompris",
-      "version": 1,
-      "kind": "experience",
-      "statement": "Je ne comprends pas comment est utilisé l'argent de mes impôts et cotisations.",
-      "rationale": "Mesure la compréhension de l'usage des impôts et cotisations. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "economie-impots-compris"
-    },
-    {
       "id": "economie-activite-locale-maintien",
       "version": 1,
-      "kind": "experience",
+      "kind": "perception",
       "statement": "Près de chez moi, l'activité économique (commerces, entreprises, emplois) se maintient.",
       "rationale": "Mesure la vitalité perçue de l'activité économique locale.",
       "mirrorOf": "economie-activite-locale-declin"
@@ -48,7 +32,7 @@
     {
       "id": "economie-activite-locale-declin",
       "version": 1,
-      "kind": "experience",
+      "kind": "perception",
       "statement": "Près de chez moi, l'activité économique (commerces, entreprises, emplois) décline.",
       "rationale": "Mesure la vitalité perçue de l'activité économique locale. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "economie-activite-locale-maintien"
@@ -57,7 +41,7 @@
       "id": "economie-priorite-haute",
       "version": 1,
       "kind": "priority",
-      "statement": "Les questions économiques comptent beaucoup pour moi aujourd'hui.",
+      "statement": "Les questions d'économie comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions économiques parmi les préoccupations.",
       "mirrorOf": "economie-priorite-basse"
     },
@@ -65,7 +49,7 @@
       "id": "economie-priorite-basse",
       "version": 1,
       "kind": "priority",
-      "statement": "Les questions économiques comptent peu pour moi aujourd'hui.",
+      "statement": "Les questions d'économie comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions économiques parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "economie-priorite-haute"
     }

@@ -8,7 +8,7 @@
     {
       "id": "cadre-de-vie-sain",
       "version": 1,
-      "kind": "experience",
+      "kind": "perception",
       "statement": "L'environnement où je vis (air, bruit, espaces verts) est bon pour ma santé.",
       "rationale": "Mesure l'effet perçu de l'environnement local sur la santé.",
       "mirrorOf": "cadre-de-vie-nocif"
@@ -16,7 +16,7 @@
     {
       "id": "cadre-de-vie-nocif",
       "version": 1,
-      "kind": "experience",
+      "kind": "perception",
       "statement": "L'environnement où je vis (air, bruit, espaces verts) nuit à ma santé.",
       "rationale": "Mesure l'effet perçu de l'environnement local sur la santé. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "cadre-de-vie-sain"
@@ -38,20 +38,20 @@
       "mirrorOf": "cadre-de-vie-nature-accessible"
     },
     {
-      "id": "environnement-priorite-haute",
+      "id": "cadre-de-vie-priorite-haute",
       "version": 1,
       "kind": "priority",
-      "statement": "Les questions d'environnement comptent beaucoup pour moi aujourd'hui.",
-      "rationale": "Mesure la place de l'environnement parmi les préoccupations.",
-      "mirrorOf": "environnement-priorite-basse"
+      "statement": "Les questions de cadre de vie comptent beaucoup pour moi aujourd'hui.",
+      "rationale": "Mesure la place du cadre de vie parmi les préoccupations.",
+      "mirrorOf": "cadre-de-vie-priorite-basse"
     },
     {
-      "id": "environnement-priorite-basse",
+      "id": "cadre-de-vie-priorite-basse",
       "version": 1,
       "kind": "priority",
-      "statement": "Les questions d'environnement comptent peu pour moi aujourd'hui.",
-      "rationale": "Mesure la place de l'environnement parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "environnement-priorite-haute"
+      "statement": "Les questions de cadre de vie comptent peu pour moi aujourd'hui.",
+      "rationale": "Mesure la place du cadre de vie parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "cadre-de-vie-priorite-haute"
     }
   ]
 }

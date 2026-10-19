@@ -20,6 +20,22 @@
       "statement": "Je ne peux pas me nourrir comme je le souhaite, en quantité ou en qualité.",
       "rationale": "Mesure l'accès à une alimentation suffisante et choisie. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "alimentation-choisie"
+    },
+    {
+      "id": "alimentation-priorite-haute",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions d'alimentation comptent beaucoup pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions d'alimentation parmi les préoccupations.",
+      "mirrorOf": "alimentation-priorite-basse"
+    },
+    {
+      "id": "alimentation-priorite-basse",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions d'alimentation comptent peu pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions d'alimentation parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "alimentation-priorite-haute"
     }
   ]
 }

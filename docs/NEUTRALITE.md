@@ -17,9 +17,11 @@ Ordre de préférence pour le type de question :
 
 1. **Le vécu** : « Au cours des 12 derniers mois, avez-vous renoncé à des soins pour des raisons
    financières ? »
-2. **Les priorités** : « Parmi ces sujets, lesquels comptent le plus pour vous ? »
-3. **Les attentes** : « Dans quelle mesure souhaitez-vous que ce sujet soit traité ? »
-4. **Les solutions**, en dernier recours, et alors avec plusieurs options issues de traditions
+2. **Les perceptions**, quand le vécu direct ne s'applique pas à tous : « Là où je vis, une personne
+   qui cherche un emploi peut en trouver un. »
+3. **Les priorités** : « Parmi ces sujets, lesquels comptent le plus pour vous ? »
+4. **Les attentes** : « Dans quelle mesure souhaitez-vous que ce sujet soit traité ? »
+5. **Les solutions**, en dernier recours, et alors avec plusieurs options issues de traditions
    différentes, présentées sans étiquette et avec une formulation de même longueur et de même ton.
 
 ## 3. Règles de rédaction
@@ -93,7 +95,12 @@ services publics, sécurité et justice, démocratie et participation, numériqu
 territoires, alimentation et agriculture, fiscalité. La liste évolue (entrée dans `DECISIONS.md`).
 
 - Le choix d'inclure ou non un thème est lui-même un biais : il se justifie et se trace.
-- Aucun thème n'est présenté comme plus important qu'un autre par l'interface.
+- Aucun thème n'est présenté comme plus important qu'un autre par l'interface. Chaque thème a
+  **une seule** paire de priorité, à la formulation identique (« Les questions de … comptent
+  beaucoup / peu pour moi aujourd'hui »), pour que les taux soient comparables entre thèmes.
+- Un thème ne doit pas être traité uniquement par ses problèmes ni uniquement par ses atouts, ni
+  sous un seul angle (par exemple le climat seulement comme menace, sans le poids ressenti des
+  règles environnementales).
 - S'inspirer des enquêtes de référence (INSEE, CREDOC, European Social Survey, World Values Survey,
   baromètres publics) et citer la source quand une formulation en est reprise.
 
@@ -102,7 +109,7 @@ territoires, alimentation et agriculture, fiscalité. La liste évolue (entrée 
 Chaque question porte :
 
 - un identifiant stable et un numéro de version ;
-- son thème et son type (vécu, priorité, attente, solution) ;
+- son thème et son type (vécu, perception, priorité, attente, solution) ;
 - une justification courte (quel besoin elle cherche à mesurer) ;
 - ses sources d'inspiration le cas échéant ;
 - l'historique de ses revues de neutralité.

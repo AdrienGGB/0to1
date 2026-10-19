@@ -8,50 +8,82 @@
     {
       "id": "climat-inquietude-oui",
       "version": 1,
-      "kind": "expectation",
-      "statement": "Les conséquences du changement climatique m'inquiètent pour mon avenir ou celui de mes proches.",
-      "rationale": "Mesure l'inquiétude liée aux conséquences du changement climatique.",
+      "kind": "perception",
+      "statement": "Le changement climatique m'inquiète pour mon avenir ou celui de mes proches.",
+      "rationale": "Mesure l'inquiétude personnelle liée au changement climatique.",
       "mirrorOf": "climat-inquietude-non"
     },
     {
       "id": "climat-inquietude-non",
       "version": 1,
-      "kind": "expectation",
-      "statement": "Les conséquences du changement climatique ne m'inquiètent pas pour mon avenir ou celui de mes proches.",
-      "rationale": "Mesure l'inquiétude liée aux conséquences du changement climatique. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "kind": "perception",
+      "statement": "Le changement climatique ne m'inquiète pas pour mon avenir ou celui de mes proches.",
+      "rationale": "Mesure l'inquiétude personnelle liée au changement climatique. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "climat-inquietude-oui"
     },
     {
-      "id": "climat-evenement-subi",
+      "id": "climat-evenement-consequences",
       "version": 1,
       "kind": "experience",
-      "statement": "Au cours des 5 dernières années, j'ai subi personnellement les effets d'un événement climatique (canicule, inondation, sécheresse, tempête…).",
-      "rationale": "Mesure l'exposition vécue aux événements climatiques.",
-      "mirrorOf": "climat-evenement-non-subi"
+      "statement": "Au cours des 5 dernières années, un événement météo extrême (canicule, inondation, tempête…) a eu des conséquences sur ma santé ou mes biens.",
+      "rationale": "Mesure les conséquences concrètes vécues d'événements météo extrêmes.",
+      "mirrorOf": "climat-evenement-sans-consequence"
     },
     {
-      "id": "climat-evenement-non-subi",
+      "id": "climat-evenement-sans-consequence",
       "version": 1,
       "kind": "experience",
-      "statement": "Au cours des 5 dernières années, je n'ai pas subi personnellement les effets d'un événement climatique (canicule, inondation, sécheresse, tempête…).",
-      "rationale": "Mesure l'exposition vécue aux événements climatiques. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "climat-evenement-subi"
+      "statement": "Au cours des 5 dernières années, aucun événement météo extrême (canicule, inondation, tempête…) n'a eu de conséquence sur ma santé ou mes biens.",
+      "rationale": "Mesure les conséquences concrètes vécues d'événements météo extrêmes. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "climat-evenement-consequences"
     },
     {
-      "id": "energie-chauffage-difficile",
+      "id": "energie-temperature-difficile",
       "version": 1,
       "kind": "experience",
-      "statement": "L'hiver dernier, chauffer suffisamment mon logement a été difficile pour moi.",
-      "rationale": "Mesure la difficulté à se chauffer.",
-      "mirrorOf": "energie-chauffage-facile"
+      "statement": "Au cours des 12 derniers mois, j'ai eu du mal à maintenir une température correcte dans mon logement (chauffage ou fraîcheur).",
+      "rationale": "Mesure la difficulté à maintenir une température correcte chez soi, quel que soit le climat.",
+      "mirrorOf": "energie-temperature-facile"
     },
     {
-      "id": "energie-chauffage-facile",
+      "id": "energie-temperature-facile",
       "version": 1,
       "kind": "experience",
-      "statement": "L'hiver dernier, chauffer suffisamment mon logement n'a pas été difficile pour moi.",
-      "rationale": "Mesure la difficulté à se chauffer. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "energie-chauffage-difficile"
+      "statement": "Au cours des 12 derniers mois, je n'ai pas eu de mal à maintenir une température correcte dans mon logement (chauffage ou fraîcheur).",
+      "rationale": "Mesure la difficulté à maintenir une température correcte chez soi, quel que soit le climat. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "energie-temperature-difficile"
+    },
+    {
+      "id": "environnement-regles-poids-budget",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Au cours des 12 derniers mois, des règles liées à l'environnement ont pesé sur mon budget.",
+      "rationale": "Mesure le poids ressenti des règles environnementales sur le budget.",
+      "mirrorOf": "environnement-regles-sans-poids-budget"
+    },
+    {
+      "id": "environnement-regles-sans-poids-budget",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Au cours des 12 derniers mois, des règles liées à l'environnement n'ont pas pesé sur mon budget.",
+      "rationale": "Mesure le poids ressenti des règles environnementales sur le budget. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "environnement-regles-poids-budget"
+    },
+    {
+      "id": "climat-energie-priorite-haute",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de climat et d'énergie comptent beaucoup pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions de climat et d'énergie parmi les préoccupations.",
+      "mirrorOf": "climat-energie-priorite-basse"
+    },
+    {
+      "id": "climat-energie-priorite-basse",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de climat et d'énergie comptent peu pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions de climat et d'énergie parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "climat-energie-priorite-haute"
     }
   ]
 }

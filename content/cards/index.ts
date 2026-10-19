@@ -8,6 +8,7 @@ import democratie from "./democratie.json";
 import economie from "./economie.json";
 import education from "./education.json";
 import emploi from "./emploi.json";
+import fiscalite from "./fiscalite.json";
 import logement from "./logement.json";
 import mobilite from "./mobilite.json";
 import numerique from "./numerique.json";
@@ -33,5 +34,6 @@ export const themeFiles: unknown[] = [
   numerique,
   solidarites,
   economie,
+  fiscalite,
   defense,
 ];
