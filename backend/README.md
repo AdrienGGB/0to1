@@ -1,1 +1,0 @@
--- Supabase SQL files go here
