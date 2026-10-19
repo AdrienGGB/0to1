@@ -9,8 +9,8 @@ priorités ; il ne classe pas les gens, ne recommande rien, ne pousse aucune opt
 
 **Développeur** : Adrien (solo).
 **État** : collecte uniquement (aucun affichage de résultats, voir `docs/DECISIONS.md`). Écran de
-swipe, 6 cartes d'exemple, anti-bot niveaux 1 et 2, stockage Supabase prêt (projet Supabase pas
-encore créé).
+swipe, 6 cartes d'exemple, anti-bot niveaux 1 et 2, projet Supabase de prod créé
+(`vpbxrneabgskbckjiwlk`, région UE).
 
 Avant toute contribution qui touche aux questions, aux réponses proposées ou à la présentation des
 résultats, lire **[docs/NEUTRALITE.md](docs/NEUTRALITE.md)**. Cette charte prime sur tout le reste.
@@ -91,7 +91,9 @@ supabase/migrations/  # Schéma SQL + RLS
 - Composants : PascalCase (`QuestionCard.tsx`) ; utilitaires : camelCase (`shuffleOptions.ts`)
 - Fonctions : verbe d'abord (`computeDistribution`) ; booléens : `is*`, `has*`, `should*`
 - Interfaces pour les objets, `type` pour les unions
-- Les migrations Supabase vont dans `supabase/migrations/`, puis `npm run generate:types`
+- Les migrations Supabase vont dans `supabase/migrations/`, puis `npm run generate:types`.
+  En prod, elles s'appliquent via le workflow manuel `.github/workflows/migrate.yml` (jamais
+  depuis une session Claude : le réseau cloud bloque Supabase).
 
 ## Workflow Git
 

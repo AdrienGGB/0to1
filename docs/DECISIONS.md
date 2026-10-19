@@ -7,6 +7,16 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ---
 
+## 2026-10-19 — Projet Supabase et application des migrations
+
+- **Contexte** : le projet Supabase de production est créé (`vpbxrneabgskbckjiwlk`, région UE). Les
+  sessions cloud de Claude ne peuvent pas joindre Supabase (réseau bloqué).
+- **Décision** : un seul projet hébergé, la production ; le dev reste local. Les migrations
+  s'appliquent avec `supabase db push` dans le workflow GitHub `Supabase Migrations (prod)`,
+  déclenché uniquement à la main, avec un mode « dry run » activé par défaut.
+- **Conséquences** : rien n'atteint la production sur un push ou un merge ; chaque migration est
+  appliquée volontairement par Adrien.
+
 ## 2026-10-19 — Collecte d'abord, aucun affichage des résultats
 
 - **Contexte** : la valeur première de l'app est l'information collectée ; il faut d'abord vérifier
