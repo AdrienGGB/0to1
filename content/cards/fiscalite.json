@@ -1,0 +1,129 @@
+{
+  "theme": {
+    "id": "fiscalite",
+    "label": "Impôts et cotisations",
+    "category": "economie"
+  },
+  "cards": [
+    {
+      "id": "fiscalite-usage-compris",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je comprends comment est utilisé l'argent des impôts et des cotisations.",
+      "rationale": "Mesure la compréhension de l'usage des impôts et cotisations, pour tous, imposables ou non.",
+      "mirrorOf": "fiscalite-usage-incompris",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "fiscalite-usage-incompris",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je ne comprends pas comment est utilisé l'argent des impôts et des cotisations.",
+      "rationale": "Mesure la compréhension de l'usage des impôts et cotisations, pour tous, imposables ou non. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "fiscalite-usage-compris",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "fiscalite-poids-lourd",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Les impôts, taxes et cotisations que je paie pèsent lourd dans mon budget.",
+      "rationale": "Mesure le poids ressenti des prélèvements dans le budget, toutes taxes confondues.",
+      "mirrorOf": "fiscalite-poids-leger",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "fiscalite-poids-leger",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Les impôts, taxes et cotisations que je paie pèsent peu dans mon budget.",
+      "rationale": "Mesure le poids ressenti des prélèvements dans le budget, toutes taxes confondues. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "fiscalite-poids-lourd",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "fiscalite-services-a-la-hauteur",
+      "version": 1,
+      "kind": "perception",
+      "statement": "Les services publics sont à la hauteur des impôts et cotisations que paient les habitants.",
+      "rationale": "Mesure l'équilibre perçu entre contribution et services reçus.",
+      "mirrorOf": "fiscalite-services-pas-a-la-hauteur",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "changes_applied"
+        }
+      ]
+    },
+    {
+      "id": "fiscalite-services-pas-a-la-hauteur",
+      "version": 1,
+      "kind": "perception",
+      "statement": "Les services publics ne sont pas à la hauteur des impôts et cotisations que paient les habitants.",
+      "rationale": "Mesure l'équilibre perçu entre contribution et services reçus. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "fiscalite-services-a-la-hauteur",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "changes_applied"
+        }
+      ]
+    },
+    {
+      "id": "fiscalite-priorite-haute",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions d'impôts et de cotisations comptent beaucoup pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions d'impôts et de cotisations parmi les préoccupations.",
+      "mirrorOf": "fiscalite-priorite-basse",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "fiscalite-priorite-basse",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions d'impôts et de cotisations comptent peu pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions d'impôts et de cotisations parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "fiscalite-priorite-haute",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    }
+  ]
+}

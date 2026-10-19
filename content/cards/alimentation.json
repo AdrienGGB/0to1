@@ -1,0 +1,69 @@
+{
+  "theme": {
+    "id": "alimentation",
+    "label": "Alimentation",
+    "category": "vie-quotidienne"
+  },
+  "cards": [
+    {
+      "id": "alimentation-choisie",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je peux me nourrir comme je le souhaite, en quantité et en qualité.",
+      "rationale": "Mesure l'accès à une alimentation suffisante et choisie.",
+      "mirrorOf": "alimentation-subie",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "alimentation-subie",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je ne peux pas me nourrir comme je le souhaite, en quantité ou en qualité.",
+      "rationale": "Mesure l'accès à une alimentation suffisante et choisie. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "alimentation-choisie",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "alimentation-priorite-haute",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions d'alimentation comptent beaucoup pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions d'alimentation parmi les préoccupations.",
+      "mirrorOf": "alimentation-priorite-basse",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "alimentation-priorite-basse",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions d'alimentation comptent peu pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions d'alimentation parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "alimentation-priorite-haute",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    }
+  ]
+}

@@ -14,9 +14,10 @@ import {
   type AnswerRecord,
   type SwipeDirection,
 } from "@/lib/answers";
-import { filterUnanswered, markAnswered, readAnsweredKeys } from "@/lib/answeredStore";
+import { markAnswered, readAnsweredKeys } from "@/lib/answeredStore";
+import { buildSessionDeck } from "@/lib/cards/buildSessionDeck";
 import type { DeckCard } from "@/lib/cards/schema";
-import { createSeed, shuffleWithSeed } from "@/lib/shuffle";
+import { createSeed } from "@/lib/shuffle";
 import {
   openSession,
   prepareChallenge,
@@ -57,6 +58,8 @@ export function Survey({ cards }: SurveyProps) {
   const [session, setSession] = useState<DeckSession | null>(null);
   const [index, setIndex] = useState(0);
   const [lastDirection, setLastDirection] = useState<SwipeDirection | null>(null);
+  const [answeredCount, setAnsweredCount] = useState(0);
+  const [hasMoreCards, setHasMoreCards] = useState(false);
   const shownAtRef = useRef(0);
   const challengeRef = useRef<Promise<SolvedChallenge> | null>(null);
 
@@ -67,9 +70,17 @@ export function Survey({ cards }: SurveyProps) {
     challengeRef.current = pending;
   }, []);
 
+  function showDeck(answerSession: AnswerSession, deckCards: DeckCard[], seed: number) {
+    setSession({ ...answerSession, seed, cards: deckCards });
+    setIndex(0);
+    setPhase("deck");
+    shownAtRef.current = performance.now();
+  }
+
   async function startSurvey() {
-    const remaining = filterUnanswered(cards, readAnsweredKeys());
-    if (remaining.length === 0) {
+    const seed = createSeed();
+    const deckCards = buildSessionDeck(cards, readAnsweredKeys(), seed);
+    if (deckCards.length === 0) {
       setPhase("nothing-left");
       return;
     }
@@ -77,17 +88,21 @@ export function Survey({ cards }: SurveyProps) {
     try {
       const solved = await (challengeRef.current ?? prepareChallenge());
       // The server-issued id groups the answers of one sitting, nothing more.
-      const answerSession = await openSession(solved);
-      const seed = createSeed();
-      setSession({ ...answerSession, seed, cards: shuffleWithSeed(remaining, seed) });
-      setIndex(0);
-      setPhase("deck");
-      shownAtRef.current = performance.now();
+      showDeck(await openSession(solved), deckCards, seed);
     } catch {
       // A challenge is single-use: retrying needs a fresh one.
       challengeRef.current = null;
       setPhase("error");
     }
+  }
+
+  /** Chains another short deck within the same session. */
+  function continueSurvey() {
+    if (!session) {
+      return;
+    }
+    const seed = createSeed();
+    showDeck(session, buildSessionDeck(cards, readAnsweredKeys(), seed), seed);
   }
 
   const currentCard = session?.cards[index];
@@ -111,14 +126,16 @@ export function Survey({ cards }: SurveyProps) {
       });
 
       markAnswered(currentCard);
+      setAnsweredCount((count) => count + 1);
       setLastDirection(direction);
       shownAtRef.current = performance.now();
       if (index + 1 >= session.cards.length) {
+        setHasMoreCards(buildSessionDeck(cards, readAnsweredKeys(), 0).length > 0);
         setPhase("done");
       }
       setIndex(index + 1);
     },
-    [session, currentCard, index],
+    [cards, session, currentCard, index],
   );
 
   useEffect(() => {
@@ -200,8 +217,22 @@ export function Survey({ cards }: SurveyProps) {
       <section className="flex flex-col gap-4 text-center" aria-live="polite">
         <h1 className="text-3xl font-semibold">Merci</h1>
         <p className="text-muted-foreground">
-          Vos {session?.cards.length ?? 0} réponses ont été prises en compte.
+          {answeredCount > 1
+            ? `Vos ${answeredCount} réponses ont été prises en compte.`
+            : "Votre réponse a été prise en compte."}
         </p>
+        {hasMoreCards ? (
+          <div className="flex flex-col gap-2">
+            <Button size="lg" onClick={continueSurvey}>
+              Continuer avec d&apos;autres cartes
+            </Button>
+            <p className="text-sm text-muted-foreground">
+              Vous pouvez aussi vous arrêter ici : chaque réponse compte déjà.
+            </p>
+          </div>
+        ) : (
+          <p className="text-muted-foreground">Vous avez répondu à toutes les cartes disponibles.</p>
+        )}
       </section>
     );
   }

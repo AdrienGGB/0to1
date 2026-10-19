@@ -1,23 +1,99 @@
 {
-  "theme": { "id": "logement", "label": "Logement" },
+  "theme": {
+    "id": "logement",
+    "label": "Logement",
+    "category": "vie-quotidienne"
+  },
   "cards": [
     {
       "id": "logement-cout-difficulte",
-      "version": 1,
+      "version": 2,
       "kind": "experience",
-      "statement": "Payer mon logement (loyer ou prêt, charges comprises) me met en difficulté financière.",
+      "statement": "Le coût de mon logement (loyer, prêt, charges) me met en difficulté financière.",
       "rationale": "Mesure le poids du logement dans le budget, tel qu'il est vécu.",
       "mirrorOf": "logement-cout-sans-difficulte",
-      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "logement-cout-sans-difficulte",
+      "version": 2,
+      "kind": "experience",
+      "statement": "Le coût de mon logement (loyer, prêt, charges) ne me met pas en difficulté financière.",
+      "rationale": "Mesure le poids du logement dans le budget, tel qu'il est vécu. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "logement-cout-difficulte",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "logement-adapte",
       "version": 1,
       "kind": "experience",
-      "statement": "Je paie mon logement (loyer ou prêt, charges comprises) sans difficulté financière.",
-      "rationale": "Formulation inverse du poids du logement, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "logement-cout-difficulte",
-      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+      "statement": "Mon logement actuel correspond à mes besoins (taille, état, confort).",
+      "rationale": "Mesure l'adéquation du logement aux besoins.",
+      "mirrorOf": "logement-inadapte",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "logement-inadapte",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Mon logement actuel ne correspond pas à mes besoins (taille, état, confort).",
+      "rationale": "Mesure l'adéquation du logement aux besoins. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "logement-adapte",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "logement-priorite-haute",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de logement comptent beaucoup pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions de logement parmi les préoccupations.",
+      "mirrorOf": "logement-priorite-basse",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "logement-priorite-basse",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de logement comptent peu pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions de logement parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "logement-priorite-haute",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     }
   ]
 }

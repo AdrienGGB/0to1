@@ -7,6 +7,27 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ---
 
+## 2026-10-19 — Premier paquet de cartes
+
+- **Contexte** : passer des 6 cartes d'exemple à un vrai premier questionnaire.
+- **Décision** :
+  - 6 catégories (vie quotidienne, travail et éducation, environnement, vie collective, économie,
+    défense), 17 thèmes, 110 cartes en 55 paires miroirs, dont une paire de priorité par thème.
+  - **Choix des thèmes** : les 6 catégories ont été choisies par Adrien. Les thèmes couvrent
+    d'abord les besoins du quotidien que les enquêtes de conditions de vie suivent habituellement
+    (budget, logement, santé, déplacements, alimentation, travail, école, services publics,
+    sécurité, lien social), plus les sujets collectifs demandés (environnement, démocratie,
+    numérique, économie, impôts, défense).
+  - **Thèmes absents de ce premier paquet**, à trancher par Adrien : culture, territoires,
+    agriculture, immigration, et tout autre sujet proposé. Leur absence est un choix, pas un oubli.
+  - **Cartes pour tous**, sans option « Non concerné » : chaque carte doit admettre une réponse
+    pertinente de n'importe qui (voir `NEUTRALITE.md`).
+  - **Split-ballot** : une seule version de chaque paire par personne, tirée au hasard.
+  - **Paquets de 12** cartes aux thèmes entremêlés, enchaînables avec « Continuer ».
+- **Conséquences** : un répondant voit au plus 55 cartes, en 5 paquets. Les cartes déjà présentes
+  dans la PR #3 et reformulées (santé, coût du logement, déplacements) passent en version 2.
+- **Remplace** la question « Non concerné » de la section « À décider ».
+
 ## 2026-10-19 — Projet Supabase et application des migrations
 
 - **Contexte** : le projet Supabase de production est créé (`vpbxrneabgskbckjiwlk`, région UE). Les
@@ -89,8 +110,5 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ## À décider
 
-- Réponse « Non concerné » pour les cartes de vécu (personne qui n'a pas eu besoin de médecin,
-  personne hébergée gratuitement…) : nouvelle option, ou cartes écrites pour s'appliquer à tous ?
-- Liste initiale des thèmes.
 - Seuil minimal d'effectif pour publier un agrégat.
 - Niveau 3 anti-abus (vérification d'unicité avec jeton anonyme) : quand, et avec quel fournisseur.

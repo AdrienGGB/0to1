@@ -9,7 +9,7 @@ priorités ; il ne classe pas les gens, ne recommande rien, ne pousse aucune opt
 
 **Développeur** : Adrien (solo).
 **État** : collecte uniquement (aucun affichage de résultats, voir `docs/DECISIONS.md`). Écran de
-swipe, 6 cartes d'exemple, anti-bot niveaux 1 et 2, projet Supabase de prod créé
+swipe, 110 cartes (17 thèmes, 6 catégories) en paquets de 12, anti-bot niveaux 1 et 2, projet Supabase de prod créé
 (`vpbxrneabgskbckjiwlk`, région UE).
 
 Avant toute contribution qui touche aux questions, aux réponses proposées ou à la présentation des
@@ -56,11 +56,11 @@ Utiliser Context7 (MCP) pour la doc à jour de Next.js, Supabase, Tailwind, shad
 ## Structure
 
 ```
-content/cards/        # Les cartes : un JSON par thème (données, pas du code)
+content/cards/        # Les cartes : un JSON par thème + index.ts qui les liste tous (données, pas du code)
 src/app/              # Pages (/, /confidentialite), routes /api/{challenge,session,answers}, manifest PWA
 src/components/       # Survey (déroulé), SwipeCard (geste), ui/ (shadcn)
 src/lib/answers.ts    # Directions → réponses, détection du geste, schéma d'une réponse
-src/lib/cards/        # Schéma zod des cartes et chargement du paquet
+src/lib/cards/        # Schéma zod, chargement, constitution d'un paquet (split-ballot, thèmes mêlés)
 src/lib/shuffle.ts    # Mélange déterministe (graine enregistrée avec chaque réponse)
 src/lib/antiAbuse/    # Défi ALTCHA, jetons de session signés, empreinte d'IP, limites de débit
 src/lib/answeredStore.ts # Cartes déjà répondues, mémorisées sur l'appareil (localStorage)

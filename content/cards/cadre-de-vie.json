@@ -1,0 +1,99 @@
+{
+  "theme": {
+    "id": "cadre-de-vie",
+    "label": "Cadre de vie",
+    "category": "environnement"
+  },
+  "cards": [
+    {
+      "id": "cadre-de-vie-sain",
+      "version": 1,
+      "kind": "perception",
+      "statement": "L'environnement où je vis (air, bruit, espaces verts) est bon pour ma santé.",
+      "rationale": "Mesure l'effet perçu de l'environnement local sur la santé.",
+      "mirrorOf": "cadre-de-vie-nocif",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "cadre-de-vie-nocif",
+      "version": 1,
+      "kind": "perception",
+      "statement": "L'environnement où je vis (air, bruit, espaces verts) nuit à ma santé.",
+      "rationale": "Mesure l'effet perçu de l'environnement local sur la santé. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "cadre-de-vie-sain",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "cadre-de-vie-nature-accessible",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Près de chez moi, j'ai accès à des espaces naturels où je peux me ressourcer.",
+      "rationale": "Mesure l'accès à des espaces naturels de proximité.",
+      "mirrorOf": "cadre-de-vie-nature-inaccessible",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "cadre-de-vie-nature-inaccessible",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Près de chez moi, je n'ai pas accès à des espaces naturels où je peux me ressourcer.",
+      "rationale": "Mesure l'accès à des espaces naturels de proximité. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "cadre-de-vie-nature-accessible",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "cadre-de-vie-priorite-haute",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de cadre de vie comptent beaucoup pour moi aujourd'hui.",
+      "rationale": "Mesure la place du cadre de vie parmi les préoccupations.",
+      "mirrorOf": "cadre-de-vie-priorite-basse",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "cadre-de-vie-priorite-basse",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de cadre de vie comptent peu pour moi aujourd'hui.",
+      "rationale": "Mesure la place du cadre de vie parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "cadre-de-vie-priorite-haute",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    }
+  ]
+}

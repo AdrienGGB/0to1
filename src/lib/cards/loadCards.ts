@@ -1,10 +1,6 @@
-import logement from "../../../content/cards/logement.json";
-import mobilite from "../../../content/cards/mobilite.json";
-import sante from "../../../content/cards/sante.json";
+import { themeFiles } from "../../../content/cards";
 
 import { themeFileSchema, type DeckCard, type ThemeFile } from "./schema";
-
-const rawThemeFiles: unknown[] = [sante, logement, mobilite];
 
 export function parseThemeFiles(files: unknown[]): ThemeFile[] {
   return files.map((file) => themeFileSchema.parse(file));
@@ -34,5 +30,5 @@ export function buildDeck(themeFiles: ThemeFile[]): DeckCard[] {
 }
 
 export function loadDeck(): DeckCard[] {
-  return buildDeck(parseThemeFiles(rawThemeFiles));
+  return buildDeck(parseThemeFiles(themeFiles));
 }

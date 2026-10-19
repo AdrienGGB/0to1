@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { buildDeck, loadDeck, parseThemeFiles } from "./loadCards";
 
-const theme = { id: "test", label: "Test" };
+const theme = { id: "test", label: "Test", category: "economie" };
 
 function makeCard(id: string, mirrorOf?: string) {
   return {
@@ -18,6 +18,10 @@ function makeCard(id: string, mirrorOf?: string) {
 describe("loadDeck", () => {
   it("loads every content file without errors", () => {
     expect(loadDeck().length).toBeGreaterThan(0);
+  });
+
+  it("gives every card a mirror (docs/NEUTRALITE.md, format swipe)", () => {
+    expect(loadDeck().filter((card) => !card.mirrorOf).map((card) => card.id)).toEqual([]);
   });
 
   it("only has mirror pairs that point at each other", () => {
@@ -49,5 +53,15 @@ describe("buildDeck", () => {
 describe("parseThemeFiles", () => {
   it("rejects a card id that is not kebab-case", () => {
     expect(() => parseThemeFiles([{ theme, cards: [makeCard("Bad Id")] }])).toThrow();
+  });
+});
+
+describe("content/cards/index.ts", () => {
+  it("lists every theme file of the folder", async () => {
+    const { readdirSync } = await import("node:fs");
+    const files = readdirSync("content/cards").filter((name) => name.endsWith(".json"));
+    expect(loadDeck().map((card) => card.theme.id).filter((id, i, all) => all.indexOf(id) === i).length).toBe(
+      files.length,
+    );
   });
 });

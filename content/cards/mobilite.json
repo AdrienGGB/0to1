@@ -1,23 +1,99 @@
 {
-  "theme": { "id": "mobilite", "label": "Transports et mobilité" },
+  "theme": {
+    "id": "mobilite",
+    "label": "Transports et mobilité",
+    "category": "vie-quotidienne"
+  },
   "cards": [
     {
       "id": "mobilite-deplacements-faciles",
-      "version": 1,
+      "version": 2,
       "kind": "experience",
-      "statement": "Je peux me déplacer sans difficulté pour mes besoins du quotidien.",
+      "statement": "Me déplacer pour mes besoins du quotidien ne me pose pas de difficulté.",
       "rationale": "Mesure la capacité à se déplacer (travail, courses, démarches), quel que soit le moyen de transport.",
       "mirrorOf": "mobilite-deplacements-difficiles",
-      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "mobilite-deplacements-difficiles",
+      "version": 2,
+      "kind": "experience",
+      "statement": "Me déplacer pour mes besoins du quotidien me pose des difficultés.",
+      "rationale": "Mesure la capacité à se déplacer (travail, courses, démarches), quel que soit le moyen de transport. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "mobilite-deplacements-faciles",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "mobilite-sans-voiture-possible",
       "version": 1,
       "kind": "experience",
-      "statement": "Me déplacer pour mes besoins du quotidien est difficile pour moi.",
-      "rationale": "Formulation inverse de la capacité à se déplacer, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "mobilite-deplacements-faciles",
-      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+      "statement": "Sans voiture, je pourrais faire l'essentiel de mes déplacements du quotidien.",
+      "rationale": "Mesure la dépendance à la voiture pour les déplacements du quotidien.",
+      "mirrorOf": "mobilite-sans-voiture-impossible",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "mobilite-sans-voiture-impossible",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Sans voiture, je ne pourrais pas faire l'essentiel de mes déplacements du quotidien.",
+      "rationale": "Mesure la dépendance à la voiture pour les déplacements du quotidien. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "mobilite-sans-voiture-possible",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "mobilite-priorite-haute",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de transports et de mobilité comptent beaucoup pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions de transports et de mobilité parmi les préoccupations.",
+      "mirrorOf": "mobilite-priorite-basse",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
+    },
+    {
+      "id": "mobilite-priorite-basse",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de transports et de mobilité comptent peu pour moi aujourd'hui.",
+      "rationale": "Mesure la place des questions de transports et de mobilité parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "mobilite-priorite-haute",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     }
   ]
 }
