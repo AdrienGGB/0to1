@@ -33,7 +33,16 @@ export interface Database {
       };
     };
     Views: Record<never, never>;
-    Functions: Record<never, never>;
+    Functions: {
+      hit_rate_limit: {
+        Args: { p_key: string; p_scope: string; p_window_seconds: number; p_limit: number };
+        Returns: boolean;
+      };
+      consume_challenge: {
+        Args: { p_nonce: string; p_expires_at: string };
+        Returns: boolean;
+      };
+    };
     Enums: Record<never, never>;
     CompositeTypes: Record<never, never>;
   };

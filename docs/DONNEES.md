@@ -23,6 +23,21 @@ qui est indispensable, et de ne pas pouvoir relier une réponse à une personne.
 - **Seuil de diffusion** : ne pas publier d'agrégat sur un sous-groupe trop petit (risque de
   ré-identification) ; seuil à fixer dans `DECISIONS.md`.
 
+## Ce qui est réellement traité aujourd'hui
+
+| Donnée | Où | Durée | Lien avec les réponses |
+|--------|----|-------|------------------------|
+| Réponse à une carte (carte, version, réponse, position, graine du paquet, temps de réponse, marqueur « rapide ») | Table `answers` | À définir | — |
+| Identifiant de session aléatoire, créé par le serveur | Table `answers` | Comme les réponses | Regroupe les réponses d'une même visite ; ne dit rien de la personne |
+| Jeton de session signé | Mémoire du navigateur | 2 h | Prouve que la session a passé l'anti-bot ; non stocké côté serveur |
+| Empreinte d'IP : HMAC de l'IP, avec un sel qui change chaque jour (UTC) | Table `rate_limits` | 24 h maximum, purge automatique | **Aucun** : jamais stockée avec les réponses |
+| Défis anti-bot déjà utilisés (nonce aléatoire) | Table `used_challenges` | 10 min | Aucun |
+| Liste des cartes déjà répondues | `localStorage` de l'appareil | Jusqu'à effacement par la personne | Jamais envoyée au serveur |
+
+L'adresse IP elle-même n'est écrite nulle part. L'empreinte sert uniquement à limiter le nombre de
+sessions et de réponses par connexion ; comme le sel change chaque jour, deux empreintes de jours
+différents ne peuvent pas être rapprochées.
+
 ## À trancher avant la mise en ligne
 
 - Base légale exacte et rédaction du recueil de consentement.

@@ -17,10 +17,19 @@ export default function PrivacyPage() {
       <ul className="list-disc space-y-2 pl-5">
         <li>Aucun compte, nom, e-mail ni adresse IP n&apos;est enregistré avec vos réponses.</li>
         <li>
-          Un identifiant aléatoire, gardé seulement le temps de votre visite, regroupe vos réponses
-          d&apos;une même session. Il ne permet pas de vous identifier.
+          Un identifiant aléatoire regroupe vos réponses d&apos;une même visite. Il ne permet pas de
+          vous identifier.
         </li>
-        <li>Les résultats ne sont publiés que sous forme agrégée.</li>
+        <li>
+          Pour bloquer les robots et les envois en masse, votre navigateur fait un petit calcul au
+          démarrage, et votre adresse IP est transformée en une empreinte illisible, renouvelée
+          chaque jour et effacée sous 24 heures. Elle n&apos;est jamais reliée à vos réponses.
+        </li>
+        <li>
+          Votre appareil retient les cartes auxquelles vous avez déjà répondu, pour ne pas vous les
+          reproposer. Cette liste reste sur votre appareil.
+        </li>
+        <li>Si des résultats sont un jour publiés, ce sera uniquement sous forme agrégée.</li>
         <li>Aucun outil de suivi publicitaire ni de mesure d&apos;audience tiers n&apos;est utilisé.</li>
       </ul>
       <p className="text-sm text-muted-foreground">

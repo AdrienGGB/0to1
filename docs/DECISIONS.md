@@ -7,6 +7,34 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ---
 
+## 2026-10-19 — Collecte d'abord, aucun affichage des résultats
+
+- **Contexte** : la valeur première de l'app est l'information collectée ; il faut d'abord vérifier
+  que les gens répondent.
+- **Décision** : on ne construit que la collecte. Aucun résultat n'est affiché, ni en public ni en
+  privé, tant que l'attraction n'est pas validée. Le choix public / privé / export viendra ensuite.
+- **Conséquences** : pas d'écran de résultats ni de vue agrégée pour l'instant.
+
+## 2026-10-19 — Anti-bot et réponses multiples (niveaux 1 et 2)
+
+- **Contexte** : garantir « une personne = une réponse » impose de vérifier l'identité au moins une
+  fois ; trop de friction pour mesurer l'attraction.
+- **Décision** :
+  - **Niveau 1, appareil** : le navigateur retient les cartes déjà répondues (`localStorage`) et ne
+    les remontre pas.
+  - **Niveau 2, anti-bot** : preuve de travail ALTCHA (open source, hébergée chez nous, sans tiers ni
+    cookie), résolue pendant la lecture de l'accueil. Un défi résolu ouvre une session signée
+    (2 h) ; chaque défi ne sert qu'une fois. Une carte ne compte qu'une fois par session (contrainte
+    unique). Limites par empreinte d'IP (sel quotidien) : 60 sessions et 2 000 réponses par heure,
+    volontairement larges car beaucoup de gens partagent une IP (opérateurs mobiles, écoles).
+  - En cas de panne de la base, les contrôles laissent passer plutôt que de bloquer tout le monde.
+- **Conséquences** : bloque les scripts et les doublons courants, pas une personne déterminée qui
+  change d'appareil. Le **niveau 3** (vérification unique par FranceConnect ou SMS délivrant un
+  jeton anonyme, en option) est reporté à la validation de l'attraction ; les réponses vérifiées
+  pourront alors être comparées aux autres.
+- **Remplace en partie** « Stockage des réponses » : les routes lisent désormais l'IP pour la hacher
+  (jamais stockée avec les réponses), et l'identifiant de session est créé par le serveur.
+
 ## 2026-10-19 — Cartes en JSON versionné
 
 - **Contexte** : les questions doivent être des données traçables, séparées du code.
@@ -55,4 +83,4 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
   personne hébergée gratuitement…) : nouvelle option, ou cartes écrites pour s'appliquer à tous ?
 - Liste initiale des thèmes.
 - Seuil minimal d'effectif pour publier un agrégat.
-- Méthode anti-abus compatible avec l'anonymat.
+- Niveau 3 anti-abus (vérification d'unicité avec jeton anonyme) : quand, et avec quel fournisseur.

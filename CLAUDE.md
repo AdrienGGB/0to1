@@ -8,8 +8,9 @@
 priorités ; il ne classe pas les gens, ne recommande rien, ne pousse aucune option.
 
 **Développeur** : Adrien (solo).
-**État** : première version de l'écran de swipe, 6 cartes d'exemple, stockage Supabase prêt (projet
-Supabase pas encore créé).
+**État** : collecte uniquement (aucun affichage de résultats, voir `docs/DECISIONS.md`). Écran de
+swipe, 6 cartes d'exemple, anti-bot niveaux 1 et 2, stockage Supabase prêt (projet Supabase pas
+encore créé).
 
 Avant toute contribution qui touche aux questions, aux réponses proposées ou à la présentation des
 résultats, lire **[docs/NEUTRALITE.md](docs/NEUTRALITE.md)**. Cette charte prime sur tout le reste.
@@ -53,11 +54,14 @@ Utiliser Context7 (MCP) pour la doc à jour de Next.js, Supabase, Tailwind, shad
 
 ```
 content/cards/        # Les cartes : un JSON par thème (données, pas du code)
-src/app/              # Pages (/, /confidentialite), route POST /api/answers, manifest PWA
+src/app/              # Pages (/, /confidentialite), routes /api/{challenge,session,answers}, manifest PWA
 src/components/       # Survey (déroulé), SwipeCard (geste), ui/ (shadcn)
 src/lib/answers.ts    # Directions → réponses, détection du geste, schéma d'une réponse
 src/lib/cards/        # Schéma zod des cartes et chargement du paquet
 src/lib/shuffle.ts    # Mélange déterministe (graine enregistrée avec chaque réponse)
+src/lib/antiAbuse/    # Défi ALTCHA, jetons de session signés, empreinte d'IP, limites de débit
+src/lib/answeredStore.ts # Cartes déjà répondues, mémorisées sur l'appareil (localStorage)
+src/lib/startSession.ts  # Côté client : résout le défi et ouvre la session
 src/lib/supabase/     # Client Supabase serveur (anonyme, insertion seule)
 supabase/migrations/  # Schéma SQL + RLS
 ```
@@ -117,7 +121,12 @@ npm run generate:types # types Supabase (remplace src/types/supabase.ts, écrit 
 ```
 
 Sans `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` (voir `.env.example`), l'app
-fonctionne et la route `/api/answers` répond 202 sans rien stocker.
+fonctionne et la route `/api/answers` répond 202 sans rien stocker ; limites de débit et défis
+utilisés sont alors gardés en mémoire. `ANTI_ABUSE_SECRET` est obligatoire en production
+(`next start` compris) ; en dev, un secret de test est utilisé.
+
+Tester les migrations sans Docker : PGlite (`@electric-sql/pglite`) dans le scratchpad, en créant
+les rôles `anon` et `authenticated` avant d'appliquer `supabase/migrations/`.
 
 ## Sécurité
 

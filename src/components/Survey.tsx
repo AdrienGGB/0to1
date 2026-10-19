@@ -14,13 +14,19 @@ import {
   type AnswerRecord,
   type SwipeDirection,
 } from "@/lib/answers";
+import { filterUnanswered, markAnswered, readAnsweredKeys } from "@/lib/answeredStore";
 import type { DeckCard } from "@/lib/cards/schema";
 import { createSeed, shuffleWithSeed } from "@/lib/shuffle";
+import {
+  openSession,
+  prepareChallenge,
+  type AnswerSession,
+  type SolvedChallenge,
+} from "@/lib/startSession";
 
-type Phase = "intro" | "deck" | "done";
+type Phase = "intro" | "starting" | "error" | "deck" | "done" | "nothing-left";
 
-interface DeckSession {
-  sessionId: string;
+interface DeckSession extends AnswerSession {
   seed: number;
   cards: DeckCard[];
 }
@@ -52,14 +58,36 @@ export function Survey({ cards }: SurveyProps) {
   const [index, setIndex] = useState(0);
   const [lastDirection, setLastDirection] = useState<SwipeDirection | null>(null);
   const shownAtRef = useRef(0);
+  const challengeRef = useRef<Promise<SolvedChallenge> | null>(null);
 
-  function startSurvey() {
-    const seed = createSeed();
-    // A random id kept in memory only: it groups the answers of one sitting, nothing more.
-    setSession({ sessionId: crypto.randomUUID(), seed, cards: shuffleWithSeed(cards, seed) });
-    setIndex(0);
-    setPhase("deck");
-    shownAtRef.current = performance.now();
+  // Solve the anti-bot challenge in the background while the intro is being read.
+  useEffect(() => {
+    const pending = prepareChallenge();
+    pending.catch(() => undefined);
+    challengeRef.current = pending;
+  }, []);
+
+  async function startSurvey() {
+    const remaining = filterUnanswered(cards, readAnsweredKeys());
+    if (remaining.length === 0) {
+      setPhase("nothing-left");
+      return;
+    }
+    setPhase("starting");
+    try {
+      const solved = await (challengeRef.current ?? prepareChallenge());
+      // The server-issued id groups the answers of one sitting, nothing more.
+      const answerSession = await openSession(solved);
+      const seed = createSeed();
+      setSession({ ...answerSession, seed, cards: shuffleWithSeed(remaining, seed) });
+      setIndex(0);
+      setPhase("deck");
+      shownAtRef.current = performance.now();
+    } catch {
+      // A challenge is single-use: retrying needs a fresh one.
+      challengeRef.current = null;
+      setPhase("error");
+    }
   }
 
   const currentCard = session?.cards[index];
@@ -72,6 +100,7 @@ export function Survey({ cards }: SurveyProps) {
       const responseMs = Math.round(performance.now() - shownAtRef.current);
       sendAnswer({
         sessionId: session.sessionId,
+        sessionToken: session.sessionToken,
         cardId: currentCard.id,
         cardVersion: currentCard.version,
         answer: getAnswerForDirection(direction),
@@ -81,6 +110,7 @@ export function Survey({ cards }: SurveyProps) {
         isFast: isFastAnswer(responseMs),
       });
 
+      markAnswered(currentCard);
       setLastDirection(direction);
       shownAtRef.current = performance.now();
       if (index + 1 >= session.cards.length) {
@@ -106,7 +136,7 @@ export function Survey({ cards }: SurveyProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [phase, handleSwipe]);
 
-  if (phase === "intro") {
+  if (phase === "intro" || phase === "starting" || phase === "error") {
     return (
       <section className="flex flex-col gap-6">
         <h1 className="text-3xl font-semibold text-balance">
@@ -119,8 +149,8 @@ export function Survey({ cards }: SurveyProps) {
             mauvaise réponse.
           </p>
           <p>
-            Vos réponses sont anonymes : aucun compte, aucun nom, aucune adresse IP enregistrée.
-            Vous pouvez arrêter à tout moment.
+            Vos réponses sont anonymes : aucun compte, aucun nom, et votre adresse IP n&apos;est
+            jamais enregistrée avec vos réponses. Vous pouvez arrêter à tout moment.
           </p>
         </div>
         <ul className="grid grid-cols-2 gap-2 text-sm">
@@ -130,8 +160,17 @@ export function Survey({ cards }: SurveyProps) {
           <li className="flex items-center gap-2"><ArrowDown aria-hidden /> {answerLabels.prefer_not}</li>
         </ul>
         <div className="flex flex-col gap-2">
-          <Button size="lg" onClick={startSurvey}>
-            J&apos;accepte et je commence
+          {phase === "error" && (
+            <p role="alert" className="text-center text-sm">
+              Le questionnaire n&apos;a pas pu démarrer. Vérifiez votre connexion et réessayez.
+            </p>
+          )}
+          <Button size="lg" onClick={startSurvey} disabled={phase === "starting"}>
+            {phase === "starting"
+              ? "Préparation…"
+              : phase === "error"
+                ? "Réessayer"
+                : "J\u2019accepte et je commence"}
           </Button>
           <Link
             href="/confidentialite"
@@ -140,6 +179,18 @@ export function Survey({ cards }: SurveyProps) {
             Comment mes réponses sont-elles utilisées ?
           </Link>
         </div>
+      </section>
+    );
+  }
+
+  if (phase === "nothing-left") {
+    return (
+      <section className="flex flex-col gap-4 text-center" aria-live="polite">
+        <h1 className="text-3xl font-semibold">Merci</h1>
+        <p className="text-muted-foreground">
+          Vous avez déjà répondu à toutes les cartes disponibles sur cet appareil. De nouvelles
+          cartes seront ajoutées prochainement.
+        </p>
       </section>
     );
   }

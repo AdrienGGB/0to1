@@ -56,6 +56,7 @@ describe("isFastAnswer", () => {
 describe("answerRecordSchema", () => {
   const valid = {
     sessionId: "3f2b8c1e-6d4a-4c8e-9b1a-2e7f5d9c0a11",
+    sessionToken: "1792430000000.signature",
     cardId: "sante-consultation-delai-ok",
     cardVersion: 1,
     answer: "dont_know",

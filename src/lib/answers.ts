@@ -72,6 +72,8 @@ export function getSwipeDirection(
 
 export const answerRecordSchema = z.object({
   sessionId: z.uuid(),
+  /** Issued by POST /api/session once the anti-bot challenge is solved. */
+  sessionToken: z.string().min(1),
   cardId: z.string().min(1),
   cardVersion: z.number().int().positive(),
   answer: answerSchema,
