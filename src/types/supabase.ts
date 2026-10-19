@@ -14,6 +14,7 @@ export interface Database {
           deck_seed: number;
           response_ms: number;
           is_fast: boolean;
+          deck_mode: "mixed" | "theme";
           created_at: string;
         };
         Insert: {
@@ -26,6 +27,7 @@ export interface Database {
           deck_seed: number;
           response_ms: number;
           is_fast: boolean;
+          deck_mode?: "mixed" | "theme";
           created_at?: string;
         };
         Update: never;
