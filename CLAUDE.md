@@ -35,6 +35,7 @@ résultats, lire **[docs/NEUTRALITE.md](docs/NEUTRALITE.md)**. Cette charte prim
 | [docs/NEUTRALITE.md](docs/NEUTRALITE.md) | Charte de neutralité : règles de rédaction, revue, résultats |
 | [docs/DONNEES.md](docs/DONNEES.md) | Données personnelles et RGPD (les réponses sont des données sensibles) |
 | [docs/DECISIONS.md](docs/DECISIONS.md) | Journal des décisions (une entrée par choix structurant) |
+| [docs/HANDOVER.md](docs/HANDOVER.md) | Passation en cours : état, actions à faire en premier, décisions en attente |
 
 Toute décision structurante (stack, modèle de données, méthode de diffusion…) → une entrée dans
 `docs/DECISIONS.md`.
@@ -97,14 +98,16 @@ supabase/migrations/  # Schéma SQL + RLS
 - Fonctions : verbe d'abord (`computeDistribution`) ; booléens : `is*`, `has*`, `should*`
 - Interfaces pour les objets, `type` pour les unions
 - Les migrations Supabase vont dans `supabase/migrations/`, puis `npm run generate:types`.
-  En prod, elles s'appliquent via le workflow manuel `.github/workflows/migrate.yml` (jamais
-  depuis une session Claude : le réseau cloud bloque Supabase).
+  En prod, elles s'appliquent via le workflow manuel `.github/workflows/migrate.yml`, pour garder
+  une trace de chaque migration (en local : `gh workflow run migrate.yml -f dry_run=false`). Les
+  sessions cloud ne peuvent pas joindre Supabase ni Vercel (réseau bloqué).
 
 ## Workflow Git
 
 - `main` est protégé : **jamais de push direct sur `main`**.
+- Adrien a autorisé Claude à **merger lui-même** les PR dont la CI est verte (2026-10-19).
 - Une branche par chantier (`feat/…`, `fix/…`, `chore/…`, `content/…` pour les questions), puis une
-  PR vers `main`. **Adrien merge lui-même** ; ne jamais merger sans son feu vert explicite.
+  PR vers `main`.
 - Commits au format conventionnel (`feat:`, `fix:`, `chore:`, `docs:`, `content:`…).
 - Avant de pousser : lint, typecheck, tests (et e2e si l'interface change) doivent passer.
 
