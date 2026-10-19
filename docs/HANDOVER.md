@@ -1,8 +1,8 @@
 # Passation — 2026-10-19
 
 Note de passation entre la session cloud qui a monté le projet et la prochaine session (locale, sur
-le Mac d'Adrien). À lire après `CLAUDE.md`. À supprimer ou mettre à jour une fois les points
-« À faire en premier » réglés.
+le Mac d'Adrien). À lire après `CLAUDE.md`. La mise en service est réglée ; restent les décisions
+en attente d'Adrien.
 
 ## Où on en est
 
@@ -22,30 +22,28 @@ Tout ce qui suit est mergé sur `main` (PR #3 à #6) et déployé sur Vercel.
   `supabase/migrations/`, workflow manuel `Supabase Migrations (prod)`.
 - **Qualité** : CI GitHub sur chaque PR (lint, typecheck, 44 tests unitaires, build, 10 tests e2e
   Playwright).
-- **Site** : https://0to1-hi4o.vercel.app (projet Vercel `0to1-hi4o`). Variables Vercel posées par
+- **Site** : https://0to1-hi4o.vercel.app (projet Vercel `0to1-hi4o`, le seul). Variables Vercel posées par
   Adrien : `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `ANTI_ABUSE_SECRET`.
 - **Secrets GitHub** posés : `SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_REF_PROD`,
   `SUPABASE_DB_PASSWORD_PROD`.
 
-## À faire en premier
+## Mise en service (réglée le 2026-10-19)
 
-1. **Appliquer les migrations en prod.** Le workflow n'a tourné qu'en dry run : il a listé les deux
-   migrations (connexion et secrets OK), mais **rien n'est appliqué**.
-   ```bash
-   gh workflow run migrate.yml -f dry_run=false
-   gh run watch   # puis vérifier le log : « Applying migration … » pour les deux fichiers
-   ```
-2. **Vérifier les tables** (MCP Supabase de `.mcp.json`, en lecture seule) : `answers`,
-   `rate_limits`, `used_challenges` existent, RLS activé sur les trois, fonctions
-   `hit_rate_limit` et `consume_challenge` présentes.
-3. **Tester la prod de bout en bout** : ouvrir le site, répondre à un paquet de 12 cartes, puis
-   vérifier dans `answers` qu'il y a 12 lignes avec le même `session_id`. Vérifier aussi que
-   `GET /api/challenge` répond 200 et qu'un `POST /api/answers` sans jeton répond 401.
-   - 202 sur `/api/answers` : les variables Supabase ne sont pas lues par Vercel (redéployer).
-   - 500 : la table n'existe pas ou la clé publique est fausse.
-4. **Nettoyer Vercel** (à confirmer avec Adrien) : les projets `0to1` (doublon) et
-   `0to1-learningassistant` (ancien projet, déploiement en échec) sont reliés au repo et
-   commentent chaque PR. Seul `0to1-hi4o` sert.
+1. **Migrations appliquées en prod** via `gh workflow run migrate.yml -f dry_run=false` : les deux
+   fichiers sont dans `supabase_migrations.schema_migrations`.
+2. **Tables vérifiées** : `answers`, `rate_limits`, `used_challenges` existent avec RLS ;
+   `hit_rate_limit` et `consume_challenge` présentes et exécutables par `anon`. Supabase a aussi
+   créé une fonction `rls_auto_enable` qui ne vient pas de nos migrations (laissée en place).
+3. **Prod testée de bout en bout** : un paquet de 12 cartes donne 12 réponses 201 et 12 lignes
+   avec le même `session_id`. `GET /api/challenge` répond 200 ; un `POST /api/answers` bien formé
+   avec un faux jeton répond 401 (un corps invalide répond 400 avant le contrôle du jeton). Les
+   12 lignes de test ont été supprimées : `answers` est vide.
+4. **Vercel nettoyé** : les projets `0to1` et `0to1-learningassistant` sont supprimés. Seul
+   `0to1-hi4o` reste.
+
+Pour interroger la base sans le MCP Supabase : `POST
+https://api.supabase.com/v1/projects/vpbxrneabgskbckjiwlk/database/query` avec le jeton du CLI
+Supabase (`supabase login`).
 
 ## Décisions en attente d'Adrien
 
