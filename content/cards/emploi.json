@@ -9,9 +9,16 @@
       "id": "emploi-local-accessible",
       "version": 1,
       "kind": "perception",
-      "statement": "Là où je vis, une personne qui cherche un emploi peut en trouver un qui corresponde à ses compétences.",
+      "statement": "Là où je vis, une personne qui cherche un emploi peut facilement en trouver un qui corresponde à ses compétences.",
       "rationale": "Mesure la perception du marché de l'emploi local, accessible à tous, en emploi ou non.",
-      "mirrorOf": "emploi-local-difficile"
+      "mirrorOf": "emploi-local-difficile",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "changes_applied"
+        }
+      ]
     },
     {
       "id": "emploi-local-difficile",
@@ -19,7 +26,14 @@
       "kind": "perception",
       "statement": "Là où je vis, une personne qui cherche un emploi aurait du mal à en trouver un qui corresponde à ses compétences.",
       "rationale": "Mesure la perception du marché de l'emploi local, accessible à tous, en emploi ou non. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "emploi-local-accessible"
+      "mirrorOf": "emploi-local-accessible",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "emploi-activite-sens-oui",
@@ -27,7 +41,14 @@
       "kind": "experience",
       "statement": "Mon activité principale (travail, études ou autre) a du sens pour moi.",
       "rationale": "Mesure le sens trouvé dans son activité principale.",
-      "mirrorOf": "emploi-activite-sens-non"
+      "mirrorOf": "emploi-activite-sens-non",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "emploi-activite-sens-non",
@@ -35,7 +56,14 @@
       "kind": "experience",
       "statement": "Mon activité principale (travail, études ou autre) n'a pas de sens pour moi.",
       "rationale": "Mesure le sens trouvé dans son activité principale. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "emploi-activite-sens-oui"
+      "mirrorOf": "emploi-activite-sens-oui",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "emploi-activite-nuit-sante",
@@ -43,7 +71,14 @@
       "kind": "experience",
       "statement": "Au cours des 12 derniers mois, mon activité principale (travail, études ou autre) a nui à ma santé physique ou mentale.",
       "rationale": "Mesure l'effet de l'activité principale sur la santé.",
-      "mirrorOf": "emploi-activite-sans-effet-sante"
+      "mirrorOf": "emploi-activite-sans-effet-sante",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "emploi-activite-sans-effet-sante",
@@ -51,7 +86,14 @@
       "kind": "experience",
       "statement": "Au cours des 12 derniers mois, mon activité principale (travail, études ou autre) n'a pas nui à ma santé physique ou mentale.",
       "rationale": "Mesure l'effet de l'activité principale sur la santé. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "emploi-activite-nuit-sante"
+      "mirrorOf": "emploi-activite-nuit-sante",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "emploi-priorite-haute",
@@ -59,7 +101,14 @@
       "kind": "priority",
       "statement": "Les questions de travail et d'emploi comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place du travail et de l'emploi parmi les préoccupations.",
-      "mirrorOf": "emploi-priorite-basse"
+      "mirrorOf": "emploi-priorite-basse",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "emploi-priorite-basse",
@@ -67,7 +116,14 @@
       "kind": "priority",
       "statement": "Les questions de travail et d'emploi comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place du travail et de l'emploi parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "emploi-priorite-haute"
+      "mirrorOf": "emploi-priorite-haute",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     }
   ]
 }

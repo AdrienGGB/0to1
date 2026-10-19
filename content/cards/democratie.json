@@ -11,7 +11,14 @@
       "kind": "perception",
       "statement": "J'ai le sentiment que mon avis compte dans les décisions qui concernent ma commune.",
       "rationale": "Mesure le sentiment d'être entendu dans les décisions locales.",
-      "mirrorOf": "democratie-avis-ne-compte-pas"
+      "mirrorOf": "democratie-avis-ne-compte-pas",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "democratie-avis-ne-compte-pas",
@@ -19,7 +26,14 @@
       "kind": "perception",
       "statement": "J'ai le sentiment que mon avis ne compte pas dans les décisions qui concernent ma commune.",
       "rationale": "Mesure le sentiment d'être entendu dans les décisions locales. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "democratie-avis-compte"
+      "mirrorOf": "democratie-avis-compte",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "democratie-consultation-plus",
@@ -27,7 +41,14 @@
       "kind": "expectation",
       "statement": "Je souhaite qu'on me demande plus souvent mon avis sur les décisions publiques.",
       "rationale": "Mesure l'attente de consultation sur les décisions publiques.",
-      "mirrorOf": "democratie-consultation-pas-plus"
+      "mirrorOf": "democratie-consultation-pas-plus",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "democratie-consultation-pas-plus",
@@ -35,7 +56,14 @@
       "kind": "expectation",
       "statement": "Je ne souhaite pas qu'on me demande plus souvent mon avis sur les décisions publiques.",
       "rationale": "Mesure l'attente de consultation sur les décisions publiques. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "democratie-consultation-plus"
+      "mirrorOf": "democratie-consultation-plus",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "democratie-priorite-haute",
@@ -43,7 +71,14 @@
       "kind": "priority",
       "statement": "Les questions de démocratie et de participation comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de démocratie et de participation parmi les préoccupations.",
-      "mirrorOf": "democratie-priorite-basse"
+      "mirrorOf": "democratie-priorite-basse",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "democratie-priorite-basse",
@@ -51,7 +86,14 @@
       "kind": "priority",
       "statement": "Les questions de démocratie et de participation comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de démocratie et de participation parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "democratie-priorite-haute"
+      "mirrorOf": "democratie-priorite-haute",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     }
   ]
 }

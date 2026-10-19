@@ -6,20 +6,34 @@
   },
   "cards": [
     {
-      "id": "defense-risque-attaque-securite-oui",
+      "id": "defense-menaces-securite-oui",
       "version": 1,
       "kind": "perception",
-      "statement": "Je me sens en sécurité face aux risques d'attaque venant d'autres pays (guerre, terrorisme, cyberattaques).",
-      "rationale": "Mesure le sentiment de sécurité face aux risques d'attaque venant d'autres pays.",
-      "mirrorOf": "defense-risque-attaque-securite-non"
+      "statement": "Je me sens en sécurité face aux menaces qui visent le pays (conflit armé, attentat, cyberattaque).",
+      "rationale": "Mesure le sentiment de sécurité face aux menaces qui visent le pays.",
+      "mirrorOf": "defense-menaces-securite-non",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "changes_applied"
+        }
+      ]
     },
     {
-      "id": "defense-risque-attaque-securite-non",
+      "id": "defense-menaces-securite-non",
       "version": 1,
       "kind": "perception",
-      "statement": "Je ne me sens pas en sécurité face aux risques d'attaque venant d'autres pays (guerre, terrorisme, cyberattaques).",
-      "rationale": "Mesure le sentiment de sécurité face aux risques d'attaque venant d'autres pays. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "defense-risque-attaque-securite-oui"
+      "statement": "Je ne me sens pas en sécurité face aux menaces qui visent le pays (conflit armé, attentat, cyberattaque).",
+      "rationale": "Mesure le sentiment de sécurité face aux menaces qui visent le pays. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "defense-menaces-securite-oui",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "changes_applied"
+        }
+      ]
     },
     {
       "id": "defense-crise-preparation-oui",
@@ -27,7 +41,14 @@
       "kind": "experience",
       "statement": "Je saurais comment réagir en cas de crise majeure (catastrophe, conflit, panne générale).",
       "rationale": "Mesure la préparation personnelle à une crise majeure.",
-      "mirrorOf": "defense-crise-preparation-non"
+      "mirrorOf": "defense-crise-preparation-non",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "defense-crise-preparation-non",
@@ -35,7 +56,14 @@
       "kind": "experience",
       "statement": "Je ne saurais pas comment réagir en cas de crise majeure (catastrophe, conflit, panne générale).",
       "rationale": "Mesure la préparation personnelle à une crise majeure. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "defense-crise-preparation-oui"
+      "mirrorOf": "defense-crise-preparation-oui",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "defense-priorite-haute",
@@ -43,7 +71,14 @@
       "kind": "priority",
       "statement": "Les questions de défense comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de défense parmi les préoccupations.",
-      "mirrorOf": "defense-priorite-basse"
+      "mirrorOf": "defense-priorite-basse",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "defense-priorite-basse",
@@ -51,7 +86,14 @@
       "kind": "priority",
       "statement": "Les questions de défense comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de défense parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "defense-priorite-haute"
+      "mirrorOf": "defense-priorite-haute",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     }
   ]
 }

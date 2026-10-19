@@ -11,7 +11,14 @@
       "kind": "experience",
       "statement": "En cas de coup dur, je peux compter sur quelqu'un de mon entourage.",
       "rationale": "Mesure le soutien de l'entourage en cas de difficulté.",
-      "mirrorOf": "solidarites-entourage-absent"
+      "mirrorOf": "solidarites-entourage-absent",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "solidarites-entourage-absent",
@@ -19,7 +26,14 @@
       "kind": "experience",
       "statement": "En cas de coup dur, je n'ai personne dans mon entourage sur qui compter.",
       "rationale": "Mesure le soutien de l'entourage en cas de difficulté. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "solidarites-entourage-present"
+      "mirrorOf": "solidarites-entourage-present",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "solidarites-solitude-difficulte",
@@ -27,7 +41,14 @@
       "kind": "experience",
       "statement": "La solitude a été une difficulté pour moi au cours des 12 derniers mois.",
       "rationale": "Mesure la solitude vécue.",
-      "mirrorOf": "solidarites-solitude-pas-difficulte"
+      "mirrorOf": "solidarites-solitude-pas-difficulte",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "solidarites-solitude-pas-difficulte",
@@ -35,7 +56,14 @@
       "kind": "experience",
       "statement": "La solitude n'a pas été une difficulté pour moi au cours des 12 derniers mois.",
       "rationale": "Mesure la solitude vécue. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "solidarites-solitude-difficulte"
+      "mirrorOf": "solidarites-solitude-difficulte",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "solidarites-priorite-haute",
@@ -43,7 +71,14 @@
       "kind": "priority",
       "statement": "Les questions de solidarité comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de solidarité parmi les préoccupations.",
-      "mirrorOf": "solidarites-priorite-basse"
+      "mirrorOf": "solidarites-priorite-basse",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     },
     {
       "id": "solidarites-priorite-basse",
@@ -51,7 +86,14 @@
       "kind": "priority",
       "statement": "Les questions de solidarité comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de solidarité parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "solidarites-priorite-haute"
+      "mirrorOf": "solidarites-priorite-haute",
+      "reviews": [
+        {
+          "date": "2026-10-19",
+          "by": "neutrality-reviewer",
+          "outcome": "approved"
+        }
+      ]
     }
   ]
 }

@@ -9,7 +9,7 @@ priorités ; il ne classe pas les gens, ne recommande rien, ne pousse aucune opt
 
 **Développeur** : Adrien (solo).
 **État** : collecte uniquement (aucun affichage de résultats, voir `docs/DECISIONS.md`). Écran de
-swipe, 108 cartes (17 thèmes, 6 catégories) en paquets de 12, anti-bot niveaux 1 et 2, projet Supabase de prod créé
+swipe, 110 cartes (17 thèmes, 6 catégories) en paquets de 12, anti-bot niveaux 1 et 2, projet Supabase de prod créé
 (`vpbxrneabgskbckjiwlk`, région UE).
 
 Avant toute contribution qui touche aux questions, aux réponses proposées ou à la présentation des
