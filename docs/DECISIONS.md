@@ -7,6 +7,27 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ---
 
+## 2026-10-19 — Choix des thèmes et progression
+
+- **Contexte** : Adrien veut que chacun voie les thèmes, choisisse le sien et suive son avancement.
+  Choisir son thème introduit un biais d'auto-sélection : ceux qui répondent sur « Logement » sont
+  surtout ceux que le logement préoccupe.
+- **Décision** :
+  - Après l'accueil, un écran propose d'abord **« Tous les thèmes, mélangés »** (le paquet de 12
+    actuel), puis la **liste des thèmes** en ordre alphabétique, au style identique.
+  - Un thème choisi donne un paquet de ce seul thème (2 à 5 cartes, une par paire miroir), avec
+    le même tirage split-ballot.
+  - **Progression** gardée sur l'appareil : globale (« 18 cartes répondues sur 55 ») et par thème
+    (« 2 sur 3 », coche « Terminé »). Une paire compte une fois, quelle que soit la version vue.
+  - Chaque réponse enregistre **`deck_mode`** (`mixed` ou `theme`) pour séparer les deux à
+    l'analyse.
+- **Conséquences** : migration `20261019000002_deck_mode.sql`, appliquée en prod avant le code
+  (valeur par défaut `mixed`, l'ancien code continuait de fonctionner). Proposition pour
+  l'analyse, à confirmer quand elle sera conçue : calculer les taux par thème sur les paquets
+  mélangés, et n'y ajouter les réponses `theme` qu'après avoir vérifié que les distributions ne
+  diffèrent pas.
+- **Complète** « Premier paquet de cartes » (paquets aux thèmes entremêlés).
+
 ## 2026-10-19 — Nom du produit : ReQuête
 
 - **Contexte** : le nom de travail « 0to1 » venait de l'ancien projet du repo.

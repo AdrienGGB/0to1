@@ -45,6 +45,7 @@ export async function POST(request: Request) {
     deck_seed: record.deckSeed,
     response_ms: record.responseMs,
     is_fast: record.isFast,
+    deck_mode: record.deckMode,
   });
   if (error?.code === UNIQUE_VIOLATION) {
     // Same card answered twice in one session: keep the first answer.

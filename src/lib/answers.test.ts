@@ -70,6 +70,15 @@ describe("answerRecordSchema", () => {
     expect(answerRecordSchema.safeParse(valid).success).toBe(true);
   });
 
+  it("defaults the deck mode to mixed", () => {
+    expect(answerRecordSchema.parse(valid).deckMode).toBe("mixed");
+    expect(answerRecordSchema.parse({ ...valid, deckMode: "theme" }).deckMode).toBe("theme");
+  });
+
+  it("rejects an unknown deck mode", () => {
+    expect(answerRecordSchema.safeParse({ ...valid, deckMode: "other" }).success).toBe(false);
+  });
+
   it("rejects an unknown answer", () => {
     expect(answerRecordSchema.safeParse({ ...valid, answer: "maybe" }).success).toBe(false);
   });
