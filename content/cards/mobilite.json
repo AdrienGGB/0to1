@@ -1,0 +1,23 @@
+{
+  "theme": { "id": "mobilite", "label": "Transports et mobilité" },
+  "cards": [
+    {
+      "id": "mobilite-deplacements-faciles",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je peux me déplacer sans difficulté pour mes besoins du quotidien.",
+      "rationale": "Mesure la capacité à se déplacer (travail, courses, démarches), quel que soit le moyen de transport.",
+      "mirrorOf": "mobilite-deplacements-difficiles",
+      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+    },
+    {
+      "id": "mobilite-deplacements-difficiles",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Me déplacer pour mes besoins du quotidien est difficile pour moi.",
+      "rationale": "Formulation inverse de la capacité à se déplacer, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "mobilite-deplacements-faciles",
+      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+    }
+  ]
+}

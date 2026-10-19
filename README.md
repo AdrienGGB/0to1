@@ -8,4 +8,12 @@ revendications de la population, de façon apolitique et neutre.
 - [Données et RGPD](docs/DONNEES.md)
 - [Journal des décisions](docs/DECISIONS.md)
 
-Projet en démarrage : pas encore de code applicatif.
+## Démarrer
+
+```bash
+npm ci
+cp .env.example .env.local   # optionnel : sans Supabase, les réponses ne sont pas stockées
+npm run dev
+```
+
+Vérifications : `npm run lint`, `npm run type-check`, `npm test`, `npm run build`.

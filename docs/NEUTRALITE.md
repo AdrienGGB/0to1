@@ -50,6 +50,31 @@ qu'aucune ne la trouve orientée**.
   pour pouvoir l'analyser.
 - Aucune option par défaut présélectionnée.
 
+### Format swipe
+
+Le QCM se présente comme une pile de cartes, chacune portant une affirmation.
+
+| Geste | Bouton équivalent | Réponse |
+|-------|-------------------|---------|
+| Vers la droite | Oui | `yes` |
+| Vers la gauche | Non | `no` |
+| Vers le haut | Je ne sais pas | `dont_know` |
+| Vers le bas | Je préfère ne pas répondre | `prefer_not` |
+
+- Les quatre boutons restent **toujours visibles** (découvrabilité, accessibilité) ; les flèches du
+  clavier font la même chose.
+- « Oui » et « Non » ont **le même style** : aucune couleur (vert/rouge) ni icône (✓/✕) ne suggère
+  une bonne réponse. On écrit « Oui / Non », jamais « gauche / droite ».
+- Swiper à droite évoque l'approbation (« j'aime ») et l'enchaînement rapide favorise le « oui » :
+  **chaque affirmation a un miroir** (`mirrorOf`), formulé dans le sens inverse, sur la **même
+  dimension** et avec la **même intensité**. Test : une personne cohérente ne peut pas répondre
+  « Oui » aux deux cartes.
+- Les cartes de vécu indiquent une **période de référence** (« Au cours des 12 derniers mois »)
+  quand elle est utile, et précisent ce qui est compté (« loyer ou prêt, charges comprises »).
+- Une réponse donnée en moins d'une seconde est **marquée** (`isFast`), jamais rejetée.
+- Paquets courts, progression visible, chaque réponse enregistrée tout de suite : on peut s'arrêter
+  à tout moment.
+
 ## 5. Couverture des thèmes
 
 Le QCM couvre largement la vie quotidienne et collective : par exemple pouvoir d'achat, emploi et

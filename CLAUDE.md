@@ -8,7 +8,8 @@
 priorités ; il ne classe pas les gens, ne recommande rien, ne pousse aucune option.
 
 **Développeur** : Adrien (solo).
-**État** : setup du repo terminé, pas encore de code applicatif.
+**État** : première version de l'écran de swipe, 6 cartes d'exemple, stockage Supabase prêt (projet
+Supabase pas encore créé).
 
 Avant toute contribution qui touche aux questions, aux réponses proposées ou à la présentation des
 résultats, lire **[docs/NEUTRALITE.md](docs/NEUTRALITE.md)**. Cette charte prime sur tout le reste.
@@ -35,22 +36,45 @@ résultats, lire **[docs/NEUTRALITE.md](docs/NEUTRALITE.md)**. Cette charte prim
 Toute décision structurante (stack, modèle de données, méthode de diffusion…) → une entrée dans
 `docs/DECISIONS.md`.
 
-## Stack (prévue)
+## Stack
 
-- **Next.js** (App Router) + **TypeScript** strict (pas de `any`)
+- **Next.js 16** (App Router, Cache Components activé) + **React 19** + **TypeScript** strict
+  (pas de `any`). Next.js 16 diffère de ce que tu connais : voir @AGENTS.md et lire le guide
+  concerné dans `node_modules/next/dist/docs/` avant d'écrire du code Next.
+- **Motion** (`motion/react`) pour les gestes de swipe ; **zod** pour valider cartes et réponses
 - **Tailwind CSS** + **shadcn/ui** (pas de composants UI faits main quand shadcn en a un)
 - **Supabase** (Postgres + RLS sur **toutes** les tables), région UE
 - **Vercel** pour le déploiement
-- Tests : **Vitest** (unitaires), **Playwright** (parcours du QCM)
+- Tests : **Vitest** (unitaires) ; Playwright pour le parcours du QCM, à ajouter
 
 Utiliser Context7 (MCP) pour la doc à jour de Next.js, Supabase, Tailwind, shadcn.
 
+## Structure
+
+```
+content/cards/        # Les cartes : un JSON par thème (données, pas du code)
+src/app/              # Pages (/, /confidentialite), route POST /api/answers, manifest PWA
+src/components/       # Survey (déroulé), SwipeCard (geste), ui/ (shadcn)
+src/lib/answers.ts    # Directions → réponses, détection du geste, schéma d'une réponse
+src/lib/cards/        # Schéma zod des cartes et chargement du paquet
+src/lib/shuffle.ts    # Mélange déterministe (graine enregistrée avec chaque réponse)
+src/lib/supabase/     # Client Supabase serveur (anonyme, insertion seule)
+supabase/migrations/  # Schéma SQL + RLS
+```
+
+## Particularités de l'environnement
+
+- **npm 10 plante** à l'ajout de certains paquets (`Cannot read properties of null (reading
+  'edgesOut')`). Pour ajouter une dépendance : `npx -y npm@11 install <paquet>`. `npm ci` marche.
+- **Le registre shadcn est bloqué** dans les sessions cloud : écrire le composant à la main dans
+  `src/components/ui/` à partir de la source shadcn (style new-york), plutôt que `npx shadcn add`.
+
 ## Principes d'architecture
 
-- **Les questions sont des données, pas du code.** Elles vivent dans des fichiers versionnés
-  (format à décider, voir `docs/DECISIONS.md`), jamais en dur dans les composants. Chaque question a
-  un identifiant stable et une version : une question modifiée = une nouvelle version, pour que les
-  réponses déjà collectées restent interprétables.
+- **Les questions sont des données, pas du code.** Elles vivent dans `content/cards/*.json`,
+  jamais en dur dans les composants. Chaque carte a un identifiant stable et une version : une carte
+  modifiée = une nouvelle version, pour que les réponses déjà collectées restent interprétables.
+  Chaque carte a un miroir (`mirrorOf`) et un historique de revues (`reviews`).
 - **Mobile-first** : la majorité des répondants seront sur téléphone.
 - **Accessibilité** : RGAA / WCAG AA. Un QCM qui exclut une partie de la population fausse les
   résultats.
@@ -83,16 +107,17 @@ Toute PR qui ajoute ou modifie une question ou des réponses proposées :
 
 ## Commandes
 
-À compléter quand l'application sera initialisée :
-
 ```bash
-npm run dev            # serveur local
+npm run dev            # serveur local (localhost:3000)
+npm run build          # build de production
 npm run lint           # ESLint
-npm run type-check     # tsc --noEmit
-npm test               # tests unitaires
-npm run test:e2e       # Playwright
-npm run generate:types # types Supabase
+npm run type-check     # next typegen + tsc --noEmit
+npm test               # tests unitaires (Vitest)
+npm run generate:types # types Supabase (remplace src/types/supabase.ts, écrit à la main)
 ```
+
+Sans `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` (voir `.env.example`), l'app
+fonctionne et la route `/api/answers` répond 202 sans rien stocker.
 
 ## Sécurité
 

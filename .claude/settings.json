@@ -7,6 +7,8 @@
       "Bash(npm install*)",
       "Bash(npm ci*)",
       "Bash(npm ls*)",
+      "Bash(npx -y npm@11 install*)",
+      "Bash(npx next *)",
       "Bash(npx tsc*)",
       "Bash(npx eslint*)",
       "Bash(npx prettier*)",

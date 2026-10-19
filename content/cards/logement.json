@@ -1,0 +1,23 @@
+{
+  "theme": { "id": "logement", "label": "Logement" },
+  "cards": [
+    {
+      "id": "logement-cout-difficulte",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Payer mon logement (loyer ou prêt, charges comprises) me met en difficulté financière.",
+      "rationale": "Mesure le poids du logement dans le budget, tel qu'il est vécu.",
+      "mirrorOf": "logement-cout-sans-difficulte",
+      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+    },
+    {
+      "id": "logement-cout-sans-difficulte",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je paie mon logement (loyer ou prêt, charges comprises) sans difficulté financière.",
+      "rationale": "Formulation inverse du poids du logement, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "logement-cout-difficulte",
+      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+    }
+  ]
+}
