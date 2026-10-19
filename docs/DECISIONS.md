@@ -7,6 +7,17 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ---
 
+## 2026-10-19 — Nom du produit : ReQuête
+
+- **Contexte** : le nom de travail « 0to1 » venait de l'ancien projet du repo.
+- **Décision** : le produit s'appelle **ReQuête** (*requête*, une demande, et *quête*, on part
+  chercher les besoins), choisi pour ne rien emprunter au vocabulaire électoral.
+- **Conséquences** : le nom apparaît dans l'interface, les métadonnées et le manifeste. Le repo
+  GitHub (`0to1`), le projet Vercel et le projet Supabase gardent leur nom technique pour
+  l'instant ; les renommer est possible sans toucher au code. La mémoire locale des cartes
+  répondues change de clé (`requete.answered.v1`), sans impact puisqu'il n'y a pas encore de
+  répondants.
+
 ## 2026-10-19 — Premier paquet de cartes
 
 - **Contexte** : passer des 6 cartes d'exemple à un vrai premier questionnaire.

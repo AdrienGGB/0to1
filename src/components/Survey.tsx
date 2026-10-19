@@ -156,6 +156,7 @@ export function Survey({ cards }: SurveyProps) {
   if (phase === "intro" || phase === "starting" || phase === "error") {
     return (
       <section className="flex flex-col gap-6">
+        <p className="text-sm font-semibold tracking-wide text-muted-foreground">ReQuête</p>
         <h1 className="text-3xl font-semibold text-balance">
           Dites-nous ce dont vous avez besoin
         </h1>

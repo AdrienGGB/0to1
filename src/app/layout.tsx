@@ -9,8 +9,8 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default: "0to1 — Vos besoins, en quelques gestes",
-    template: "%s · 0to1",
+    default: "ReQuête — Vos besoins, en quelques gestes",
+    template: "%s · ReQuête",
   },
   description:
     "Un questionnaire neutre et anonyme pour faire remonter les besoins et les attentes de la population.",
