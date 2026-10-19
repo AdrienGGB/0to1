@@ -46,7 +46,10 @@ Toute décision structurante (stack, modèle de données, méthode de diffusion�
 - **Tailwind CSS** + **shadcn/ui** (pas de composants UI faits main quand shadcn en a un)
 - **Supabase** (Postgres + RLS sur **toutes** les tables), région UE
 - **Vercel** pour le déploiement
-- Tests : **Vitest** (unitaires) ; Playwright pour le parcours du QCM, à ajouter
+- Tests : **Vitest** (unitaires, `src/**/*.test.ts`) ; **Playwright** (parcours du QCM, `e2e/`,
+  Chromium uniquement, aux tailles iPhone 13 et iPhone SE). `@playwright/test` est figé en 1.56.1 pour
+  correspondre au Chromium préinstallé des sessions cloud : ne pas lancer `playwright install` ici.
+- CI GitHub (`.github/workflows/ci.yml`) sur chaque PR : lint, typecheck, tests, build, e2e
 
 Utiliser Context7 (MCP) pour la doc à jour de Next.js, Supabase, Tailwind, shadcn.
 
@@ -101,7 +104,7 @@ supabase/migrations/  # Schéma SQL + RLS
 - Une branche par chantier (`feat/…`, `fix/…`, `chore/…`, `content/…` pour les questions), puis une
   PR vers `main`. **Adrien merge lui-même** ; ne jamais merger sans son feu vert explicite.
 - Commits au format conventionnel (`feat:`, `fix:`, `chore:`, `docs:`, `content:`…).
-- Avant de pousser : lint, typecheck et tests doivent passer.
+- Avant de pousser : lint, typecheck, tests (et e2e si l'interface change) doivent passer.
 
 ## Revue des questions
 
@@ -119,6 +122,7 @@ npm run build          # build de production
 npm run lint           # ESLint
 npm run type-check     # next typegen + tsc --noEmit
 npm test               # tests unitaires (Vitest)
+npm run test:e2e       # parcours Playwright (après npm run build ; lance next start sur :3100)
 npm run generate:types # types Supabase (remplace src/types/supabase.ts, écrit à la main)
 ```
 
