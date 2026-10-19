@@ -64,13 +64,36 @@ test("a short drag snaps back without answering", async ({ page }) => {
   await expect(page.getByText(`Carte 1 sur ${deckSize}`)).toBeVisible();
 });
 
-test("does not show answered cards again on the same device", async ({ page }) => {
-  await startSurvey(page);
+async function answerDeck(page: Page): Promise<string[]> {
   const deckSize = await getDeckSize(page);
+  const statements: string[] = [];
   for (let index = 0; index < deckSize; index++) {
+    await expect(page.getByText(`Carte ${index + 1} sur ${deckSize}`)).toBeVisible();
+    statements.push(await page.locator("article h2").last().innerText());
     await page.getByRole("button", { name: "Oui", exact: true }).click();
   }
   await expect(page.getByRole("heading", { name: "Merci" })).toBeVisible();
+  return statements;
+}
+
+test("chains a new deck without repeating cards", async ({ page }) => {
+  await startSurvey(page);
+  const first = await answerDeck(page);
+  expect(first).toHaveLength(12);
+  await page.getByRole("button", { name: /Continuer/ }).click();
+  const second = await answerDeck(page);
+  expect(second.filter((statement) => first.includes(statement))).toEqual([]);
+});
+
+test("does not show answered cards again on the same device", async ({ page }) => {
+  await startSurvey(page);
+  await answerDeck(page);
+  const continueButton = page.getByRole("button", { name: /Continuer/ });
+  while (await continueButton.isVisible()) {
+    await continueButton.click();
+    await answerDeck(page);
+  }
+  await expect(page.getByText("Vous avez répondu à toutes les cartes disponibles.")).toBeVisible();
 
   await page.reload();
   await page.getByRole("button", { name: /je commence/ }).click();

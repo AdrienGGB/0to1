@@ -1,0 +1,57 @@
+{
+  "theme": {
+    "id": "climat-energie",
+    "label": "Climat et énergie",
+    "category": "environnement"
+  },
+  "cards": [
+    {
+      "id": "climat-inquietude-oui",
+      "version": 1,
+      "kind": "expectation",
+      "statement": "Les conséquences du changement climatique m'inquiètent pour mon avenir ou celui de mes proches.",
+      "rationale": "Mesure l'inquiétude liée aux conséquences du changement climatique.",
+      "mirrorOf": "climat-inquietude-non"
+    },
+    {
+      "id": "climat-inquietude-non",
+      "version": 1,
+      "kind": "expectation",
+      "statement": "Les conséquences du changement climatique ne m'inquiètent pas pour mon avenir ou celui de mes proches.",
+      "rationale": "Mesure l'inquiétude liée aux conséquences du changement climatique. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "climat-inquietude-oui"
+    },
+    {
+      "id": "climat-evenement-subi",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Au cours des 5 dernières années, j'ai subi personnellement les effets d'un événement climatique (canicule, inondation, sécheresse, tempête…).",
+      "rationale": "Mesure l'exposition vécue aux événements climatiques.",
+      "mirrorOf": "climat-evenement-non-subi"
+    },
+    {
+      "id": "climat-evenement-non-subi",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Au cours des 5 dernières années, je n'ai pas subi personnellement les effets d'un événement climatique (canicule, inondation, sécheresse, tempête…).",
+      "rationale": "Mesure l'exposition vécue aux événements climatiques. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "climat-evenement-subi"
+    },
+    {
+      "id": "energie-chauffage-difficile",
+      "version": 1,
+      "kind": "experience",
+      "statement": "L'hiver dernier, chauffer suffisamment mon logement a été difficile pour moi.",
+      "rationale": "Mesure la difficulté à se chauffer.",
+      "mirrorOf": "energie-chauffage-facile"
+    },
+    {
+      "id": "energie-chauffage-facile",
+      "version": 1,
+      "kind": "experience",
+      "statement": "L'hiver dernier, chauffer suffisamment mon logement n'a pas été difficile pour moi.",
+      "rationale": "Mesure la difficulté à se chauffer. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "energie-chauffage-difficile"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "theme": {
+    "id": "education",
+    "label": "Éducation et formation",
+    "category": "travail-education"
+  },
+  "cards": [
+    {
+      "id": "education-reussite-tous",
+      "version": 1,
+      "kind": "expectation",
+      "statement": "Je pense que l'école permet aujourd'hui à chaque enfant de réussir, quel que soit son milieu.",
+      "rationale": "Mesure la perception de l'école comme moyen de réussite pour tous les enfants.",
+      "mirrorOf": "education-reussite-pas-tous"
+    },
+    {
+      "id": "education-reussite-pas-tous",
+      "version": 1,
+      "kind": "expectation",
+      "statement": "Je pense que l'école ne permet pas aujourd'hui à chaque enfant de réussir, quel que soit son milieu.",
+      "rationale": "Mesure la perception de l'école comme moyen de réussite pour tous les enfants. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "education-reussite-tous"
+    },
+    {
+      "id": "education-formation-orientation-connue",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Si je voulais me former ou changer de métier, je saurais vers qui me tourner.",
+      "rationale": "Mesure l'accès à l'information sur la formation et la reconversion.",
+      "mirrorOf": "education-formation-orientation-inconnue"
+    },
+    {
+      "id": "education-formation-orientation-inconnue",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Si je voulais me former ou changer de métier, je ne saurais pas vers qui me tourner.",
+      "rationale": "Mesure l'accès à l'information sur la formation et la reconversion. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "education-formation-orientation-connue"
+    }
+  ]
+}

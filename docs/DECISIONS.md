@@ -7,6 +7,20 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ---
 
+## 2026-10-19 — Premier paquet de cartes
+
+- **Contexte** : passer des 6 cartes d'exemple à un vrai premier questionnaire.
+- **Décision** :
+  - 6 catégories (vie quotidienne, travail et éducation, environnement, vie collective, économie,
+    défense), 16 thèmes, 76 cartes en 38 paires miroirs.
+  - **Cartes pour tous**, sans option « Non concerné » : chaque carte doit admettre une réponse
+    pertinente de n'importe qui (voir `NEUTRALITE.md`).
+  - **Split-ballot** : une seule version de chaque paire par personne, tirée au hasard.
+  - **Paquets de 12** cartes aux thèmes entremêlés, enchaînables avec « Continuer ».
+- **Conséquences** : un répondant voit au plus 38 cartes. Les deux cartes santé passent en
+  version 2 (formulation hypothétique, pour inclure ceux qui n'ont pas eu besoin de médecin).
+- **Remplace** la question « Non concerné » de la section « À décider ».
+
 ## 2026-10-19 — Projet Supabase et application des migrations
 
 - **Contexte** : le projet Supabase de production est créé (`vpbxrneabgskbckjiwlk`, région UE). Les
@@ -89,8 +103,5 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ## À décider
 
-- Réponse « Non concerné » pour les cartes de vécu (personne qui n'a pas eu besoin de médecin,
-  personne hébergée gratuitement…) : nouvelle option, ou cartes écrites pour s'appliquer à tous ?
-- Liste initiale des thèmes.
 - Seuil minimal d'effectif pour publier un agrégat.
 - Niveau 3 anti-abus (vérification d'unicité avec jeton anonyme) : quand, et avec quel fournisseur.

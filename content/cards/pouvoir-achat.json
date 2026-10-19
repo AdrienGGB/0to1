@@ -1,0 +1,57 @@
+{
+  "theme": {
+    "id": "pouvoir-achat",
+    "label": "Pouvoir d'achat",
+    "category": "vie-quotidienne"
+  },
+  "cards": [
+    {
+      "id": "pouvoir-achat-imprevu-possible",
+      "version": 1,
+      "kind": "experience",
+      "statement": "À la fin du mois, il me reste de quoi faire face à une dépense imprévue.",
+      "rationale": "Mesure la marge de manœuvre financière face à un imprévu.",
+      "mirrorOf": "pouvoir-achat-imprevu-impossible"
+    },
+    {
+      "id": "pouvoir-achat-imprevu-impossible",
+      "version": 1,
+      "kind": "experience",
+      "statement": "À la fin du mois, il ne me reste pas de quoi faire face à une dépense imprévue.",
+      "rationale": "Mesure la marge de manœuvre financière face à un imprévu. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "pouvoir-achat-imprevu-possible"
+    },
+    {
+      "id": "pouvoir-achat-privations-oui",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Au cours des 12 derniers mois, j'ai dû me priver sur des dépenses essentielles (alimentation, chauffage, soins).",
+      "rationale": "Mesure les privations sur les dépenses essentielles.",
+      "mirrorOf": "pouvoir-achat-privations-non"
+    },
+    {
+      "id": "pouvoir-achat-privations-non",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Au cours des 12 derniers mois, je n'ai pas eu à me priver sur des dépenses essentielles (alimentation, chauffage, soins).",
+      "rationale": "Mesure les privations sur les dépenses essentielles. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "pouvoir-achat-privations-oui"
+    },
+    {
+      "id": "pouvoir-achat-priorite-haute",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Le pouvoir d'achat fait partie de mes principales préoccupations aujourd'hui.",
+      "rationale": "Mesure la place du pouvoir d'achat parmi les préoccupations.",
+      "mirrorOf": "pouvoir-achat-priorite-basse"
+    },
+    {
+      "id": "pouvoir-achat-priorite-basse",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Le pouvoir d'achat ne fait pas partie de mes principales préoccupations aujourd'hui.",
+      "rationale": "Mesure la place du pouvoir d'achat parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "pouvoir-achat-priorite-haute"
+    }
+  ]
+}

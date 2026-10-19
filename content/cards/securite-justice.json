@@ -1,0 +1,41 @@
+{
+  "theme": {
+    "id": "securite-justice",
+    "label": "Sécurité et justice",
+    "category": "vie-collective"
+  },
+  "cards": [
+    {
+      "id": "securite-quartier-oui",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je me sens en sécurité dans mon quartier ou ma commune.",
+      "rationale": "Mesure le sentiment de sécurité au quotidien.",
+      "mirrorOf": "securite-quartier-non"
+    },
+    {
+      "id": "securite-quartier-non",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je ne me sens pas en sécurité dans mon quartier ou ma commune.",
+      "rationale": "Mesure le sentiment de sécurité au quotidien. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "securite-quartier-oui"
+    },
+    {
+      "id": "justice-plainte-prise-en-compte",
+      "version": 1,
+      "kind": "expectation",
+      "statement": "Si j'étais victime d'une infraction, je pense que ma plainte serait prise en compte.",
+      "rationale": "Mesure la confiance dans la prise en compte d'une plainte.",
+      "mirrorOf": "justice-plainte-ignoree"
+    },
+    {
+      "id": "justice-plainte-ignoree",
+      "version": 1,
+      "kind": "expectation",
+      "statement": "Si j'étais victime d'une infraction, je pense que ma plainte ne serait pas prise en compte.",
+      "rationale": "Mesure la confiance dans la prise en compte d'une plainte. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "justice-plainte-prise-en-compte"
+    }
+  ]
+}

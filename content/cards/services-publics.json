@@ -1,0 +1,41 @@
+{
+  "theme": {
+    "id": "services-publics",
+    "label": "Services publics",
+    "category": "vie-collective"
+  },
+  "cards": [
+    {
+      "id": "services-publics-proximite-ok",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Près de chez moi, je trouve les services publics dont j'ai besoin (mairie, poste, école, guichets…).",
+      "rationale": "Mesure l'accès de proximité aux services publics.",
+      "mirrorOf": "services-publics-proximite-ko"
+    },
+    {
+      "id": "services-publics-proximite-ko",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Près de chez moi, il me manque des services publics dont j'ai besoin (mairie, poste, école, guichets…).",
+      "rationale": "Mesure l'accès de proximité aux services publics. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "services-publics-proximite-ok"
+    },
+    {
+      "id": "services-publics-demarches-autonome",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Quand je fais une démarche administrative, j'arrive à la mener au bout sans aide.",
+      "rationale": "Mesure l'autonomie dans les démarches administratives.",
+      "mirrorOf": "services-publics-demarches-aide"
+    },
+    {
+      "id": "services-publics-demarches-aide",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Quand je fais une démarche administrative, j'ai besoin d'aide pour la mener au bout.",
+      "rationale": "Mesure l'autonomie dans les démarches administratives. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "services-publics-demarches-autonome"
+    }
+  ]
+}

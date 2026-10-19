@@ -1,0 +1,41 @@
+{
+  "theme": {
+    "id": "democratie",
+    "label": "Démocratie et participation",
+    "category": "vie-collective"
+  },
+  "cards": [
+    {
+      "id": "democratie-avis-compte",
+      "version": 1,
+      "kind": "experience",
+      "statement": "J'ai le sentiment que mon avis compte dans les décisions qui concernent ma commune.",
+      "rationale": "Mesure le sentiment d'être entendu dans les décisions locales.",
+      "mirrorOf": "democratie-avis-ne-compte-pas"
+    },
+    {
+      "id": "democratie-avis-ne-compte-pas",
+      "version": 1,
+      "kind": "experience",
+      "statement": "J'ai le sentiment que mon avis ne compte pas dans les décisions qui concernent ma commune.",
+      "rationale": "Mesure le sentiment d'être entendu dans les décisions locales. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "democratie-avis-compte"
+    },
+    {
+      "id": "democratie-consultation-plus",
+      "version": 1,
+      "kind": "expectation",
+      "statement": "J'aimerais qu'on me demande plus souvent mon avis sur les décisions publiques.",
+      "rationale": "Mesure l'attente de consultation sur les décisions publiques.",
+      "mirrorOf": "democratie-consultation-suffisante"
+    },
+    {
+      "id": "democratie-consultation-suffisante",
+      "version": 1,
+      "kind": "expectation",
+      "statement": "Je n'ai pas besoin qu'on me demande plus souvent mon avis sur les décisions publiques.",
+      "rationale": "Mesure l'attente de consultation sur les décisions publiques. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "democratie-consultation-plus"
+    }
+  ]
+}

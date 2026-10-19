@@ -1,0 +1,25 @@
+{
+  "theme": {
+    "id": "alimentation",
+    "label": "Alimentation",
+    "category": "vie-quotidienne"
+  },
+  "cards": [
+    {
+      "id": "alimentation-choisie",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je peux me nourrir comme je le souhaite, en quantité et en qualité.",
+      "rationale": "Mesure l'accès à une alimentation suffisante et choisie.",
+      "mirrorOf": "alimentation-subie"
+    },
+    {
+      "id": "alimentation-subie",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je ne peux pas me nourrir comme je le souhaite, en quantité ou en qualité.",
+      "rationale": "Mesure l'accès à une alimentation suffisante et choisie. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "alimentation-choisie"
+    }
+  ]
+}

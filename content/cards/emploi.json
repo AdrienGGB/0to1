@@ -1,0 +1,57 @@
+{
+  "theme": {
+    "id": "emploi",
+    "label": "Travail et emploi",
+    "category": "travail-education"
+  },
+  "cards": [
+    {
+      "id": "emploi-recherche-confiance",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Si je devais chercher un emploi, je pense que j'en trouverais un qui corresponde à mes compétences.",
+      "rationale": "Mesure la confiance dans l'accès à un emploi adapté, y compris pour qui n'en cherche pas.",
+      "mirrorOf": "emploi-recherche-inquietude"
+    },
+    {
+      "id": "emploi-recherche-inquietude",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Si je devais chercher un emploi, je pense que j'aurais du mal à en trouver un qui corresponde à mes compétences.",
+      "rationale": "Mesure la confiance dans l'accès à un emploi adapté, y compris pour qui n'en cherche pas. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "emploi-recherche-confiance"
+    },
+    {
+      "id": "emploi-activite-nuit-sante",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Au cours des 12 derniers mois, mon activité principale (travail, études ou autre) a nui à ma santé physique ou mentale.",
+      "rationale": "Mesure l'effet de l'activité principale sur la santé.",
+      "mirrorOf": "emploi-activite-sans-effet-sante"
+    },
+    {
+      "id": "emploi-activite-sans-effet-sante",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Au cours des 12 derniers mois, mon activité principale (travail, études ou autre) n'a pas nui à ma santé physique ou mentale.",
+      "rationale": "Mesure l'effet de l'activité principale sur la santé. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "emploi-activite-nuit-sante"
+    },
+    {
+      "id": "emploi-priorite-haute",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de travail et d'emploi comptent beaucoup pour moi aujourd'hui.",
+      "rationale": "Mesure la place du travail et de l'emploi parmi les préoccupations.",
+      "mirrorOf": "emploi-priorite-basse"
+    },
+    {
+      "id": "emploi-priorite-basse",
+      "version": 1,
+      "kind": "priority",
+      "statement": "Les questions de travail et d'emploi comptent peu pour moi aujourd'hui.",
+      "rationale": "Mesure la place du travail et de l'emploi parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "emploi-priorite-haute"
+    }
+  ]
+}

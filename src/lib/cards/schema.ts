@@ -34,9 +34,19 @@ export const cardSchema = z.object({
   reviews: z.array(reviewSchema).default([]),
 });
 
+export const categorySchema = z.enum([
+  "vie-quotidienne",
+  "travail-education",
+  "environnement",
+  "vie-collective",
+  "economie",
+  "defense",
+]);
+
 export const themeSchema = z.object({
   id: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/),
   label: z.string().min(2),
+  category: categorySchema,
 });
 
 export const themeFileSchema = z.object({
@@ -45,6 +55,7 @@ export const themeFileSchema = z.object({
 });
 
 export type CardKind = z.infer<typeof cardKindSchema>;
+export type Category = z.infer<typeof categorySchema>;
 export type Review = z.infer<typeof reviewSchema>;
 export type Card = z.infer<typeof cardSchema>;
 export type Theme = z.infer<typeof themeSchema>;

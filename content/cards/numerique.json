@@ -1,0 +1,41 @@
+{
+  "theme": {
+    "id": "numerique",
+    "label": "Numérique",
+    "category": "vie-collective"
+  },
+  "cards": [
+    {
+      "id": "numerique-demarches-aise",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je suis à l'aise pour faire mes démarches en ligne (impôts, santé, aides…).",
+      "rationale": "Mesure l'aisance avec les démarches en ligne.",
+      "mirrorOf": "numerique-demarches-difficulte"
+    },
+    {
+      "id": "numerique-demarches-difficulte",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Je suis en difficulté pour faire mes démarches en ligne (impôts, santé, aides…).",
+      "rationale": "Mesure l'aisance avec les démarches en ligne. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "numerique-demarches-aise"
+    },
+    {
+      "id": "numerique-connexion-suffisante",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Là où je vis, ma connexion internet est suffisante pour mes besoins.",
+      "rationale": "Mesure la qualité de la connexion internet là où l'on vit.",
+      "mirrorOf": "numerique-connexion-insuffisante"
+    },
+    {
+      "id": "numerique-connexion-insuffisante",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Là où je vis, ma connexion internet est insuffisante pour mes besoins.",
+      "rationale": "Mesure la qualité de la connexion internet là où l'on vit. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "numerique-connexion-suffisante"
+    }
+  ]
+}

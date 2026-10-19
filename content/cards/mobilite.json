@@ -1,5 +1,9 @@
 {
-  "theme": { "id": "mobilite", "label": "Transports et mobilité" },
+  "theme": {
+    "id": "mobilite",
+    "label": "Transports et mobilité",
+    "category": "vie-quotidienne"
+  },
   "cards": [
     {
       "id": "mobilite-deplacements-faciles",
@@ -7,17 +11,31 @@
       "kind": "experience",
       "statement": "Je peux me déplacer sans difficulté pour mes besoins du quotidien.",
       "rationale": "Mesure la capacité à se déplacer (travail, courses, démarches), quel que soit le moyen de transport.",
-      "mirrorOf": "mobilite-deplacements-difficiles",
-      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+      "mirrorOf": "mobilite-deplacements-difficiles"
     },
     {
       "id": "mobilite-deplacements-difficiles",
       "version": 1,
       "kind": "experience",
       "statement": "Me déplacer pour mes besoins du quotidien est difficile pour moi.",
-      "rationale": "Formulation inverse de la capacité à se déplacer, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "mobilite-deplacements-faciles",
-      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+      "rationale": "Mesure la capacité à se déplacer (travail, courses, démarches), quel que soit le moyen de transport. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "mobilite-deplacements-faciles"
+    },
+    {
+      "id": "mobilite-sans-voiture-possible",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Sans voiture, je pourrais faire l'essentiel de mes déplacements du quotidien.",
+      "rationale": "Mesure la dépendance à la voiture pour les déplacements du quotidien.",
+      "mirrorOf": "mobilite-sans-voiture-impossible"
+    },
+    {
+      "id": "mobilite-sans-voiture-impossible",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Sans voiture, je ne pourrais pas faire l'essentiel de mes déplacements du quotidien.",
+      "rationale": "Mesure la dépendance à la voiture pour les déplacements du quotidien. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "mobilite-sans-voiture-possible"
     }
   ]
 }

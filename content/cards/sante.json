@@ -1,23 +1,41 @@
 {
-  "theme": { "id": "sante", "label": "Santé" },
+  "theme": {
+    "id": "sante",
+    "label": "Santé",
+    "category": "vie-quotidienne"
+  },
   "cards": [
     {
       "id": "sante-consultation-delai-ok",
-      "version": 1,
+      "version": 2,
       "kind": "experience",
-      "statement": "Au cours des 12 derniers mois, j'ai pu consulter un médecin dans un délai raisonnable chaque fois que j'en ai eu besoin.",
-      "rationale": "Mesure l'accès effectif à une consultation médicale, tel qu'il est vécu.",
-      "mirrorOf": "sante-consultation-delai-ko",
-      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+      "statement": "Si j'avais besoin d'un médecin dans les prochains jours, je pourrais en consulter un facilement.",
+      "rationale": "Mesure l'accès perçu à une consultation médicale, pour tous, qu'on en ait eu besoin ou non.",
+      "mirrorOf": "sante-consultation-delai-ko"
     },
     {
       "id": "sante-consultation-delai-ko",
+      "version": 2,
+      "kind": "experience",
+      "statement": "Si j'avais besoin d'un médecin dans les prochains jours, j'aurais du mal à en consulter un.",
+      "rationale": "Mesure l'accès perçu à une consultation médicale, pour tous, qu'on en ait eu besoin ou non. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "sante-consultation-delai-ok"
+    },
+    {
+      "id": "sante-renoncement-oui",
       "version": 1,
       "kind": "experience",
-      "statement": "Au cours des 12 derniers mois, il m'est arrivé de ne pas pouvoir consulter un médecin dans un délai raisonnable alors que j'en avais besoin.",
-      "rationale": "Formulation inverse de l'accès à une consultation, pour compenser la tendance à répondre oui.",
-      "mirrorOf": "sante-consultation-delai-ok",
-      "reviews": [{ "date": "2026-10-19", "by": "neutrality-reviewer", "outcome": "changes_applied" }]
+      "statement": "Au cours des 12 derniers mois, j'ai renoncé à des soins pour des raisons financières.",
+      "rationale": "Mesure le renoncement aux soins pour raisons financières.",
+      "mirrorOf": "sante-renoncement-non"
+    },
+    {
+      "id": "sante-renoncement-non",
+      "version": 1,
+      "kind": "experience",
+      "statement": "Au cours des 12 derniers mois, je n'ai renoncé à aucun soin pour des raisons financières.",
+      "rationale": "Mesure le renoncement aux soins pour raisons financières. Formulation inverse, pour compenser la tendance à répondre oui.",
+      "mirrorOf": "sante-renoncement-oui"
     }
   ]
 }
