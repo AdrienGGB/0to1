@@ -57,17 +57,6 @@
       "WebFetch(domain:www.worldvaluessurvey.org)",
       "mcp__context7__*"
     ],
-    "ask": [
-      "Bash(npm uninstall*)",
-      "Bash(npm publish*)",
-      "Bash(supabase db push*)",
-      "Bash(supabase link*)",
-      "Bash(vercel*)",
-      "Bash(git reset*)",
-      "Bash(git rebase*)",
-      "Bash(git tag*)",
-      "Bash(rm -rf *)"
-    ],
     "deny": [
       "Bash(git push origin main*)",
       "Bash(git push -u origin main*)",
