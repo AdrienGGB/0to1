@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 
 async function openMenu(page: Page) {
-  await page.goto("/");
+  await page.goto("/repondre");
   await page.getByRole("button", { name: /je commence/ }).click();
   await expect(page.getByRole("heading", { name: "Sur quoi voulez-vous répondre ?" })).toBeVisible();
 }
@@ -298,4 +298,14 @@ test("shows the full distribution of the priority question past the threshold", 
   await expect(message.getByText("Santé : 24 %")).toBeVisible();
   await expect(message.getByText("Numérique : 0 %")).toBeVisible();
   await expect(message.getByText("Je ne sais pas : 8 %")).toBeVisible();
+});
+
+test("home page explains the app and leads to the questionnaire", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Dites ce dont vous avez besoin.");
+  await expect(page.getByRole("heading", { name: "Comment ça marche" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /^\d+ thèmes, \d+ cartes$/ })).toBeVisible();
+  await page.getByRole("link", { name: "Répondre" }).first().click();
+  await expect(page).toHaveURL(/\/repondre$/);
+  await expect(page.getByRole("button", { name: /je commence/ })).toBeVisible();
 });

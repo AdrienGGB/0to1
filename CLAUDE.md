@@ -63,7 +63,7 @@ Utiliser Context7 (MCP) pour la doc à jour de Next.js, Supabase, Tailwind, shad
 
 ```
 content/cards/        # Les cartes : un JSON par thème + index.ts qui les liste tous (données, pas du code)
-src/app/              # Pages (/, /confidentialite), routes /api/{challenge,session,answers,messages,stats}, manifest PWA
+src/app/              # Pages (/ accueil, /repondre questionnaire, /confidentialite), routes /api/{challenge,session,answers,messages,stats}, manifest PWA
 src/components/       # Survey (accueil, choix du thème, déroulé), SurveySummary (bilan), SwipeCard (geste), ui/ (shadcn)
 src/lib/answers.ts    # Directions → réponses, détection du geste, schéma d'une réponse
 src/lib/cards/        # Schéma zod, chargement, constitution d'un paquet (split-ballot, thèmes mêlés), progression par thème
