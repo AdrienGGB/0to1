@@ -43,7 +43,7 @@ export default function PrivacyPage() {
       <p className="text-sm text-muted-foreground">
         Page provisoire : la politique de confidentialité complète sera publiée avant le lancement.
       </p>
-      <Link href="/" className="underline underline-offset-4">
+      <Link href="/repondre" className="underline underline-offset-4">
         Retour au questionnaire
       </Link>
     </main>
