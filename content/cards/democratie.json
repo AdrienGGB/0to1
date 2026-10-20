@@ -12,6 +12,11 @@
       "statement": "J'ai le sentiment que mon avis compte dans les décisions qui concernent ma commune.",
       "rationale": "Mesure le sentiment d'être entendu dans les décisions locales.",
       "mirrorOf": "democratie-avis-ne-compte-pas",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Poids de votre avis dans votre commune"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -27,6 +32,11 @@
       "statement": "J'ai le sentiment que mon avis ne compte pas dans les décisions qui concernent ma commune.",
       "rationale": "Mesure le sentiment d'être entendu dans les décisions locales. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "democratie-avis-compte",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Poids de votre avis dans votre commune"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -72,6 +82,10 @@
       "statement": "Les questions de démocratie et de participation comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de démocratie et de participation parmi les préoccupations.",
       "mirrorOf": "democratie-priorite-basse",
+      "signal": {
+        "kind": "priority",
+        "answer": "yes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -87,6 +101,10 @@
       "statement": "Les questions de démocratie et de participation comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de démocratie et de participation parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "democratie-priorite-haute",
+      "signal": {
+        "kind": "priority",
+        "answer": "no"
+      },
       "reviews": [
         {
           "date": "2026-10-19",

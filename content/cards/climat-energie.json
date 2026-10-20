@@ -12,6 +12,11 @@
       "statement": "Le changement climatique m'inquiète pour mon avenir ou celui de mes proches.",
       "rationale": "Mesure l'inquiétude personnelle liée au changement climatique.",
       "mirrorOf": "climat-inquietude-non",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Changement climatique et avenir de vos proches"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -27,6 +32,11 @@
       "statement": "Le changement climatique ne m'inquiète pas pour mon avenir ou celui de mes proches.",
       "rationale": "Mesure l'inquiétude personnelle liée au changement climatique. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "climat-inquietude-oui",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Changement climatique et avenir de vos proches"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -42,6 +52,11 @@
       "statement": "Au cours des 5 dernières années, un événement météo extrême (canicule, inondation, tempête…) a eu des conséquences sur ma santé ou mes biens.",
       "rationale": "Mesure les conséquences concrètes vécues d'événements météo extrêmes.",
       "mirrorOf": "climat-evenement-sans-consequence",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Conséquences d'événements météo extrêmes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -57,6 +72,11 @@
       "statement": "Au cours des 5 dernières années, aucun événement météo extrême (canicule, inondation, tempête…) n'a eu de conséquence sur ma santé ou mes biens.",
       "rationale": "Mesure les conséquences concrètes vécues d'événements météo extrêmes. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "climat-evenement-consequences",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Conséquences d'événements météo extrêmes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -72,6 +92,11 @@
       "statement": "Au cours des 12 derniers mois, j'ai eu du mal à maintenir une température correcte dans mon logement (chauffage ou fraîcheur).",
       "rationale": "Mesure la difficulté à maintenir une température correcte chez soi, quel que soit le climat.",
       "mirrorOf": "energie-temperature-facile",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Température dans votre logement"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -87,6 +112,11 @@
       "statement": "Au cours des 12 derniers mois, je n'ai pas eu de mal à maintenir une température correcte dans mon logement (chauffage ou fraîcheur).",
       "rationale": "Mesure la difficulté à maintenir une température correcte chez soi, quel que soit le climat. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "energie-temperature-difficile",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Température dans votre logement"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -102,6 +132,11 @@
       "statement": "Au cours des 12 derniers mois, des règles environnementales (normes logement ou véhicules, taxes, interdictions…) ont pesé sur mon budget.",
       "rationale": "Mesure le poids ressenti des règles environnementales sur le budget.",
       "mirrorOf": "environnement-regles-sans-poids-budget",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Poids des règles environnementales sur votre budget"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -117,6 +152,11 @@
       "statement": "Au cours des 12 derniers mois, aucune règle environnementale (normes logement ou véhicules, taxes, interdictions…) n'a pesé sur mon budget.",
       "rationale": "Mesure le poids ressenti des règles environnementales sur le budget. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "environnement-regles-poids-budget",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Poids des règles environnementales sur votre budget"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -132,6 +172,10 @@
       "statement": "Les questions de climat et d'énergie comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de climat et d'énergie parmi les préoccupations.",
       "mirrorOf": "climat-energie-priorite-basse",
+      "signal": {
+        "kind": "priority",
+        "answer": "yes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -147,6 +191,10 @@
       "statement": "Les questions de climat et d'énergie comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de climat et d'énergie parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "climat-energie-priorite-haute",
+      "signal": {
+        "kind": "priority",
+        "answer": "no"
+      },
       "reviews": [
         {
           "date": "2026-10-19",

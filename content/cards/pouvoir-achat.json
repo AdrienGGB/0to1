@@ -12,6 +12,11 @@
       "statement": "Si j'avais une dépense imprévue importante, je pourrais y faire face avec mes propres moyens.",
       "rationale": "Mesure la capacité à faire face à un imprévu, épargne comprise.",
       "mirrorOf": "pouvoir-achat-imprevu-impossible",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Dépenses imprévues"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -27,6 +32,11 @@
       "statement": "Si j'avais une dépense imprévue importante, je ne pourrais pas y faire face avec mes propres moyens.",
       "rationale": "Mesure la capacité à faire face à un imprévu, épargne comprise. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "pouvoir-achat-imprevu-possible",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Dépenses imprévues"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -42,6 +52,11 @@
       "statement": "Au cours des 12 derniers mois, j'ai dû me priver sur des dépenses essentielles (alimentation, chauffage, soins).",
       "rationale": "Mesure les privations sur les dépenses essentielles.",
       "mirrorOf": "pouvoir-achat-privations-non",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Privations sur des dépenses essentielles"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -57,6 +72,11 @@
       "statement": "Au cours des 12 derniers mois, je n'ai pas eu à me priver sur des dépenses essentielles (alimentation, chauffage, soins).",
       "rationale": "Mesure les privations sur les dépenses essentielles. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "pouvoir-achat-privations-oui",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Privations sur des dépenses essentielles"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -72,6 +92,10 @@
       "statement": "Les questions de pouvoir d'achat comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place du pouvoir d'achat parmi les préoccupations.",
       "mirrorOf": "pouvoir-achat-priorite-basse",
+      "signal": {
+        "kind": "priority",
+        "answer": "yes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -87,6 +111,10 @@
       "statement": "Les questions de pouvoir d'achat comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place du pouvoir d'achat parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "pouvoir-achat-priorite-haute",
+      "signal": {
+        "kind": "priority",
+        "answer": "no"
+      },
       "reviews": [
         {
           "date": "2026-10-19",

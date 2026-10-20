@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+
 import { expect, test, type Page } from "@playwright/test";
 
 async function openMenu(page: Page) {
@@ -158,4 +160,142 @@ test("records mixed decks as mixed and leaves a deck for the theme list", async 
   await page.getByRole("button", { name: "Thèmes" }).click();
   await expect(page.getByText(/^1 carte répondue sur \d+$/)).toBeVisible();
   await expect.poll(() => modes).toEqual(["mixed"]);
+});
+
+function cardKey(themeFile: string, cardId: string): string {
+  const { cards } = JSON.parse(readFileSync(`content/cards/${themeFile}.json`, "utf8")) as {
+    cards: { id: string; version: number }[];
+  };
+  const card = cards.find((candidate) => candidate.id === cardId)!;
+  return `${card.id}@${card.version}`;
+}
+
+async function seedAnswers(page: Page, answers: Record<string, string>) {
+  await page.addInitScript((seeded) => {
+    if (!window.sessionStorage.getItem("seeded")) {
+      window.localStorage.setItem("requete.answered.v1", JSON.stringify(Object.keys(seeded)));
+      window.localStorage.setItem("requete.answers.v1", JSON.stringify(seeded));
+      window.sessionStorage.setItem("seeded", "1");
+    }
+  }, answers);
+}
+
+test("summarises the person's own answers and compares above the threshold", async ({ page }) => {
+  const needKey = cardKey("logement", "logement-cout-difficulte");
+  const otherNeedKey = cardKey("sante", "sante-renoncement-non");
+  await seedAnswers(page, {
+    [cardKey("logement", "logement-priorite-haute")]: "yes",
+    [needKey]: "yes",
+    [otherNeedKey]: "no",
+    [cardKey("solidarites", "solidarites-solitude-difficulte")]: "no",
+  });
+  await page.route("**/api/stats", (route) =>
+    route.fulfill({
+      json: {
+        cards: {
+          [needKey]: {
+            total: 1240,
+            counts: { yes: 720, no: 372, dont_know: 99, prefer_not: 49 },
+            since: "2026-10-20T08:00:00Z",
+          },
+        },
+        message: null,
+      },
+    }),
+  );
+
+  await openMenu(page);
+  await page.getByRole("button", { name: "Voir mon bilan" }).click();
+  await expect(page.getByRole("heading", { name: "Votre bilan" })).toBeVisible();
+  await expect(page.getByText(/^Vous avez répondu à 4 cartes\./)).toBeVisible();
+
+  const priorities = page.getByRole("region", { name: "Les thèmes qui comptent pour vous" });
+  await expect(priorities.getByRole("listitem")).toHaveText(["Logement"]);
+
+  const needs = page.getByRole("region", { name: /peuvent indiquer une difficulté/ });
+  await expect(needs.getByRole("listitem").filter({ has: page.locator("p.font-medium") })).toHaveCount(2);
+  await expect(needs).toContainText("Coût du logement");
+  await expect(needs).toContainText("1 240 réponses");
+  await expect(needs).toContainText("Oui 58 %");
+  await expect(needs).toContainText("Renoncement aux soins pour raisons financières");
+  await expect(needs).toContainText("Pas encore assez de réponses pour comparer");
+  await expect(needs).not.toContainText("Solitude");
+});
+
+test("sends one priority message of up to three themes", async ({ page }) => {
+  await seedAnswers(page, { [cardKey("logement", "logement-adapte")]: "yes" });
+  const messages: unknown[] = [];
+  page.on("request", (request) => {
+    if (request.url().endsWith("/api/messages")) {
+      messages.push(request.postDataJSON());
+    }
+  });
+
+  await openMenu(page);
+  await page.getByRole("button", { name: "Voir mon bilan" }).click();
+  const send = page.getByRole("button", { name: "Envoyer mes choix" });
+  await expect(send).toBeDisabled();
+  for (const theme of ["Logement", "Santé", "Solidarités"]) {
+    await page.getByRole("button", { name: theme, exact: true }).click();
+  }
+  await expect(page.getByRole("button", { name: "Numérique", exact: true })).toBeDisabled();
+  await send.click();
+
+  await expect(page.getByText(/^Vos choix sont enregistrés, de façon anonyme/)).toContainText(
+    "Logement, Santé, Solidarités",
+  );
+  expect(messages).toHaveLength(1);
+  expect(messages[0]).toMatchObject({
+    choice: "themes",
+    themeIds: ["logement", "sante", "solidarites"],
+    displaySeed: expect.any(Number),
+  });
+
+  await page.reload();
+  await openMenu(page);
+  await page.getByRole("button", { name: "Voir mon bilan" }).click();
+  await expect(page.getByRole("button", { name: "Envoyer mes choix" })).toHaveCount(0);
+});
+
+test("clears the device after confirmation", async ({ page }) => {
+  await seedAnswers(page, { [cardKey("logement", "logement-adapte")]: "yes" });
+  await openMenu(page);
+  await page.getByRole("button", { name: "Voir mon bilan" }).click();
+  await page.getByRole("button", { name: "Effacer mes réponses de cet appareil" }).click();
+  await page.getByRole("button", { name: "Effacer", exact: true }).click();
+  await expect(page.getByText(/^0 carte répondue sur \d+$/)).toBeVisible();
+  await expect(page.getByRole("button", { name: "Voir mon bilan" })).toHaveCount(0);
+});
+
+test("shows the full distribution of the priority question past the threshold", async ({ page }) => {
+  await seedAnswers(page, { [cardKey("logement", "logement-adapte")]: "yes" });
+  await page.addInitScript(() => {
+    window.localStorage.setItem(
+      "requete.message.v1",
+      JSON.stringify({ choice: "themes", themeIds: ["logement"] }),
+    );
+  });
+  await page.route("**/api/stats", (route) =>
+    route.fulfill({
+      json: {
+        cards: {},
+        message: {
+          total: 250,
+          counts: { logement: 100, sante: 60, dont_know: 20 },
+          since: "2026-10-20T08:00:00Z",
+        },
+      },
+    }),
+  );
+
+  await openMenu(page);
+  await page.getByRole("button", { name: "Voir mon bilan" }).click();
+  const message = page.getByRole("region", { name: "Votre message" });
+  await expect(message).toContainText("Sur cette question, 250 réponses");
+  await expect(message).toContainText("le total dépasse 100 %");
+  await expect(message).toContainText("Logement : choisi dans 40 % des réponses à cette question");
+  await message.getByText("Voir tous les thèmes").click();
+  await expect(message.getByText("Santé : 24 %")).toBeVisible();
+  await expect(message.getByText("Numérique : 0 %")).toBeVisible();
+  await expect(message.getByText("Je ne sais pas : 8 %")).toBeVisible();
 });

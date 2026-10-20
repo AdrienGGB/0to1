@@ -12,6 +12,11 @@
       "statement": "Le coût de mon logement (loyer, prêt, charges) me met en difficulté financière.",
       "rationale": "Mesure le poids du logement dans le budget, tel qu'il est vécu.",
       "mirrorOf": "logement-cout-sans-difficulte",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Coût du logement"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -27,6 +32,11 @@
       "statement": "Le coût de mon logement (loyer, prêt, charges) ne me met pas en difficulté financière.",
       "rationale": "Mesure le poids du logement dans le budget, tel qu'il est vécu. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "logement-cout-difficulte",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Coût du logement"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -42,6 +52,11 @@
       "statement": "Mon logement actuel correspond à mes besoins (taille, état, confort).",
       "rationale": "Mesure l'adéquation du logement aux besoins.",
       "mirrorOf": "logement-inadapte",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Adaptation du logement à vos besoins"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -57,6 +72,11 @@
       "statement": "Mon logement actuel ne correspond pas à mes besoins (taille, état, confort).",
       "rationale": "Mesure l'adéquation du logement aux besoins. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "logement-adapte",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Adaptation du logement à vos besoins"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -72,6 +92,10 @@
       "statement": "Les questions de logement comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de logement parmi les préoccupations.",
       "mirrorOf": "logement-priorite-basse",
+      "signal": {
+        "kind": "priority",
+        "answer": "yes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -87,6 +111,10 @@
       "statement": "Les questions de logement comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de logement parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "logement-priorite-haute",
+      "signal": {
+        "kind": "priority",
+        "answer": "no"
+      },
       "reviews": [
         {
           "date": "2026-10-19",

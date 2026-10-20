@@ -7,6 +7,34 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ---
 
+## 2026-10-20 — Bilan de fin, comparaison et message prioritaire
+
+- **Contexte** : Adrien veut que chacun reparte avec une conclusion, puisse comparer ses réponses
+  à celles des autres et faire passer son message.
+- **Décision** :
+  - **Bilan miroir**, calculé sur l'appareil : thèmes qui comptent pour la personne, réponses qui
+    peuvent indiquer une difficulté ou une préoccupation. Règles dans `NEUTRALITE.md` (« Bilan
+    personnel »). Les réponses sont désormais gardées sur l'appareil, avec un bouton d'effacement.
+  - **Comparaison** avec les autres répondants, sur la même version de carte, répartition
+    complète, à partir de **100 réponses** (choix d'Adrien, marge d'environ ±10 points). Le seuil
+    est appliqué en SQL (`card_answer_stats()`), donc impossible à contourner depuis le navigateur.
+  - **Toutes les réponses comptent** dans la comparaison, paquets mélangés et thèmes choisis
+    (choix d'Adrien). Le relecteur de neutralité recommandait les seuls paquets mélangés ; le bilan
+    précise que les réponses par thème sont incluses.
+  - **Message prioritaire** : une question versionnée (`priorite-message` v1), 1 à 3 thèmes en
+    ordre aléatoire, ou une non-réponse ; un par session (table `priority_messages`). Le
+    relecteur a fait retirer « Si un seul message devait passer » (contradictoire avec 3 thèmes,
+    et laissant croire à une transmission).
+  - **Signaux** : 101 cartes en portent un ; pas de signal quand la réponse est ambiguë (voir
+    `NEUTRALITE.md`). Un signal ne change pas la version d'une carte : il ne modifie pas ce
+    qu'elle affiche.
+- **Conséquences** : migrations `20261020000000_summary_stats.sql` et
+  `20261020000001_message_question_tracking.sql`. Avec 0 réponse au départ, le bilan affiche
+  « Pas encore assez de réponses » partout jusqu'au seuil. La question prioritaire suit le bilan :
+  effet de contexte possible, à garder en tête à l'analyse.
+- **Remplace** « Collecte d'abord, aucun affichage des résultats » : des agrégats sont désormais
+  montrés au répondant, dans son bilan. Une page de résultats publique reste à décider.
+
 ## 2026-10-19 — Adresse et noms techniques : requete
 
 - **Contexte** : le site et le repo portaient encore le nom technique `0to1`. `requete.vercel.app`
@@ -154,5 +182,4 @@ Format : **date — titre** · Contexte · Décision · Conséquences.
 
 ## À décider
 
-- Seuil minimal d'effectif pour publier un agrégat.
 - Niveau 3 anti-abus (vérification d'unicité avec jeton anonyme) : quand, et avec quel fournisseur.

@@ -92,6 +92,29 @@ Le QCM se présente comme une pile de cartes, chacune portant une affirmation.
 - Paquets courts, progression visible, chaque réponse enregistrée tout de suite : on peut s'arrêter
   à tout moment.
 
+### Bilan personnel
+
+À la fin, la personne peut voir un **bilan miroir** : ses propres réponses regroupées, calculées
+sur son appareil.
+
+- Il **reprend sans interpréter** : les thèmes qu'elle a dit compter pour elle, et les réponses qui
+  peuvent indiquer une difficulté ou une préoccupation. Aucun score, aucun profil, aucun total de
+  difficultés, aucune couleur d'alerte, pas d'image à partager ; ordre alphabétique par thème.
+- **Quelle réponse signale un besoin** : chaque carte concernée porte un `signal` (la réponse qui
+  l'exprime, et un libellé court qui nomme le sujet sans prendre parti). Un signal sur un « Non »
+  n'est posé que si ce « Non » équivaut à l'affirmation inverse : « Non » à « l'activité se
+  maintient » peut vouloir dire qu'elle progresse, donc pas de signal. Pas de signal non plus
+  quand la réponse dépend de la personne (dépendre de la voiture n'est pas une difficulté pour
+  tous) ni sur les attentes. Les signaux passent par la revue, comme les cartes.
+- **Comparaison** : sur la carte exacte que la personne a vue (jamais les deux versions d'une
+  paire additionnées), répartition complète, effectif et date de début, et seulement à partir de
+  100 réponses. Mention : les participants ne forment pas un échantillon représentatif.
+- **Question prioritaire** : « Parmi ces thèmes, lesquels voudriez-vous voir traités en
+  priorité ? », de 1 à 3 thèmes, plus « Je ne sais pas » et « Je préfère ne pas répondre ». Thèmes
+  dans un **ordre aléatoire** par personne, graine enregistrée ; question versionnée. Elle vient
+  après le bilan : cet effet de contexte est connu et documenté. Ses résultats s'affichent en
+  entier (tous les thèmes et les non-réponses), avec la mention que le total dépasse 100 %.
+
 ## 5. Couverture des thèmes
 
 Le QCM couvre largement la vie quotidienne et collective : par exemple pouvoir d'achat, emploi et

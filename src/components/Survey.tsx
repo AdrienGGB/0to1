@@ -3,8 +3,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence } from "motion/react";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, LayoutList, Shuffle } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, ClipboardList, LayoutList, Shuffle } from "lucide-react";
 
+import { SurveySummary } from "@/components/SurveySummary";
 import { SwipeCard } from "@/components/SwipeCard";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -16,10 +17,11 @@ import {
   type DeckMode,
   type SwipeDirection,
 } from "@/lib/answers";
-import { markAnswered, readAnsweredKeys } from "@/lib/answeredStore";
+import { clearLocalAnswers, markAnswered, readAnsweredKeys } from "@/lib/answeredStore";
 import { buildSessionDeck } from "@/lib/cards/buildSessionDeck";
 import type { DeckCard, Theme } from "@/lib/cards/schema";
 import { getThemeProgress, isThemeComplete } from "@/lib/cards/themeProgress";
+import { clearLocalMessage } from "@/lib/priorityMessage";
 import { createSeed } from "@/lib/shuffle";
 import {
   openSession,
@@ -28,7 +30,7 @@ import {
   type SolvedChallenge,
 } from "@/lib/startSession";
 
-type Phase = "intro" | "starting" | "error" | "menu" | "deck" | "done";
+type Phase = "intro" | "starting" | "error" | "menu" | "deck" | "done" | "summary";
 
 interface Deck {
   seed: number;
@@ -88,13 +90,18 @@ export function Survey({ cards }: SurveyProps) {
     window.scrollTo(0, 0);
   }
 
+  function showSummary() {
+    setPhase("summary");
+    window.scrollTo(0, 0);
+  }
+
+  function clearDevice() {
+    clearLocalAnswers();
+    clearLocalMessage();
+    showMenu();
+  }
+
   async function startSurvey() {
-    const keys = readAnsweredKeys();
-    if (buildSessionDeck(cards, keys, 0).length === 0) {
-      // Nothing left to answer on this device: no session needed to say so.
-      showMenu();
-      return;
-    }
     setPhase("starting");
     try {
       const solved = await (challengeRef.current ?? prepareChallenge());
@@ -131,12 +138,13 @@ export function Survey({ cards }: SurveyProps) {
         return;
       }
       const responseMs = Math.round(performance.now() - shownAtRef.current);
+      const answer = getAnswerForDirection(direction);
       sendAnswer({
         sessionId: session.sessionId,
         sessionToken: session.sessionToken,
         cardId: currentCard.id,
         cardVersion: currentCard.version,
-        answer: getAnswerForDirection(direction),
+        answer,
         position: index,
         deckSeed: deck.seed,
         responseMs,
@@ -144,7 +152,7 @@ export function Survey({ cards }: SurveyProps) {
         deckMode: deck.mode,
       });
 
-      markAnswered(currentCard);
+      markAnswered(currentCard, answer);
       setAnsweredCount((count) => count + 1);
       setLastDirection(direction);
       shownAtRef.current = performance.now();
@@ -235,6 +243,12 @@ export function Survey({ cards }: SurveyProps) {
           />
         </div>
 
+        {answeredTotal > 0 && (
+          <Button variant="outline" size="lg" onClick={showSummary}>
+            <ClipboardList aria-hidden /> Voir mon bilan
+          </Button>
+        )}
+
         {hasMoreCards ? (
           <Button size="lg" onClick={() => startDeck()}>
             <Shuffle aria-hidden /> Tous les thèmes, mélangés
@@ -287,6 +301,19 @@ export function Survey({ cards }: SurveyProps) {
     );
   }
 
+  if (phase === "summary") {
+    return (
+      <SurveySummary
+        cards={cards}
+        session={session}
+        hasMoreCards={hasMoreCards}
+        onContinue={() => startDeck()}
+        onShowMenu={showMenu}
+        onClear={clearDevice}
+      />
+    );
+  }
+
   if (phase === "done" || !deck) {
     const themeDone = deck?.theme
       ? themeProgress.find(({ theme }) => theme.id === deck.theme?.id)
@@ -309,6 +336,9 @@ export function Survey({ cards }: SurveyProps) {
             <Button size="lg" onClick={() => startDeck()}>
               Continuer avec d&apos;autres cartes
             </Button>
+            <Button variant="outline" size="lg" onClick={showSummary}>
+              <ClipboardList aria-hidden /> Voir mon bilan
+            </Button>
             <Button variant="outline" size="lg" onClick={showMenu}>
               <LayoutList aria-hidden /> Choisir un thème
             </Button>
@@ -317,7 +347,12 @@ export function Survey({ cards }: SurveyProps) {
             </p>
           </div>
         ) : (
-          <p className="text-muted-foreground">Vous avez répondu à toutes les cartes disponibles.</p>
+          <>
+            <p className="text-muted-foreground">Vous avez répondu à toutes les cartes disponibles.</p>
+            <Button size="lg" onClick={showSummary}>
+              <ClipboardList aria-hidden /> Voir mon bilan
+            </Button>
+          </>
         )}
       </section>
     );

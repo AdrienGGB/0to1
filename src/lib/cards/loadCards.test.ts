@@ -35,6 +35,31 @@ describe("loadDeck", () => {
   });
 });
 
+describe("card signals", () => {
+  const cards = loadDeck();
+  const byId = new Map(cards.map((card) => [card.id, card]));
+
+  it("gives both cards of a pair the same signal with opposite answers", () => {
+    for (const card of cards) {
+      const mirror = card.mirrorOf ? byId.get(card.mirrorOf) : undefined;
+      if (!card.signal || !mirror?.signal) {
+        continue;
+      }
+      expect(mirror.signal.kind).toBe(card.signal.kind);
+      expect(mirror.signal.answer).not.toBe(card.signal.answer);
+      if (card.signal.kind === "difficulty" && mirror.signal.kind === "difficulty") {
+        expect(mirror.signal.label).toBe(card.signal.label);
+      }
+    }
+  });
+
+  it("marks every priority card, and only priority cards, as a priority signal", () => {
+    for (const card of cards) {
+      expect(card.kind === "priority").toBe(card.signal?.kind === "priority");
+    }
+  });
+});
+
 describe("buildDeck", () => {
   it("rejects duplicate ids across files", () => {
     const files = parseThemeFiles([

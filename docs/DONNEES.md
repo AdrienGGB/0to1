@@ -21,7 +21,10 @@ qui est indispensable, et de ne pas pouvoir relier une réponse à une personne.
 - **Hébergement dans l'UE** (projet Supabase en région UE, Vercel configuré en conséquence).
 - **Durée de conservation** définie et documentée pour chaque type de donnée.
 - **Seuil de diffusion** : ne pas publier d'agrégat sur un sous-groupe trop petit (risque de
-  ré-identification) ; seuil à fixer dans `DECISIONS.md`.
+  ré-identification). Seuil : **100 réponses** par carte (ou par version de la question
+  prioritaire), appliqué dans la base (voir `DECISIONS.md`).
+- **Appareil partagé** : le bilan est calculé à partir de réponses gardées sur l'appareil ; il
+  propose de les effacer.
 
 ## Ce qui est réellement traité aujourd'hui
 
@@ -32,7 +35,9 @@ qui est indispensable, et de ne pas pouvoir relier une réponse à une personne.
 | Jeton de session signé | Mémoire du navigateur | 2 h | Prouve que la session a passé l'anti-bot ; non stocké côté serveur |
 | Empreinte d'IP : HMAC de l'IP, avec un sel qui change chaque jour (UTC) | Table `rate_limits` | 24 h maximum, purge automatique | **Aucun** : jamais stockée avec les réponses |
 | Défis anti-bot déjà utilisés (nonce aléatoire) | Table `used_challenges` | 10 min | Aucun |
-| Liste des cartes déjà répondues | `localStorage` de l'appareil | Jusqu'à effacement par la personne | Jamais envoyée au serveur |
+| Liste des cartes déjà répondues, et la réponse donnée à chacune | `localStorage` de l'appareil | Jusqu'à effacement par la personne (bouton dans le bilan) | Jamais envoyées au serveur depuis ce stockage ; servent à calculer le bilan sur l'appareil |
+| Message prioritaire : 1 à 3 thèmes, ou « Je ne sais pas » / « Je préfère ne pas répondre », version de la question, graine de l'ordre d'affichage | Table `priority_messages` (un par session), et copie sur l'appareil | À définir (comme les réponses) | Même identifiant de session que les réponses |
+| Agrégats du bilan : répartition des réponses par carte, et des choix au message prioritaire | Calculés à la demande par `card_answer_stats()` et `message_choice_stats()`, mis en cache quelques minutes | — | Aucun : seulement des totaux, et seulement à partir de 100 réponses |
 
 L'adresse IP elle-même n'est écrite nulle part. L'empreinte sert uniquement à limiter le nombre de
 sessions et de réponses par connexion ; comme le sel change chaque jour, deux empreintes de jours

@@ -9,8 +9,9 @@ en attente d'Adrien.
 Tout ce qui suit est mergé sur `main` (PR #3 à #6) et déployé sur Vercel.
 
 - **Produit** : ReQuête, un QCM en swipe pour faire remonter les besoins de la population, neutre et
-  anonyme. Collecte uniquement : aucun résultat n'est affiché (décision volontaire, voir
-  `DECISIONS.md`).
+  anonyme. En fin de parcours, un bilan miroir calculé sur l'appareil, une comparaison avec les
+  autres répondants à partir de 100 réponses par carte, et une question prioritaire (1 à 3
+  thèmes). Pas de page de résultats publique (voir `DECISIONS.md`).
 - **Interface** : pile de cartes à 4 gestes (droite Oui, gauche Non, haut Je ne sais pas, bas Je
   préfère ne pas répondre), boutons et clavier équivalents, paquets de 12 cartes enchaînables.
   Écran de choix : paquet mélangé ou un thème, avec progression globale et par thème ; chaque
@@ -57,8 +58,8 @@ Supabase (`supabase login`).
 - **Avant une diffusion publique** (voir `DONNEES.md`) : base légale et texte de consentement,
   analyse d'impact (AIPD, probablement obligatoire), durée de conservation, page de confidentialité
   définitive (`/confidentialite` est provisoire).
-- **Plus tard** : niveau 3 anti-abus (vérification d'unicité avec jeton anonyme), puis
-  l'affichage ou le partage des résultats, une fois l'attraction validée.
+- **Plus tard** : niveau 3 anti-abus (vérification d'unicité avec jeton anonyme), puis une page
+  de résultats publique, une fois l'attraction validée.
 
 ## Pièges connus
 

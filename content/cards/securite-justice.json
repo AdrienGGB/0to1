@@ -12,6 +12,11 @@
       "statement": "Je me sens en sécurité dans mon quartier ou ma commune.",
       "rationale": "Mesure le sentiment de sécurité au quotidien.",
       "mirrorOf": "securite-quartier-non",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Sécurité dans votre quartier ou commune"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -27,6 +32,11 @@
       "statement": "Je ne me sens pas en sécurité dans mon quartier ou ma commune.",
       "rationale": "Mesure le sentiment de sécurité au quotidien. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "securite-quartier-oui",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Sécurité dans votre quartier ou commune"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -42,6 +52,11 @@
       "statement": "Si j'étais victime d'une infraction et portais plainte, je pense que ma plainte serait traitée sérieusement.",
       "rationale": "Mesure la confiance dans le traitement d'une plainte.",
       "mirrorOf": "justice-plainte-non-traitee",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Traitement des plaintes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -57,6 +72,11 @@
       "statement": "Si j'étais victime d'une infraction et portais plainte, je pense que ma plainte ne serait pas traitée sérieusement.",
       "rationale": "Mesure la confiance dans le traitement d'une plainte. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "justice-plainte-traitee",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Traitement des plaintes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -72,6 +92,10 @@
       "statement": "Les questions de sécurité et de justice comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de sécurité et de justice parmi les préoccupations.",
       "mirrorOf": "securite-justice-priorite-basse",
+      "signal": {
+        "kind": "priority",
+        "answer": "yes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -87,6 +111,10 @@
       "statement": "Les questions de sécurité et de justice comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de sécurité et de justice parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "securite-justice-priorite-haute",
+      "signal": {
+        "kind": "priority",
+        "answer": "no"
+      },
       "reviews": [
         {
           "date": "2026-10-19",

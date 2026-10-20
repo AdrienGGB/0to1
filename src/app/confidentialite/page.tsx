@@ -26,10 +26,18 @@ export default function PrivacyPage() {
           chaque jour et effacée sous 24 heures. Elle n&apos;est jamais reliée à vos réponses.
         </li>
         <li>
-          Votre appareil retient les cartes auxquelles vous avez déjà répondu, pour ne pas vous les
-          reproposer. Cette liste reste sur votre appareil.
+          Votre appareil retient les cartes auxquelles vous avez déjà répondu et vos réponses, pour
+          ne pas vous les reproposer et pour calculer votre bilan. Elles restent sur votre appareil,
+          et le bilan propose de les effacer. Sur un appareil partagé, pensez à le faire.
         </li>
-        <li>Si des résultats sont un jour publiés, ce sera uniquement sous forme agrégée.</li>
+        <li>
+          Les thèmes que vous choisissez comme prioritaires sont enregistrés, anonymes, comme vos
+          réponses aux cartes.
+        </li>
+        <li>
+          Les comparaisons du bilan sont des totaux : aucun chiffre n&apos;est affiché tant
+          qu&apos;une carte ou une question n&apos;a pas reçu au moins 100 réponses.
+        </li>
         <li>Aucun outil de suivi publicitaire ni de mesure d&apos;audience tiers n&apos;est utilisé.</li>
       </ul>
       <p className="text-sm text-muted-foreground">

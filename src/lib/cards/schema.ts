@@ -19,6 +19,21 @@ export const reviewSchema = z.object({
   outcome: z.enum(["approved", "changes_requested", "changes_applied"]),
 });
 
+/**
+ * Which answer to a card signals a need, for the person's own summary (docs/NEUTRALITE.md §9).
+ * Analysis metadata: it never changes what the card shows, so it does not bump the version.
+ */
+export const signalSchema = z.discriminatedUnion("kind", [
+  /** "yes" on « … comptent beaucoup », "no" on its mirror: the theme matters to the person. */
+  z.object({ kind: z.literal("priority"), answer: z.enum(["yes", "no"]) }),
+  /** A difficulty or concern the person reported, named by a short, side-neutral label. */
+  z.object({
+    kind: z.literal("difficulty"),
+    answer: z.enum(["yes", "no"]),
+    label: z.string().min(3).max(60),
+  }),
+]);
+
 export const cardSchema = z.object({
   /** Stable identifier: never reused, never renamed. */
   id: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/),
@@ -30,6 +45,8 @@ export const cardSchema = z.object({
   rationale: z.string().min(10),
   /** Card framed in the opposite direction, to offset acquiescence bias. */
   mirrorOf: z.string().optional(),
+  /** Absent when no answer clearly signals a need (expectations, contested framings). */
+  signal: signalSchema.optional(),
   sources: z.array(z.string()).default([]),
   /** Neutrality reviews, oldest first (docs/NEUTRALITE.md §6–7). */
   reviews: z.array(reviewSchema).default([]),
@@ -58,6 +75,7 @@ export const themeFileSchema = z.object({
 export type CardKind = z.infer<typeof cardKindSchema>;
 export type Category = z.infer<typeof categorySchema>;
 export type Review = z.infer<typeof reviewSchema>;
+export type Signal = z.infer<typeof signalSchema>;
 export type Card = z.infer<typeof cardSchema>;
 export type Theme = z.infer<typeof themeSchema>;
 export type ThemeFile = z.infer<typeof themeFileSchema>;
