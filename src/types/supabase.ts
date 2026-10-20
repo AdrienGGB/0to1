@@ -39,6 +39,8 @@ export interface Database {
           session_id: string;
           choice: "themes" | "dont_know" | "prefer_not";
           theme_ids: string[];
+          question_version: number;
+          display_seed: number;
           created_at: string;
         };
         Insert: {
@@ -46,6 +48,8 @@ export interface Database {
           session_id: string;
           choice: "themes" | "dont_know" | "prefer_not";
           theme_ids?: string[];
+          question_version: number;
+          display_seed: number;
           created_at?: string;
         };
         Update: never;
@@ -75,9 +79,15 @@ export interface Database {
           first_answer_at: string;
         }[];
       };
-      theme_message_stats: {
+      message_choice_stats: {
         Args: Record<string, never>;
-        Returns: { theme_id: string; chosen: number; total: number; first_message_at: string }[];
+        Returns: {
+          question_version: number;
+          option: string;
+          chosen: number;
+          total: number;
+          first_message_at: string;
+        }[];
       };
     };
     Enums: Record<never, never>;
