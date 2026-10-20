@@ -12,6 +12,11 @@
       "statement": "Je suis à l'aise pour faire mes démarches en ligne (impôts, santé, aides…).",
       "rationale": "Mesure l'aisance avec les démarches en ligne.",
       "mirrorOf": "numerique-demarches-pas-aise",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Démarches en ligne"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -27,6 +32,11 @@
       "statement": "Je ne suis pas à l'aise pour faire mes démarches en ligne (impôts, santé, aides…).",
       "rationale": "Mesure l'aisance avec les démarches en ligne. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "numerique-demarches-aise",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Démarches en ligne"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -42,6 +52,11 @@
       "statement": "Là où je vis, l'accès à internet est suffisant pour mes besoins.",
       "rationale": "Mesure la qualité de la connexion internet là où l'on vit.",
       "mirrorOf": "numerique-acces-insuffisant",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Accès à internet"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -57,6 +72,11 @@
       "statement": "Là où je vis, l'accès à internet est insuffisant pour mes besoins.",
       "rationale": "Mesure la qualité de la connexion internet là où l'on vit. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "numerique-acces-suffisant",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Accès à internet"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -72,6 +92,10 @@
       "statement": "Les questions de numérique comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de numérique parmi les préoccupations.",
       "mirrorOf": "numerique-priorite-basse",
+      "signal": {
+        "kind": "priority",
+        "answer": "yes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -87,6 +111,10 @@
       "statement": "Les questions de numérique comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de numérique parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "numerique-priorite-haute",
+      "signal": {
+        "kind": "priority",
+        "answer": "no"
+      },
       "reviews": [
         {
           "date": "2026-10-19",

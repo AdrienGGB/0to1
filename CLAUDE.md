@@ -11,7 +11,8 @@ priorités ; il ne classe pas les gens, ne recommande rien, ne pousse aucune opt
 le dossier local peut s'appeler encore `0to1`).
 **Site** : https://re-quete.vercel.app (injoignable depuis les sessions cloud : réseau bloqué).
 **Développeur** : Adrien (solo).
-**État** : collecte uniquement (aucun affichage de résultats, voir `docs/DECISIONS.md`). Écran de
+**État** : collecte, plus un bilan personnel en fin de parcours (comparaison à partir de 100
+réponses, message prioritaire ; voir `docs/DECISIONS.md`). Écran de
 swipe, 110 cartes (17 thèmes, 6 catégories) en paquets de 12 mélangés ou par thème choisi, avec
 progression globale et par thème, anti-bot niveaux 1 et 2, projet Supabase de prod créé
 (`vpbxrneabgskbckjiwlk`, région UE).
@@ -62,13 +63,14 @@ Utiliser Context7 (MCP) pour la doc à jour de Next.js, Supabase, Tailwind, shad
 
 ```
 content/cards/        # Les cartes : un JSON par thème + index.ts qui les liste tous (données, pas du code)
-src/app/              # Pages (/, /confidentialite), routes /api/{challenge,session,answers}, manifest PWA
-src/components/       # Survey (accueil, choix du thème, déroulé), SwipeCard (geste), ui/ (shadcn)
+src/app/              # Pages (/, /confidentialite), routes /api/{challenge,session,answers,messages,stats}, manifest PWA
+src/components/       # Survey (accueil, choix du thème, déroulé), SurveySummary (bilan), SwipeCard (geste), ui/ (shadcn)
 src/lib/answers.ts    # Directions → réponses, détection du geste, schéma d'une réponse
 src/lib/cards/        # Schéma zod, chargement, constitution d'un paquet (split-ballot, thèmes mêlés), progression par thème
 src/lib/shuffle.ts    # Mélange déterministe (graine enregistrée avec chaque réponse)
 src/lib/antiAbuse/    # Défi ALTCHA, jetons de session signés, empreinte d'IP, limites de débit
-src/lib/answeredStore.ts # Cartes déjà répondues, mémorisées sur l'appareil (localStorage)
+src/lib/answeredStore.ts # Cartes déjà répondues et réponses, mémorisées sur l'appareil (localStorage)
+src/lib/summary.ts    # Bilan miroir à partir des signaux des cartes ; stats.ts (agrégats), priorityMessage.ts
 src/lib/startSession.ts  # Côté client : résout le défi et ouvre la session
 src/lib/supabase/     # Client Supabase serveur (anonyme, insertion seule)
 supabase/migrations/  # Schéma SQL + RLS

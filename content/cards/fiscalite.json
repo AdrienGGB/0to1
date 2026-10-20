@@ -12,6 +12,11 @@
       "statement": "Je comprends comment est utilisé l'argent des impôts et des cotisations.",
       "rationale": "Mesure la compréhension de l'usage des impôts et cotisations, pour tous, imposables ou non.",
       "mirrorOf": "fiscalite-usage-incompris",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Comprendre l'usage des impôts et cotisations"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -27,6 +32,11 @@
       "statement": "Je ne comprends pas comment est utilisé l'argent des impôts et des cotisations.",
       "rationale": "Mesure la compréhension de l'usage des impôts et cotisations, pour tous, imposables ou non. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "fiscalite-usage-compris",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Comprendre l'usage des impôts et cotisations"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -42,6 +52,11 @@
       "statement": "Les impôts, taxes et cotisations que je paie pèsent lourd dans mon budget.",
       "rationale": "Mesure le poids ressenti des prélèvements dans le budget, toutes taxes confondues.",
       "mirrorOf": "fiscalite-poids-leger",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Poids des impôts et cotisations dans votre budget"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -72,6 +87,11 @@
       "statement": "Les services publics sont à la hauteur des impôts et cotisations que paient les habitants.",
       "rationale": "Mesure l'équilibre perçu entre contribution et services reçus.",
       "mirrorOf": "fiscalite-services-pas-a-la-hauteur",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Services publics au regard des impôts payés"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -87,6 +107,11 @@
       "statement": "Les services publics ne sont pas à la hauteur des impôts et cotisations que paient les habitants.",
       "rationale": "Mesure l'équilibre perçu entre contribution et services reçus. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "fiscalite-services-a-la-hauteur",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Services publics au regard des impôts payés"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -102,6 +127,10 @@
       "statement": "Les questions d'impôts et de cotisations comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions d'impôts et de cotisations parmi les préoccupations.",
       "mirrorOf": "fiscalite-priorite-basse",
+      "signal": {
+        "kind": "priority",
+        "answer": "yes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -117,6 +146,10 @@
       "statement": "Les questions d'impôts et de cotisations comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions d'impôts et de cotisations parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "fiscalite-priorite-haute",
+      "signal": {
+        "kind": "priority",
+        "answer": "no"
+      },
       "reviews": [
         {
           "date": "2026-10-19",

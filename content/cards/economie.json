@@ -27,6 +27,11 @@
       "statement": "Je pense que ma situation financière sera moins bonne dans cinq ans qu'aujourd'hui.",
       "rationale": "Mesure les perspectives financières personnelles. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "economie-perspectives-meilleures",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Perspectives financières à cinq ans"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -57,6 +62,11 @@
       "statement": "Près de chez moi, l'activité économique (commerces, entreprises, emplois) décline.",
       "rationale": "Mesure la vitalité perçue de l'activité économique locale. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "economie-activite-locale-maintien",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Activité économique près de chez vous"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -72,6 +82,10 @@
       "statement": "Les questions d'économie comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions économiques parmi les préoccupations.",
       "mirrorOf": "economie-priorite-basse",
+      "signal": {
+        "kind": "priority",
+        "answer": "yes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -87,6 +101,10 @@
       "statement": "Les questions d'économie comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions économiques parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "economie-priorite-haute",
+      "signal": {
+        "kind": "priority",
+        "answer": "no"
+      },
       "reviews": [
         {
           "date": "2026-10-19",

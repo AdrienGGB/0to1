@@ -32,7 +32,7 @@ export function getClientKeySecret(): string {
   return deriveSecret("client-key");
 }
 
-export type RateLimitScope = "session" | "answer";
+export type RateLimitScope = "session" | "answer" | "message";
 
 /**
  * Generous limits: many people can share one IP (mobile carriers, schools, offices).
@@ -41,6 +41,7 @@ export type RateLimitScope = "session" | "answer";
 const rateLimits: Record<RateLimitScope, { windowSeconds: number; limit: number }> = {
   session: { windowSeconds: 3600, limit: 60 },
   answer: { windowSeconds: 3600, limit: 2000 },
+  message: { windowSeconds: 3600, limit: 60 },
 };
 
 // In-memory fallbacks for local dev without Supabase. Not shared across serverless instances.

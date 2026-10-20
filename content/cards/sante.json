@@ -12,6 +12,11 @@
       "statement": "Si j'avais besoin d'un médecin dans les prochains jours, je pourrais en consulter un facilement.",
       "rationale": "Mesure l'accès perçu à une consultation médicale, pour tous, qu'on en ait eu besoin ou non.",
       "mirrorOf": "sante-consultation-delai-ko",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Consulter un médecin rapidement"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -27,6 +32,11 @@
       "statement": "Si j'avais besoin d'un médecin dans les prochains jours, j'aurais du mal à en consulter un.",
       "rationale": "Mesure l'accès perçu à une consultation médicale, pour tous, qu'on en ait eu besoin ou non. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "sante-consultation-delai-ok",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Consulter un médecin rapidement"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -42,6 +52,11 @@
       "statement": "Au cours des 12 derniers mois, j'ai renoncé à des soins pour des raisons financières.",
       "rationale": "Mesure le renoncement aux soins pour raisons financières.",
       "mirrorOf": "sante-renoncement-non",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "yes",
+        "label": "Renoncement aux soins pour raisons financières"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -57,6 +72,11 @@
       "statement": "Au cours des 12 derniers mois, je n'ai renoncé à aucun soin pour des raisons financières.",
       "rationale": "Mesure le renoncement aux soins pour raisons financières. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "sante-renoncement-oui",
+      "signal": {
+        "kind": "difficulty",
+        "answer": "no",
+        "label": "Renoncement aux soins pour raisons financières"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -72,6 +92,10 @@
       "statement": "Les questions de santé comptent beaucoup pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de santé parmi les préoccupations.",
       "mirrorOf": "sante-priorite-basse",
+      "signal": {
+        "kind": "priority",
+        "answer": "yes"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
@@ -87,6 +111,10 @@
       "statement": "Les questions de santé comptent peu pour moi aujourd'hui.",
       "rationale": "Mesure la place des questions de santé parmi les préoccupations. Formulation inverse, pour compenser la tendance à répondre oui.",
       "mirrorOf": "sante-priorite-haute",
+      "signal": {
+        "kind": "priority",
+        "answer": "no"
+      },
       "reviews": [
         {
           "date": "2026-10-19",
